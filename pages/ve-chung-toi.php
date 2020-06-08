@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Trang về chúng tôi</h1>
+    <a href="/">Quay về trang chủ</a>
 </body>
 </html>
