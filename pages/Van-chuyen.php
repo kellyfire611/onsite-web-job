@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>VẬN CHUYỂN</h1>
-    <a href="/">Trở về trang chủ</a>
+    <a href="\">Trở về trang chủ</a>
 </body>
 </html>
