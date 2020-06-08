@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Khanh làm chính sách vận tải</h1>
+    <a href="/">Quay về trang chủ</a>
 </body>
 </html>
