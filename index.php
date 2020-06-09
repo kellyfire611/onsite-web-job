@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <h1 class="text-center">Trang chủ test</h1>
+  <h1 class="text-center">Trang chủ test 1</h1>
 
   <div class="container text-center">
     <ul>
