@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Trang về chúng tôi</h1>
-    <a href="/">Quay về trang chủ</a>
-</body>
-</html>
+<?php
+// Include file cấu hình ban đầu của `Twig`
+require_once __DIR__.'/../../bootstrap.php';
+
+// Truy vấn database để lấy danh sách
+// 1. Include file cấu hình kết nối đến database, khởi tạo kết nối $conn
+include_once(__DIR__.'/../../dbconnect.php');
+
+// Yêu cầu `Twig` vẽ giao diện được viết trong file `frontend/pages/ve-chung-toi.html.twig`
+// với dữ liệu truyền vào file giao diện được đặt tên là `products`
+echo $twig->render('frontend/pages/ve-chung-toi.html.twig', [
+]);
