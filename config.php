@@ -1,10 +1,10 @@
 <?php
 class Config
 {
-    public static $DB_CONNECTION_HOST           = 'localhost';
-    public static $DB_CONNECTION_USERNAME       = 'root';
-    public static $DB_CONNECTION_PASSWORD       = 'root';
-    public static $DB_CONNECTION_DATABASE_NAME  = 'netashop';
+    public static $DB_CONNECTION_HOST           = '156.67.222.148';
+    public static $DB_CONNECTION_USERNAME       = 'u883604362_taxi';
+    public static $DB_CONNECTION_PASSWORD       = 'u883604362_taxi';
+    public static $DB_CONNECTION_DATABASE_NAME  = 'Db@#Taxi123';
 
     public static $LIMIT = 5;
     public static $PAGE = 1;
