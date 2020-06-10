@@ -1,0 +1,48 @@
+{# Kế thừa layout frontend #}
+{% extends "frontend/layouts/layout.html.twig" %}
+{# Nội dung trong block title #}
+{% block title %}
+    Đăng Nhập
+{% endblock %}
+{# End Nội dung trong block title #}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>    
+            <div class="col-sm-8">
+                 <div class="card">
+                   <div class="card-body">
+                <form method="POST">
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                   <h1>Đăng Nhập</h1>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="exampleInputusername1"  placeholder="Tên Đăng Nhập">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mật Khẩu">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                            </div>
+                        
+                           <div class="col-sm-6">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                            <div class="card-header"></div>
+                            <div class="card-body">
+                                <h3 class="text-center">Đăng Ký</h3>
+                                <p class="card-text">Đăng ký để làm thành viên của Trang web bán hàng. Bạn sẽ được một số quyền lợi nhất định khi làm thành viên của chúng tôi.</p>
+                                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Đăng Ký Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                    </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+{% endblock %}
