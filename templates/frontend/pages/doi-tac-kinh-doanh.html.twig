@@ -1,0 +1,26 @@
+{# Kế thừa layout frontend #}
+{% extends "frontend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Đối Tác Kinh Doanh
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-text col-6">
+            <div class="content">
+                <h2>Đối Tác Kinh Doanh</h2>
+                <p>Đây là phần nội dung!!</p>
+            </div>
+        </div>
+        <div class="col-image col-6">
+            <img src="/assets/frontend/img/doitac.jpg" alt="">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
