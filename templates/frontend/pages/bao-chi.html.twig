@@ -5,9 +5,35 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-		{% for new in news %}
-			<h1>{{ new.title }}</h1>
-		{% endfor %}
+	<div class="container py-5">
+		<form>
+			<div class="form-group">
+				<div class="input-group">
+					<input type="search" class="form-control" placeholder="Tìm kiếm bài viết">
+					<div class="input-group-append">
+						<button class="btn btn-primary">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="row row-cols-1 row-cols-lg-3">
+			{% for news in newsList %}
+				<div class="col my-3">
+					<div class="card h-100 shadow-sm">
+						<img class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">{{ news.title }}</h5>
+							<p class="card-text">{{ news.shortContent }}</p>
+						</div>
+						<div class="card-footer text-center">
+							<a href="/frontend/pages/bao-chi/{{ news.url }}">Xem thêm</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
