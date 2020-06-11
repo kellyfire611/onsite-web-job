@@ -1,17 +1,13 @@
-{# Kế thừa layout frontend #}
 {% extends "frontend/layouts/layout.html.twig" %}
 
-{# Nội dung trong block title #}
 {% block title %}
-Báo chí
+	Báo chí
 {% endblock %}
-{# End Nội dung trong block title #}
 
 {% block content %}
-
-<div class="container">
-    <h1>Đây là nội dung sẽ làm tương tự</h1>
-    <img src="/assets/frontend/img/marketing-1.png" />
-</div>
-
+	<div class="container">
+		{% for new in news %}
+			<h1>{{ new.title }}</h1>
+		{% endfor %}
+	</div>
 {% endblock %}
