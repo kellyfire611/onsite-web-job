@@ -8,5 +8,5 @@ require_once __DIR__.'/../../bootstrap.php';
 
 // Yêu cầu `Twig` vẽ giao diện được viết trong file `frontend/pages/ve-chung-toi.html.twig`
 // với dữ liệu truyền vào file giao diện được đặt tên là `products`
-echo $twig->render('frontend/pages/lien-he.html.twig', [
+echo $twig->render('frontend/pages/register.html.twig', [
 ]);
