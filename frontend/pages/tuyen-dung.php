@@ -1,27 +1,52 @@
-<!doctype html>
-<html lang="en">
+<?php
+require_once __DIR__ . '/../../bootstrap.php';
+// include_once __DIR__ . '/../../dbconnect.php';
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+$jobs = [
+  0 => [
+    'position'   => 'Front-end developer',
+    'department' => 'Developer',
+    'location'   => 'Hà Nội',
+  ],
+  1 => [
+    'position'   => 'Nhân viên kiểm thử (Tester)',
+    'department' => 'Product',
+    'location'   => 'Hà Nội',
+  ], 2 => [
+    'position'   => 'Performance Marketing Leader',
+    'department' => 'Marketing',
+    'location'   => 'Hà Nội',
+  ], 3 => [
+    'position'   => 'PHP developer',
+    'department' => 'Developer',
+    'location'   => 'Hà Nội',
+  ], 4 => [
+    'position'   => 'SEO Specialist',
+    'department' => 'Marketing',
+    'location'   => 'Hà Nội',
+  ], 5 => [
+    'position'   => 'Customer Supporter',
+    'department' => 'Customer Success',
+    'location'   => 'Hà Nội',
+  ],
+];
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+$departments = [
+  'Developer',
+  'Product',
+  'Marketing',
+  'Customer Success',
+];
 
-  <title>Tuyển dụng</title>
-</head>
+$locations = [
+  'Hà Nội',
+  'Đà Nẵng',
+  'TP. Hồ Chí Minh',
+  'Cần Thơ',
+];
 
-<body>
-  <h1 class="text-center">Tuyển dụng</h1>
-
-  <div>
-    <a href="/">Về trang chủ</a>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
-
-</html>
+echo $twig->render('frontend/pages/tuyen-dung.html.twig', [
+  'jobs'        => $jobs,
+  'departments' => $departments,
+  'locations'   => $locations,
+]);
