@@ -35,7 +35,6 @@ $newsList = [
   ],
 ];
 
-// render template
 echo $twig->render('frontend/pages/bao-chi.html.twig', [
   'newsList' => $newsList,
 ]);
