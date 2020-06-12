@@ -1,9 +1,505 @@
 {% extends "frontend/layouts/layout.html.twig" %}
 
 {% block title %}
-	Trang chủ
+Trang chủ
 {% endblock %}
 
 {% block content %}
+<div class="bg d-flex flex-column wrapper vh-min-100">
+	<div class="container py-5 mt-5">
+		<div class="row py-5">
+			<div class="col-lg-6 d-flex align-items-center mb-5 mb-lg-0">
+				<div class="cursor-default text-light mx-auto">
+					<div class="logo logo-128 mx-auto mb-4"></div>
+					<h1 class="font-logo text-center">
+						Onsite Web Job
+					</h1>
+					<h5 class="text-center">Thoải mái như xe nhà - Giá rẻ như xe khách</h5>
+					<hr class="bg-light">
+					<h5><i class="far fa-check-square mr-2"></i>An toàn, đúng giờ</h5>
+					<h5><i class="far fa-check-square mr-2"></i>Giá trọn gói, không phí ẩn</h5>
+					<h5><i class="far fa-check-square mr-2"></i>Miễn phí thay đổi thông tin</h5>
+				</div>
+			</div>
+			<div class="col-lg-6 d-flex align-items-center mt-5 mt-lg-0">
+				<div class="card border border-primary shadow-sm w-100">
+					<div class="card-header nav nav-pills d-flex">
+						<a class="nav-item nav-link flex-fill text-center active" data-toggle="pill" href="#tab-airport">Sân bay</a>
+						<a class="nav-item nav-link flex-fill text-center" data-toggle="pill" href="#tab-long-road">Đường dài</a>
+						<a class="nav-item nav-link flex-fill text-center" data-toggle="pill" href="#tab-tour-rental">Thuê xe tour</a>
+					</div>
+					<div class="card-body">
+						<div class="tab-content">
+							<form class="tab-pane show active" id="tab-airport">
+								<div class="form-group">
+									<label for="tab-airport-begin">Điểm đón</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<input type="search" class="form-control" id="tab-airport-begin">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="tab-airport-end">Điểm trả</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<input type="search" class="form-control" id="tab-airport-end">
+									</div>
+								</div>
+								<div class="row no-gutters">
+									<div class="col-md-6 pr-md-2">
+										<div class="form-group">
+											<label for="tab-airport-time">Thời gian đón</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-clock"></i></span>
+												</div>
+												<input type="datetime-local" class="form-control" id="tab-airport-time">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 pl-md-2">
+										<div class="form-group">
+											<label for="tab-airport-people">Số người</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+												</div>
+												<select class="custom-select" id="tab-airport-people">
+													{% for number in 1..peopleAirport %}
+													<option value="{{ number }}">{{ number }} người</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Xem giá</button>
+							</form>
+							<form class="tab-pane" id="tab-long-road">
+								<div class="form-group">
+									<label for="tab-long-road-begin">Điểm đón</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<input type="search" class="form-control" id="tab-long-road-begin">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="tab-long-road-end">Điểm trả</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<input type="search" class="form-control" id="tab-long-road-end">
+									</div>
+								</div>
+								<div class="row no-gutters">
+									<div class="col-md-6 pr-md-2">
+										<div class="form-group">
+											<label for="tab-long-road-time">Thời gian đón</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-clock"></i></span>
+												</div>
+												<input type="datetime-local" class="form-control" id="tab-long-road-time">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 pl-md-2">
+										<div class="form-group">
+											<label for="tab-long-road-people">Số người</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+												</div>
+												<select class="custom-select" id="tab-long-road-people">
+													{% for number in 1..peopleLongRoad %}
+													<option value="{{ number }}">{{ number }} người</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Xem giá</button>
+							</form>
+							<form class="tab-pane" id="tab-tour-rental">
+								<div class="form-group">
+									<label for="tab-tour-rental-begin">Điểm đón</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+										</div>
+										<input type="search" class="form-control" id="tab-tour-rental-begin">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="tab-tour-rental-time">Thời gian đón</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-clock"></i></span>
+										</div>
+										<input type="datetime-local" class="form-control" id="tab-tour-rental-time">
+									</div>
+								</div>
+								<div class="row no-gutters">
+									<div class="col-md-6 pr-md-2">
+										<div class="form-group">
+											<label for="tab-tour-rental-duration">Thời lượng</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-hourglass-half"></i></span>
+												</div>
+												<select class="custom-select" id="tab-tour-rental-duration">
+													{% for duration in durationTourRentals %}
+													<option value="{{ duration }}">{{ duration }} giờ</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 pl-md-2">
+										<div class="form-group">
+											<label for="tab-long-road-people">Loại xe</label>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i class="fas fa-car"></i></span>
+												</div>
+												<select class="custom-select" id="tab-long-road-people">
+													{% for category in carCategoriesTourRental %}
+													<option value="{{ category }}">{{ category }}</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Xem giá</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center mt-auto mb-5">
+		<img src="/assets/frontend/img/trang-chu/scroll-down.gif" alt="" style="height: 5rem;">
+	</div>
+</div>
+<div class="bg-white py-5">
+	<div class="container text-center">
+		<h4>
+			Lý do lựa chọn <span class="font-logo text-primary">Onsite Web Job</span>
+		</h4>
+		<hr class="bg-dark w-50">
+		<div class="row">
+			<div class="col-lg-4">
+				<i class="fas fa-dollar-sign my-3 text-primary" style="font-size: 3rem;"></i>
+				<h5>Đảm bảo giá tốt</h5>
+				<p>
+					Dịch vụ đi ghép giá siêu rẻ<br>
+					So sánh hãng để chọn giá tốt nhất
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<i class="fas fa-thumbs-up my-3 text-primary" style="font-size: 3rem;"></i>
+				<h5>Cam kết chất lượng</h5>
+				<p>
+					Hoàn tiền nếu không hài lòng<br>
+					Bồi thuờng nếu đón muộn
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<i class="fas fa-smog my-3 text-primary" style="font-size: 3rem;"></i>
+				<h5>Giảm khí thải</h5>
+				<p>
+					Vừa tiết kiệm lại sống xanh<br>
+					Tiêu dùng thông minh và bền vững
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="py-5 bg-cantho">
+	<div class="container">
+		<h4 class="text-light text-center">
+			Các tuyến phổ biến
+		</h4>
+		<hr class="bg-light w-50">
+		<div class="row no-gutters">
+			<div class="col-xl-6 pr-xl-4">
+				<div class="card w-100 shadow my-2">
+					<div class="card-body px-3 pt-3 pb-0">
+						{% for index in 1..(tripsPopular|length / 2) %}
+						<div class="row no-gutters mb-3">
+							<div class="col-4 align-self-center">
+								{{ tripsPopular[2 * index - 2].from }}
+							</div>
+							<div class="col-1 align-self-center">
+								<i class="fas fa-long-arrow-alt-right"></i>
+							</div>
+							<div class="col-4 align-self-center">
+								{{ tripsPopular[2 * index - 2].to }}
+							</div>
+							<div class="col-3 align-self-center">
+								<button class="btn btn-primary btn-block">{{ tripsPopular[2 * index - 2].price }} 000 đ</button>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6 pr-xl-4">
+				<div class="card w-100 shadow my-2">
+					<div class="card-body px-3 pt-3 pb-0">
+						{% for index in 1..(tripsPopular|length / 2) %}
+						<div class="row no-gutters mb-3">
+							<div class="col-4 align-self-center">
+								{{ tripsPopular[2 * index - 1].from }}
+							</div>
+							<div class="col-1 align-self-center">
+								<i class="fas fa-long-arrow-alt-right"></i>
+							</div>
+							<div class="col-4 align-self-center">
+								{{ tripsPopular[2 * index - 1].to }}
+							</div>
+							<div class="col-3 align-self-center">
+								<button class="btn btn-primary btn-block">{{ tripsPopular[2 * index - 1].price }} 000 đ</button>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-white py-5">
+	<div class="container text-center">
+		<h4>
+			Tác động xã hội
+		</h4>
+		<hr class="bg-dark w-50">
+		<div class="row">
+			<div class="col-lg-4">
+				<i class="font-weight-bold text-primary" style="font-size: 3rem;">CO<sub>2</sub></i>
+				<h5 class="mt-2">{{co2}} tấn</h5>
+				<p>
+					CO<sub>2</sub> giảm thải môi trường
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<i class="fas fa-car-side my-3 text-primary" style="font-size: 3rem;"></i>
+				<h5>{{ tripsSuccess }}</h5>
+				<p>
+					Chuyến đi thành công
+				</p>
+			</div>
+			<div class="col-lg-4">
+				<i class="fas fa-hand-holding-usd my-3 text-primary" style="font-size: 3rem;"></i>
+				<h5>{{ moneySave }} VNĐ</h5>
+				<p>
+					Tiết kiệm cho khách hàng
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-light py-5">
+	<div class="container">
+		<h4 class="text-center">
+			Truyền thông nói về <span class="font-logo text-primary">Onsite Web Job</span>
+		</h4>
+		<hr class="w-50">
+		<div class="row row-cols-1 row-cols-lg-3">
+			{% for news in newsList %}
+			<div class="col my-3">
+				<div class="card h-100 shadow-sm">
+					<img src="/assets/uploads/news/{{ news.name }}.jpg" alt="" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">{{ news.title }}</h5>
+						<p class="card-text">{{ news.shortContent }}</p>
+					</div>
+					<div class="card-footer text-center">
+						<a href="/frontend/pages/bao-chi/{{ news.name }}">Xem thêm</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="text-center mt-4">
+			<a class="btn btn-primary" href="/frontend/pages/bao-chi">Tìm hiểu thêm</a>
+		</div>
+	</div>
+</div>
+<div class="bg-white py-5">
+	<div class="container">
+		<h4 class="text-center">
+			Chương trình khuyến mại
+		</h4>
+		<hr class="bg-dark w-50">
+		<div class="row row-cols-1 row-cols-lg-3">
+			{% for sale in saleList %}
+			<div class="col my-3">
+				<div class="card h-100 shadow-sm">
+					<img src="/assets/uploads/blog/{{ sale.name }}.jpg" alt="" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">{{ sale.title }}</h5>
+						<p class="card-text">{{ sale.shortContent }}</p>
+					</div>
+					<div class="card-footer text-center">
+						<a href="/frontend/pages/blog/{{ sale.name }}">Xem thêm</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<div class="bg-light py-5">
+	<div class="container">
+		<h4 class="text-center">
+			Khách hàng hài lòng
+		</h4>
+		<hr class="bg-dark w-50">
+		<div id="carousel-comment" class="carousel slide d-flex">
+			<div class="flex-fill align-self-center mr-4">
+				<a href="#carousel-comment" data-slide="prev">
+					<i class="fas fa-chevron-left text-primary"></i>
+				</a>
+			</div>
+			<div class="carousel-inner flex-fill">
+				{% for indexComment in 1..(comments|length / 3) %}
+				<div class="carousel-item {% if indexComment == 1 %}active{% endif %}">
+					<div class="row row-cols-1 row-cols-lg-3">
+						<div class="col my-3">
+							<div class="card h-100 shadow-sm">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										{% for indexStar in 1..comments[indexComment * 3 - 3].star %}
+										<i class="fas fa-star text-primary"></i>
+										{% endfor %}
+										{% if 5 - comments[indexComment * 3 - 3].star > 0 %}
+										{% for indexStar in 1..(5 - comments[indexComment * 3 - 3].star) %}
+										<i class="far fa-star text-primary"></i>
+										{% endfor %}
+										{% endif %}
+									</div>
+									<div>
+										{{ comments[indexComment * 3 - 3].date }}
+									</div>
+								</div>
+								<div class="card-body">
+									{{ comments[indexComment * 3 - 3].content }}
+								</div>
+								<div class="card-footer text-right">
+									{{ comments[indexComment * 3 - 3].auth }}
+								</div>
+							</div>
+						</div>
+						<div class="col my-3">
+							<div class="card h-100 shadow-sm">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										{% for indexStar in 1..comments[indexComment * 3 - 2].star %}
+										<i class="fas fa-star text-primary"></i>
+										{% endfor %}
+										{% if 5 - comments[indexComment * 3 - 2].star > 0 %}
+										{% for indexStar in 1..(5 - comments[indexComment * 3 - 2].star) %}
+										<i class="far fa-star text-primary"></i>
+										{% endfor %}
+										{% endif %}
+									</div>
+									<div>
+										{{ comments[indexComment * 3 - 2].date }}
+									</div>
+								</div>
+								<div class="card-body">
+									{{ comments[indexComment * 3 - 2].content }}
+								</div>
+								<div class="card-footer text-right">
+									{{ comments[indexComment * 3 - 2].auth }}
+								</div>
+							</div>
+						</div>
+						<div class="col my-3">
+							<div class="card h-100 shadow-sm">
+								<div class="card-header d-flex justify-content-between">
+									<div>
+										{% for indexStar in 1..comments[indexComment * 3 - 1].star %}
+										<i class="fas fa-star text-primary"></i>
+										{% endfor %}
+										{% if 5 - comments[indexComment * 3 - 1].star > 0 %}
+										{% for indexStar in 1..(5 - comments[indexComment * 3 - 1].star) %}
+										<i class="far fa-star text-primary"></i>
+										{% endfor %}
+										{% endif %}
+									</div>
+									<div>
+										{{ comments[indexComment * 3 - 1].date }}
+									</div>
+								</div>
+								<div class="card-body">
+									{{ comments[indexComment * 3 - 1].content }}
+								</div>
+								<div class="card-footer text-right">
+									{{ comments[indexComment * 3 - 1].auth }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="flex-fill align-self-center ml-4">
+				<a href="#carousel-comment" data-slide="next">
+					<i class="fas fa-chevron-right text-primary"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-white py-5">
+	<div class="container text-center">
+		<h4>
+			Đối tác tin cậy
+		</h4>
+		<hr class="bg-dark w-50">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/mailinh.png" alt="" style="height: 3rem;">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/traveloka.png" alt="" style="height: 3rem;">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/taxigroup.png" alt="" style="height: 3rem;">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/satsco.png" alt="" style="height: 3rem;">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/klook.png" alt="" style="height: 3rem;">
+		<img class="m-3" src="/assets/frontend/img/trang-chu/abc.png" alt="" style="height: 3rem;">
+	</div>
+</div>
+{% endblock %}
 
+{% block customscripts %}
+<script>
+	$('main.wrapper').removeClass('wrapper');
+</script>
+{% endblock %}
+
+{% block customstyles %}
+<style>
+	.bg {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/assets/frontend/img/trang-chu/bg.jpg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+
+	.bg-cantho {
+		background-image: linear-gradient(rgba(5, 19, 16, 0.9), rgba(5, 19, 16, 0.9)), url("/assets/frontend/img/trang-chu/taxi.jpg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+</style>
 {% endblock %}
