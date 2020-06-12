@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" type="text/css" />
 
   <!-- Custom css - Các file css do chúng ta tự viết -->
-  <!-- <link rel="stylesheet" href="/assets/frontend/css/style.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/assets/shared/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="/assets/frontend/css/style.css" type="text/css" />
 
   <!-- Block title - Đục lỗ trên giao diện bố cục chung, đặt tên là `title` -->
   <title>
@@ -32,18 +33,17 @@
 </head>
 
 <body>
-  <div class="vh-min-100">
-    <!-- header -->
-    {{ include('frontend/layouts/includes/header.html.twig') }}
-    <!-- end header -->
+  <!-- header -->
+  {{ include('frontend/layouts/includes/header.html.twig') }}
+  <!-- end header -->
 
-    <main role="main">
-      <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
-      {% block content %}
-      {% endblock %}
-      <!-- End block content -->
-    </main>
-  </div>
+  <main role="main" class="wrapper vh-min-100">
+    <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
+    {% block content %}
+    {% endblock %}
+    <!-- End block content -->
+  </main>
+
   <!-- footer -->
   {{ include('frontend/layouts/includes/footer.html.twig') }}
   <!-- end footer -->
