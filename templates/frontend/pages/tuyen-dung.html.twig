@@ -5,67 +5,83 @@ Tuyển dụng
 {% endblock %}
 
 {% block content %}
-<img src="/assets/frontend/img/tuyen-dung.jpeg" class="w-100" />
-<div class="container py-5">
-	<article class="pb-3">
-		<h4 class="mb-3">
-			Cùng nhau tốt hơn
-		</h4>
-		<p>
-			Đi Chung là một môi trường năng động, cởi mở, nơi tập trung những cá nhân luôn khát khao đóng góp cho cộng đồng.
-			Kiến thức tại Đi Chung là không giới hạn và không có tính sở hữu.
-			Chúng tôi chia sẻ với nhau hàng ngày những gì chúng tôi biết, quan tâm qua hoạt động đào tạo hàng ngày, hàng tuần.
-			Thiền, học ngoại ngữ, thể thao, yoga, kịch ứng tác, vvv cũng là một thứ không thể thiếu trong định nghĩa công việc của mỗi "DiChunger".
-			Mỗi ngày, chúng tôi cùng nhau tốt hơn như vậy đó. Together we are Better.
-		</p>
-	</article>
+<div class="bg">
+	<div class="container py-5">
+		<article class="pb-3 text-light">
+			<h4 class="mb-3">
+				Cùng nhau tốt hơn
+			</h4>
+			<p class="text-justify">
+				<span class="font-logo">Onsite Web Job</span> là một môi trường năng động, cởi mở, nơi tập trung những cá nhân luôn khát khao đóng góp cho cộng đồng.
+				Kiến thức tại <span class="font-logo">Onsite Web Job</span> là không giới hạn và không có tính sở hữu.<br>
+				Chúng tôi chia sẻ với nhau hàng ngày những gì chúng tôi biết, quan tâm qua hoạt động đào tạo hàng ngày, hàng tuần.
+				Thiền, học ngoại ngữ, thể thao, yoga, kịch ứng tác,... cũng là một thứ không thể thiếu trong định nghĩa công việc của mỗi "<span class="font-logo">Owjer</span>".<br>
+				Mỗi ngày, chúng tôi cùng nhau tốt hơn như vậy đó.<br>
+			</p>
+			<strong class="pt-2">Together we are Better!</strong>
+		</article>
+	</div>
 
-	<h4 class="mb-3">Các vị trí đang tuyển</h4>
-	<form>
-		<div class="form-row">
-			<div class="form-group col-lg-4">
-				<input type="search" class="form-control" placeholder="Nhập từ khoá tìm kiếm">
-			</div>
-			<div class="form-group col-lg-3 col-md-6">
-				<select class="custom-select" id="inputGroupSelect01">
-					<option value="null" selected>Bộ phận</option>
-					{% for department in departments %}
-					<option value="{{ loop.index }}">{{ department }}</option>
+	<div class="bg-white">
+		<div class="container py-5">
+			<h4 class="mb-3">Các vị trí đang tuyển</h4>
+			<form>
+				<div class="form-row">
+					<div class="form-group col-lg-4">
+						<input type="search" class="form-control" placeholder="Nhập từ khoá tìm kiếm">
+					</div>
+					<div class="form-group col-lg-3 col-md-6">
+						<select class="custom-select">
+							<option value="null" selected>Bộ phận</option>
+							{% for department in departments %}
+							<option value="{{ loop.index }}">{{ department }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="form-group col-lg-3 col-md-6">
+						<select class="custom-select">
+							<option value="null" selected>Địa điểm</option>
+							{% for location in locations %}
+							<option value="{{ location }}">{{ location }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="form-group col-lg-2">
+						<button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
+					</div>
+			</form>
+			<table class="table table-sm table-bordered table-hover table-responsive-sm bg-white">
+				<thead class="bg-light">
+					<tr>
+						<th scope="col">STT</th>
+						<th scope="col">Vị trí cần tuyển</th>
+						<th scope="col">Bộ phận</th>
+						<th scope="col">Địa điểm</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for job in jobs %}
+					<tr>
+						<th scope="row">{{ loop.index }}</th>
+						<td>{{ job.position }}</td>
+						<td>{{ job.department }}</td>
+						<td>{{ job.location }}</td>
+					</tr>
 					{% endfor %}
-				</select>
-			</div>
-			<div class="form-group col-lg-3 col-md-6">
-				<select class="custom-select" id="inputGroupSelect01">
-					<option value="null" selected>Địa điểm</option>
-					{% for location in locations %}
-					<option value="{{ loop.index }}">{{ location }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="form-group col-lg-2">
-				<button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
-			</div>
-	</form>
-
-	<table class="table table-sm table-striped table-bordered table-hover table-responsive-sm">
-		<thead>
-			<tr>
-				<th scope="col">STT</th>
-				<th scope="col">Vị trí cần tuyển</th>
-				<th scope="col">Bộ phận</th>
-				<th scope="col">Địa điểm</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for job in jobs %}
-			<tr>
-				<th scope="row">{{ loop.index }}</th>
-				<td>{{ job.position }}</td>
-				<td>{{ job.department }}</td>
-				<td>{{ job.location }}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+{% endblock %}
+
+{% block customstyles %}
+<style>
+	.bg {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("/assets/frontend/img/tuyen-dung.jpg");
+		background-repeat: no-repeat;
+		background-position: bottom;
+		background-size: cover;
+	}
+</style>
 {% endblock %}
