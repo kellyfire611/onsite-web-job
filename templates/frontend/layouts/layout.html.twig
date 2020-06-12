@@ -5,17 +5,21 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/assets/shared/ico/logo.ico">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css" type="text/css" />
+  {# <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css" type="text/css" /> #}
+  <!-- Custom Bootstrap CSS -->
+  <link rel="stylesheet" href="/assets/shared/css/custom.bootstrap.css" type="text/css" />
   <!-- Font awesome -->
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" type="text/css" />
 
   <!-- Custom css - Các file css do chúng ta tự viết -->
-  <link rel="stylesheet" href="/assets/frontend/css/style.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="/assets/frontend/css/style.css" type="text/css" /> -->
 
   <!-- Block title - Đục lỗ trên giao diện bố cục chung, đặt tên là `title` -->
   <title>
+    Onsite Web Job -
     {% block title %}
     {% endblock %}
   </title>
@@ -28,16 +32,18 @@
 </head>
 
 <body>
-  <!-- header -->
-  {{ include('frontend/layouts/includes/header.html.twig') }}
-  <!-- end header -->
-  <main role="main">
-    <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
-    {% block content %}
-    {% endblock %}
-    <!-- End block content -->
-  </main>
+  <div class="vh-min-100">
+    <!-- header -->
+    {{ include('frontend/layouts/includes/header.html.twig') }}
+    <!-- end header -->
 
+    <main role="main">
+      <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
+      {% block content %}
+      {% endblock %}
+      <!-- End block content -->
+    </main>
+  </div>
   <!-- footer -->
   {{ include('frontend/layouts/includes/footer.html.twig') }}
   <!-- end footer -->
