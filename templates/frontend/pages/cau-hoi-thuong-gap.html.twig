@@ -1,0 +1,440 @@
+{# Kế thừa layout frontend #}
+{% extends "frontend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Câu hỏi thường gặp
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">			
+        <div class="col-md-6 coltrai">
+            <h1 class="text-center">Câu hỏi thường gặp</h1>	
+        </div> <!-- end col trai -->
+        <div class="col-md-6 colphai">
+            <div class="timnhanh text-center">
+                <h3 class="tieude_timnhanh">Bạn hỏi, Đi Chung trả lời</h3>
+                <form action="">
+                    <div class="noidung_timnhanh">
+                        <input type="text" class="form-control" name="txttimnhanh" placeholder="Nhập câu hỏi ở đây">
+                        <button class="btn btn-primary icon_search"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+                
+            </div> <!-- end timnhanh -->
+        </div> <!-- end col phai -->						
+    </div> <!-- end row head -->
+</div>
+<div class="container noidung_cauhoi">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="dm_cauhoi">
+                <div class="bao_cauhoi">
+                    <div class="hieuung_cauhoi">
+                        <div class="khoi_kh">
+                            <h3>Khách hàng</h3>
+                            <div class="nd_khoi_kh">
+                                <ul>
+                                    <li><a id="cauhoi1" data-toggle="collapse" data-target="#traloi_cau1" href="">Đi chung là như thế nào?</a></li>
+                                    <li><a id="cauhoi2" data-toggle="collapse" data-target="" href="#traloi_cau2">Đăng ký/Đăng nhập tài khoản</a></li>
+                                    <li><a id="cauhoi3" data-toggle="collapse" data-target="" href="#traloi_cau3">Hướng dẫn đặt xe</a></li>
+                                    <li><a id="cauhoi4" data-toggle="collapse" data-target="" href="#traloi_cau4">Chính sách Giá</a></li>
+                                    <li><a id="cauhoi5" data-toggle="collapse" data-target="" href="#traloi_cau5">Chính sách Thanh toán/Hóa đơn</a></li>
+                                    <li><a id="cauhoi6" data-toggle="collapse" data-target="" href="#traloi_cau6">Chính sách Vận chuyển</a></li>
+                                    <li><a id="cauhoi7" data-toggle="collapse" data-target="" href="#traloi_cau7">Chính sách Bảo hiểm/Bồi thường</a></li>
+                                    <li><a id="cauhoi8" data-toggle="collapse" data-target="" href="#traloi_cau8">Chính sách Khuyến mại</a></li>
+                                    <li><a id="cauhoi9" data-toggle="collapse" data-target="" href="#traloi_cau9">Câu hỏi khác</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col- md 4 -->
+        <div class="col-md-8">
+            <div class="dm_traloi">
+                <div class="bao_traloi">
+                    <div class="hieuung_traloi collapse" id="traloi_cau1">
+                        <div class="khoi_traloi">
+                            <h5>Đi riêng xe và Đi chung xe khác nhau như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đi riêng xe là trường hợp bạn đặt xe, taxi theo hình thức thông thường.
+Đi chung xe là trường hợp bạn đặt xe và sẵn sàng đi cùng hành khách khác để tiết kiệm chi phí. Khi bạn lựa chọn đi chung xe, ĐiChungTaxi sẽ tìm người cùng tuyến đường và ghép đi chung với bạn. Giá đi chung sẽ ít hơn giá đi riêng cùng tuyến ít nhất 40%.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi nên lựa chọn đi chung xe khi nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu bạn đi một mình hoặc nhóm 2 người đón cùng 1 địa điểm thì bạn nên lựa chọn hình thức đi chung xe. Trong trường hợp này, sử dụng hình thức đi chung xe sẽ giúp bạn tiếp kiệm được tối đa chi phí (ít nhất 40%), vừa đảm bảo một trải nghiệm di chuyển thoải mái và thú vị.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Nếu tôi đi chung cùng một người bạn thì chi phí đi chung như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu bạn đi 2 người (cùng điểm đón, điểm trả) thì phụ phí thêm 20.000Đ cho chuyến đi. Ví dụ, bạn đi một mình giá vé đi ghép là 110.000 VND/người/1 mã vé, nếu thêm 1 người bạn giá sẽ là 130.000VND/2 người/1 mã vé
+
+Nếu bạn đi 2 người (điểm đón và điểm trả khác nhau) thì bạn vui lòng thanh toán thêm phụ phí đón thêm điểm (chi phí đón thêm điểm phụ thuộc vào khoảng cách giữa 2 điểm đón)  Bạn hãy nhập thông tin về điểm đón/trả phát sinh trong Bước 2 (trên website) để biết số tiền phụ trội tạm tính.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đi chung xe có đảm bảo đón đúng giờ không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Theo chính sách vận chuyển của Đi Chung Taxi, với hình thức đi chung xe, xe sẽ đến đón đúng địa điểm bạn yêu cầu trong thời gian khoảng thời gian +/- 15 phút so với thời điểm bạn yêu cầu đón. Nghĩa là bạn có thể phải xuất phát sớm hơn hoặc muộn hơn 15 phút. Tuy nhiên, chúng tôi sẽ thông báo thời gian đón chính xác trước 60 phút so với giờ khởi hành để bạn chuẩn bị trước.
+                            </div>
+                        </div>
+                                                    
+                    </div> <!-- end cau tra loi 1 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau2">
+                        <div class="khoi_traloi">
+                            <h5>Đăng ký tài khoản như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn vui lòng xem hướng dẫn chi tiết các bước đăng ký tài khoản Tại đây.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đăng nhập tài khoản như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn vui lòng xem hướng dẫn chi tiết các bước đăng nhập tài khoản Tại đây.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tại sao hệ thống báo tôi "đã có tài khoản" trong khi tôi chưa tạo tài khoản?</h5>
+                            <div class="nd_khoi_traloi">
+                                Trong quá trình đặt xe tại bước "điền thông tin", Đi ChungTaxi để một lựa chọn "tạo tài khoản với số điện thoại của bạn". Khi bạn lựa chọn ô tạo tài khoản này, hệ thống sẽ tự động tạo cho bạn một tài khoản! Vì vậy, Bạn có thể lấy lại mật khẩu và dùng số điện thoại để đăng nhập vào tài khoản.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Quên mật khẩu. Lấy lại như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bước 1: Tại trang chủ website www.dichungtaxi.com trên thanh menu, bạn chọn "Tài Khoản" và click "Đăng nhập".
+Bước 2: Một thông báo hiện ra như hình dưới. Click "Quên mật khẩu".
+
+Quên mật khẩu
+
+Bước 3: Nhập số điện thoại bạn đăng ký tài khoản vào ô trống và click Ok.
+
+lấy lại mật khẩu
+
+Mật khẩu mới sẽ được gửi vào điện thoại của bạn. bạn có thể sử dụng mật khẩu mới này để đăng nhập.
+                            </div>
+                        </div>
+                                                    
+                    </div> <!-- end cau tra loi 2 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau3">
+                        <div class="khoi_traloi">
+                            <h5>Đặt xe online trên website www.dichungtaxi.com như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn vui lòng xem hướng dẫn chi tiết các bước đặt xe Tại đây.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đặt xe trên website khác gì đặt xe qua tổng đài?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đặt xe qua website, bạn có thể:
+- Trải nghiệm mới với dịch vụ đặt xe online thuận tiện.
+
+- So sánh giác các hãng xe và đưa ra lựa chọn
+
+- Nhận được nhiều khuyến mại hơn như các khuyến mại dành cho khách hàng đặt trước, đặt trực tuyến. Xem thêm các khuyến mại
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đặt đi chung (đi ghép) tôi cần lưu ý điều gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đặt xe đi ghép bạn cần lưu ý những điều sau:
+
+- Đi Chung sẽ đón bạn tại điểm đón bạn lựa chọn
+
+- Thời gian khởi hành: trước giờ bay 2.5 giờ so với chuyến bay nội địa và 3 giờ đối với chuyến bay quốc tế
+
+Quý khách vui lòng xem chính sách đi ghép tại đây
+
+- Hành lý mang theo: Đi Chung giới hạn hành lý mang theo với khách đi chung là 1 Vali kích thước 30*20*54cm + 1 Túi xách / 1 Người (như hành lý xách tay khi đi máy bay).
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi có thể đặt vé cho người khác không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn có thể đặt vé cho người khác.
+Cách 1: Đặt bằng thông tin của bạn. Chúng tôi sẽ liên lạc với bạn như bạn là người đi.
+
+Cách 2: Đặt bằng thông tin của người đi. Lúc này, chúng tôi sẽ liên lạc trực tiếp với người đi.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đi Chung Taxi có đón khách sáng sớm hoặc tối muộn không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đi Chung cung cấp dịch vụ 24/7 tại hơn 20 sân bay Việt Nam. Tuy nhiên, với chuyến đi sáng sớm hoặc tối muộn (từ 21h00 đến 8h00 sáng hôm sau), bạn vui lòng đặt trước 19h30 để đảm bảo có xe phục vụ.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi phải chọn thời gian đón trước giờ bay bao lâu để đảm bảo chuyến đi?</h5>
+                            <div class="nd_khoi_traloi">
+                                Với chuyến bay nội địa:
+- Đặt xe đi đi ghép: Chọn giờ đón trước 2 giờ 30 phút so với giờ bay.
+- Đặt xe đi riêng: Chọn giờ đón trước 2 giờ so với giờ bay.
+Với chuyến bay quốc tế:
+- Đặt xe đi ghép: Chọn giờ đón trước 3 giờ
+- Đặt xe đi riêng: Chọn giờ đón trước tối thiểu 2h45 phút
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Làm thế nào để biết tôi đã đặt xe thành công?</h5>
+                            <div class="nd_khoi_traloi">
+                                Khi bạn có MÃ ĐẶT XE của ĐiChungTaxi nghĩa là bạn đã đặt xe thành công. Ngoài ra, chúng tôi sẽ xác nhận thêm qua SMS, điện thoại hoặc email theo yêu cầu của bạn.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Sau khi đặt xe thành công, có mã vé rồi, tôi phải làm gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                Khi đã nhận được thông tin xác nhận đặt xe qua SMS, email, Quý khách vui lòng kiểm tra và xác nhận lại thông tin khi nhân viên của Đi Chung liên hệ trước chuyến đi.
+
+Chúng tôi sẽ gửi thông tin tài xế muộn nhất 1 tiếng trước giờ đi, bạn lưu ý kiểm tra tin nhắn điện thoại.
+
+Trong trường hợp có bất kì sai sót hoặc thay đổi gì, bạn vui lòng liên hệ Tổng đài 1900 6022 (trong khung giờ 8:00 - 21:00 hàng ngày) để được hỗ trợ.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Làm thế nào để xem thông tin chi tiết vé (Hành trình và Lịch trình) của tôi?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn có thể xem lại thông tin chi tiết mã vé (hành trình và lịch trình) tại phần "Tra Cứu Mã Vé" trên trang chủ www.dichungtaxi.com.
+Hướng dẫn chi tiết bạn có thể xem thêm Tại Đây
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Hủy vé có mất phí không? Làm thế nào để hủy vé?</h5>
+                            <div class="nd_khoi_traloi">
+                                Quý khách có quyền hủy đặt xe hoặc thay đổi giờ đi mà không mất thêm chi phí. Riêng với các chuyến đi ghép, quý khách vui lòng thay đổi thông tin tối thiểu 3 tiếng trước giờ khởi hành. Các chuyến đi sáng sớm (21h - 9h sáng hôm sau) vui lòng thay đổi trước 18h tối ngày trước khởi hành. Các trường hợp cập nhật thông tin muộn hơn quý khách vui lòng chuyển sang Đi riêng để đảm bảo chất lượng dịch vụ tốt nhất.
+
+Trừ một số trường hợp đặc biệt khi đặt xe trong các ngày lễ, Tết. Khi có nhu cầu hủy vé hoặc thay đổi thông tin, Quý khách vui lòng thông báo trước 24 giờ so với thời gian khởi hành để không mất phí. Quý khách có thể tham khảo thêm Chính sách vận chuyển hành khách
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Khi hủy vé, tôi có nhận lại được tiền đặt cọc hoặc tiền đã thanh toán trước không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Với những chuyến đi thông thường, Đi Chung sẽ hoàn trả lại những khoản đặt cọc hoặc thanh toán trước cho bạn trong vòng 2 ngày làm việc kể từ khi chúng tôi nhận được thông tin hủy vé được thông báo từ bạn.
+
+- Với trường hợp các ngày lễ Tết, Đi Chung sẽ có những quy định cụ thể về thời gian hủy vé cho phép. Nếu vi phạm quy định này, Đi Chung có quyền thu thêm phí từ tiền đặt cọc hay thanh toán trước của bạn.
+Quý khách vui lòng tham khảo thêm chính sách hoàn tiền của chúng tôi.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Thay đổi lịch trình có mất phí không? Làm thế nào để thay đổi lịch trình?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đi Chung không tính phí thay đổi lịch trình.
+
+Có 3 cách thay đổi lịch trình:
+
+- Cách 1: Hủy vé sai và đặt chuyến mới.
+
+- Cách 2: gửi mail về support@dichung.vn
+
+Tiêu đề: Thay đổi lịch trình chuyến đi
+
+Nội dung: Mã đặt xe, thông tin thay đổi
+
+- Cách 3: Liên hệ tổng đài 1900 6022 (8:00 -21:00 hàng ngày)
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Nếu không liên lạc được với tài xế thì phải làm sao?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu không liên lạc được tài xế, bạn vui lòng gọi 19006022 (8h-21h hàng ngày) để được hỗ trợ.
+
+Trường hợp chuyến đi lúc sáng sớm hoặc tối khuya (từ 21h00 đến 8h00 sáng hôm sau), tài xế sẽ chủ động liên lạc với bạn từ 21h00. Thời điểm này, bạn cũng sẽ nhận được số điện thoại tài xế để liên lạc trực tiếp với tài xế.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi nhận được tin nhắn/email Thông tin đặt xe như vậy là có xe rồi phải không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Tin nhắn và email Thông tin đặt xe chỉ xác nhận việc Đi chung đã nhận được yêu cầu đặt xe của anh/chị.
+
+Đi Chung sẽ liên hệ để xác nhận lại thông tin trước khi tiến hành điều xe cho anh chị Khi anh chị nhận được thông tin lái xe gửi qua tin nhắn mới đảm bảo chuyến đi của mình được phục vụ
+                            </div>
+                        </div>
+                                                    
+                    </div> <!-- end cau tra loi 3 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau4">
+                        <div class="khoi_traloi">
+                            <h5>Giá đi ghép 110.000 đồng nghĩa là gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đối với hình thức "Đi ghép xe", mức giá niêm yết trên website là mức giá trọn gói bạn phải trả cho số khách bạn lựa chọn. Ví dụ: ở đây số khách là 1 thì 110.000 đồng là mức giá trọn gói cho 1 người.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Giá 180.000 đồng cho tối đa 30 Km, phụ trội 9.000 đồng/Km là như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Giá này có nghĩa là nếu quãng đường chỉ trong vòng 30km thì giá luôn là 180.000 đồng. Khi vượt quá 30km, từ km thứ 31 giá cước sẽ tính là 9.000 đồng/km!
+
+Ví dụ: bạn đi 32km thì giá sẽ là 180k + 2x9k = 198k!
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Khi đặt xe 2 chiều thì phí phát sinh chờ là bao nhiêu?</h5>
+                            <div class="nd_khoi_traloi">
+                                Với những chuyến đi 2 chiều, ĐiChungTaxi sẽ miễn phí 60 phút chờ đầu tiên. Nếu thời gian chờ nhiều hơn 1 giờ thì phí chờ là 50.000 đồng/giờ.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Giá tại ĐiChungTaxi đã bao gồm phí cầu đường chưa?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu bạn đi sân bay hoặc đi ghép đường dài, giá ĐiChungTaxi báo là giá trọn gói (đã bao gồm chi phí cầu đường, bến bãi nhưng chưa có VAT). Với hình thức đi riêng đường dài thì chưa có phí cầu đường.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Nếu tôi đặt xe đường dài đi 2 chiều thì chiều về có được giảm giá không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Với tuyến Hà Nội tỉnh, nếu chuyến đi với khoảng cách 1 chiều trên 50km, Đi Chung Taxi sẽ giảm 70% giá chiều về - Với các tuyến khác, vui lòng liên hệ tổng đài 19006022 (8h-21h) để được tư vấn giá chính xác
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đặt xe trước có được giảm giá không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Thông thường, những chuyến đi ghép đặt xe trước 7 ngày và chuyển khoản luôn trong ngày sẽ được giảm giá. Vd: Đặt xe đi chung sân bay trước 7 ngày và Thanh toán trả trước luôn sẽ được giảm 30.000 đồng.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Giá cả dịch vụ từ sân bay Nội Bài đi tỉnh tính như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                - Dưới 50km, giá sẽ tính theo: 4 chỗ nhỏ - 4 chỗ cốp rộng -7 chỗ: 10.000 đ/km- 11.000đ/km - 12.000đ/ km)
+
+(theo giá áp dụng tại thời điểm tháng 07/2019; giá có thể thay đổi tùy thuộc vào sự tăng giảm của thị trường, chưa bao gồm phí cầu đường, thuế VAT)
+
+- Trên 50km, giá sẽ tính theo: 4 chỗ nhỏ - 4 chỗ cốp rộng -7 chỗ: 8.500 đ/km- 9.000đ/km - 10.000đ/ km)
+
+(theo giá áp dụng tại thời điểm tháng 07/2019; giá có thể thay đổi tùy thuộc vào sự tăng giảm của thị trường, chưa bao gồm phí cầu đường, thuế VAT)
+                            </div>
+                        </div>
+                                                    
+                    </div> <!-- end cau tra loi 4 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau5">
+                        <div class="khoi_traloi">
+                            <h5>Tôi có thể thanh toán bằng những cách nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Có 3 hình thức thanh toán ĐiChungTaxi đang áp dụng:
+
+(1) Thanh toán trực tuyến: bằng thẻ quốc tế (mastercard, visa,...) hoặc thẻ nội địa (debit, credit, ...)
+
+(2) Thanh toán bằng chuyển khoản: qua ATM hoặc ngân hàng
+
+(3) Thanh toán tiền mặt trả sau: trả trực tiếp cho tài xế sau khi hoàn thành chuyến đi.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi muốn xuất hóa đơn được không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu bạn muốn nhận hóa đơn cho chuyến đi bạn có thể chọn 1 trong 2 phương án dưới đây
+
+- Cách 1: Ghi thông tin hóa đơn vào mục "Tôi cần xuất hóa đơn" trong bước 3 "Thông tin khách hàng" khi đặt xe.
+
+Các thông tin cần thiết để xuất hóa đơn bao gồm: tên công ty, địa chỉ công ty, mã số thuế và địa chỉ nhận hóa đơn.
+
+Vui lòng nhập thông tin và kiểm tra kỹ lưỡng trước khi gửi
+
+- Cách 2: Gửi thông tin hóa đơn về hoadon@dichung.vn
+
+Lưu ý:
+
+- Hóa đơn sẽ được gửi đến địa chỉ nhận hóa đơn trong vòng 2 ngày làm việc nếu chúng tôi nhận đầy đủ thông tin
+
+- Thời hạn xuất hóa đơn: 7 ngày sau thời điểm khách hàng hoàn thành chuyến đi.
+                            </div>
+                        </div>
+                                            
+                    </div> <!-- end cau tra loi 5 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau6">
+                        <div class="khoi_traloi">
+                            <h5>Nếu đi chung xe thì sẽ đón tối đa bao nhiêu người? Có bị giới hạn hành lý không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đi Chung sẽ vận chuyển tối đa 3 khách trên xe 4 chỗ, 5 khách trên xe 7 chỗ và có giới hạn hành lý (mỗi người một 1 vali kích cỡ 30*20*54cm và 1 túi xách tay).
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Trong trường hợp đi chung xe, tôi có phải đợi ĐiChungTaxi ghép đủ khách mới được đi không?</h5>
+                            <div class="nd_khoi_traloi">
+                                - Với ghép cố định (như các tuyến sân bay, đường dài): Dù không có khách ghép, ĐiChungTaxi vẫn đón đúng thời gian như quy định và giá không đổi.
+- Với ghép linh hoạt: Không có khách ghép, bạn có thể hủy đặt xe hoặc lựa chọn đi xe riêng.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Nếu không có khách ghép thì tôi phải trả số tiền là bao nhiêu?</h5>
+                            <div class="nd_khoi_traloi">
+                                - Với những tuyến ghép cố định như đưa đón sân bay hay một số tuyến đường dài, giá không đổi kể cả khi không có khách ghép (không thêm bất kì chi phí nào).
+- Với các tuyến khác (ghép linh hoạt), nếu không có khách ghép thì bạn có thể lựa chọn đi riêng hoặc hủy đặt xe...
+                            </div>
+                        </div>
+                                            
+                    </div> <!-- end cau tra loi 6 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau7">
+                        <div class="khoi_traloi">
+                            <h5>Chi phí bảo hiểm của ĐiChungTaxi với khách hàng như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Theo quy định vận chuyển, các đối tác vận chuyển có trách nhiệm mua bảo hiểm TNDS đối với người thứ 3, mức tối đa 100tr/người/vụ.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Nếu đặt xe mà không có xe đón có được đền bù không?</h5>
+                            <div class="nd_khoi_traloi">
+                                Tùy vào tính chất sai phạm, ĐiChungTaxi sẽ đưa ra hình thức đền bù phù hợp với từng trường hợp, có thể đền bù đến 100% giá trị chuyến đi cho bạn. ĐiChungTaxi sẽ hỗ trợ giải quyết những trường hợp này qua Hotline: 1900 6022 hoặc email support@dichung.vn
+                            </div>
+                        </div>
+                                            
+                    </div> <!-- end cau tra loi 7 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau8">
+                        <div class="khoi_traloi">
+                            <h5>Mã giảm giá là gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                - Mã giảm giá là một trong những cách thức mà ĐiChungTaxi sử dụng để ưu đãi cho các khách hàng thường xuyên, khách hàng đã đăng ký tài khoản trong các chương trình khuyến mại.
+
+- Với mỗi chương trình ưu đãi này, bạn sẽ nhận được một mã giảm giá từ ĐiChungTaxi. Bạn có thể sử dụng mã giảm giá này trong phần lựa chọn bổ sung "Tôi có mã giảm giá" tại bước 3 “Điền thông tin khách hàng” để tiết kiệm thêm chi phí.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Tôi có thể tìm mã giảm giá của ĐiChungTaxi ở đâu?</h5>
+                            <div class="nd_khoi_traloi">
+                                Bạn có thể tìm mã giảm giá của ĐiChungTaxi theo nhiều cách: các bài viết tại Tin khuyến mại, đăng ký nhận email hoặc theo dõi Fanpage của ĐiChungTaxi.
+                            </div>
+                        </div>
+                                            
+                    </div> <!-- end cau tra loi 8 -->
+                    <div class="hieuung_traloi collapse" id="traloi_cau9">
+                        <div class="khoi_traloi">
+                            <h5>Nếu chuyến bay bị delay tôi phải làm gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                Nếu chuyến bay bị delay, bạn vui lòng cung cấp: mã đặt vé, mã chuyến bay và thông tin thay đổi của bạn để ĐiChungTaxi điều chỉnh giờ đón phù hợp với bạn theo 3 cách sau:
+
+Cách 1: Gửi email về support@dichung.vn
+
++ Tiêu đề: Thay đổi lịch trình chuyến đi
+
++ Nội dung: Mã đặt xe, thông tin thay đổi
+
+Cách 2: Liên hệ tổng đài 1900 6022
+
+Cách 3: Inbox facebook cho ĐiChungTaxi: Fanpage hoặc Messenger
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>Đi hai chiều và khứ hồi khác nhau như thế nào?</h5>
+                            <div class="nd_khoi_traloi">
+                                Đi hai chiều là đi và về trên cùng một xe (được giảm giá vì tận dụng xe trống chiều về, trừ các tuyến giá cố định như tuyến Sân bay). Đi khứ hồi là đi và về trên hai xe khác nhau.
+                            </div>
+                        </div>
+                        <div class="khoi_traloi">
+                            <h5>"Tiền tiết kiệm" trong tài khoản Đi Chung của tôi có nghĩa là gì?</h5>
+                            <div class="nd_khoi_traloi">
+                                Số tiền tiết kiệm được hiển thị trong tài khoản của bạn tại Đi Chung chính là số tiền mà bạn đã tiết kiệm được khi sử dụng dịch vụ của chúng tôi, được tính bằng cách so sánh với số tiền mà bạn phải trả nếu sử dụng dịch vụ đi riêng
+                            </div>
+                        </div>
+                                            
+                    </div> <!-- end cau tra loi 9 -->
+                    
+                </div>
+            </div>
+        </div> <!-- end col-md 8 -->
+    </div>
+</div>
+{% endblock %}
