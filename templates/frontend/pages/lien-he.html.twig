@@ -9,7 +9,38 @@ Liên hệ
 
 {% block content %}
 
-<h1>Đây là Trang liên hệ</h1>
+   <div>
+            <br />
+			<h3 align="center"><a href="#">LIÊN HỆ</a></h3>
+			<br />
+    </div>
+    <div>
+           <div class="container">  
+                <form id="submit_form">  
+                     <label>Name</label>  
+                     <input type="text" name="name" id="name" class="form-control" />  
+                     <br />  
+                     <label>Message</label>  
+                     <textarea name="message" id="message" class="form-control"></textarea>  
+                     <br />  
+                     <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
+                     <span id="error_message" class="text-danger"></span>  
+                     <span id="success_message" class="text-success"></span>  
+                </form>  
+           </div>  
+           <div>
+            <h1><span class="glyphicon glyphicon-earphone"></span>HOTLINE:</h1>
+        </div>
+        <div>
+            <h1><span class="glyphicon glyphicon-map-marker"></span>ĐỊA CHỈ:</h1>
+        </div>
+        <div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15714.681564549866!2d105.77034015000001!3d10.0440341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1592211675627!5m2!1svi!2s" width="1200" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+    </div>
+        
+
+   
 
 
 {% endblock %}
