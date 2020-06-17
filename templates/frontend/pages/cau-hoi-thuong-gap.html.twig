@@ -1,6 +1,102 @@
 {# Kế thừa layout frontend #}
 {% extends "frontend/layouts/layout.html.twig" %}
+{% block customstyles %}
+    
+.coltrai, .colphai{
+	color: white;
+	width: 100%;
+    height: 200px;
+}
+.col-md-6.coltrai {
+    
+    background-color: #00363d;
+}
+.coltrai h1.text-center {
+    position: relative;
+    top: 80px;
+    left: 0;
+}
+.col-md-6.colphai {
+  
+    background-color: #77a300;
+}
+.colphai button.icon_search {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    color: #77a300;
+    background: #00363d;
+    border: solid #00363d;
+}
+.colphai .tieude_timnhanh, .colphai .noidung_timnhanh {
+    position: relative;
+    text-align: left;
+    top: 80px;
+    left: 0;
+}
 
+.nd_khoi_kh ul li{
+    font-size: 16px;
+    font-weight: bold;
+    list-style: none;
+}
+.nd_khoi_kh ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #00363d;
+    font-weight: bold;
+}
+.nd_khoi_kh ul li:hover >a{
+	color:#77a300;
+	
+}
+
+
+.dm_cauhoi {
+    position: relative;
+    top: 30px;
+    left: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 2px rgba(18, 18, 18, 0.06);
+    padding: 5px 15px;
+}
+
+.dm_traloi {
+    position: relative;
+    top: 30px;
+    left: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 2px rgba(18, 18, 18, 0.06);
+    padding: 5px 15px;
+}
+
+.khoi_kh h3.xanhden {
+ 
+    background: url(../img/cau-hoi/arrow_up.png) no-repeat 96% #00363d;
+}
+
+.khoi_kh h3{
+    background: url(../img/cau-hoi/arrow_down.png) no-repeat 96% #77a300;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+.khoi_traloi h5.xanhden {
+ 
+    background: url(../img/cau-hoi/arrow_up.png) no-repeat 96% #00363d;
+}
+
+.khoi_traloi h5{
+    background: url(../img/cau-hoi/arrow_down.png) no-repeat 96% #77a300;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+
+{% endblock %}
 {# Nội dung trong block title #}
 {% block title %}
 Câu hỏi thường gặp
@@ -437,4 +533,143 @@ Cách 3: Inbox facebook cho ĐiChungTaxi: Fanpage hoặc Messenger
         </div> <!-- end col-md 8 -->
     </div>
 </div>
+{% endblock %}
+
+{% block customscripts %}
+$(document).ready(function() {
+	//cho tat ca noi dung thu lai 
+	//$('.nd_khoi_kh').slideUp();
+
+	// click vao the h3 
+	$('.khoi_kh h3').click(function(event) {
+		//$('.nd_khoi_kh').slideUp();
+		//console.log('Da chay duoc hieu ung click roi ')
+		$(this).next().slideToggle();
+		$(this).toggleClass('xanhden');
+	});
+
+	//phan tra loi
+	$('.nd_khoi_traloi').slideUp();
+
+	// click vao the h5 
+	$('.khoi_traloi h5').click(function(event) {
+		$(this).next().slideToggle();
+		$(this).toggleClass('xanhden');
+	});
+	//click vao cau hoi 1 hien ra traloi 1
+	$("#traloi_cau1").show();
+    //$("#traloi_cau2").hide();
+
+    $("#cauhoi1").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau1").show();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi2").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau2").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi3").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau3").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi4").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau4").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi5").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau5").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi6").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau6").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi7").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau7").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi8").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau8").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau4").hide();
+    	$("#traloi_cau9").hide();
+	});
+	$("#cauhoi9").click(function(event){
+    	//console.log('Da chay click roi ');
+		$("#traloi_cau9").show();
+    	$("#traloi_cau1").hide();
+    	$("#traloi_cau2").hide();
+    	$("#traloi_cau3").hide();
+    	$("#traloi_cau5").hide();
+    	$("#traloi_cau6").hide();
+    	$("#traloi_cau7").hide();
+    	$("#traloi_cau8").hide();
+    	$("#traloi_cau4").hide();
+	});
+	
+	
+});
+
 {% endblock %}
