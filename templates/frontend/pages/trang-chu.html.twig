@@ -57,7 +57,7 @@ Trang chủ
 												<div class="input-group-prepend">
 													<span class="input-group-text"><i class="fas fa-clock"></i></span>
 												</div>
-												<input type="datetime-local" class="form-control" id="tab-airport-time">
+												<input class="form-control bg-white" id="tab-airport-time">
 											</div>
 										</div>
 									</div>
@@ -106,7 +106,7 @@ Trang chủ
 												<div class="input-group-prepend">
 													<span class="input-group-text"><i class="fas fa-clock"></i></span>
 												</div>
-												<input type="datetime-local" class="form-control" id="tab-long-road-time">
+												<input class="form-control bg-white" id="tab-long-road-time">
 											</div>
 										</div>
 									</div>
@@ -144,7 +144,7 @@ Trang chủ
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="fas fa-clock"></i></span>
 										</div>
-										<input type="datetime-local" class="form-control" id="tab-tour-rental-time">
+										<input class="form-control bg-white" id="tab-tour-rental-time">
 									</div>
 								</div>
 								<div class="row no-gutters">
@@ -165,12 +165,12 @@ Trang chủ
 									</div>
 									<div class="col-md-6 pl-md-2">
 										<div class="form-group">
-											<label for="tab-long-road-people">Loại xe</label>
+											<label for="tab-tour-rental-car-category">Loại xe</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
 													<span class="input-group-text"><i class="fas fa-car"></i></span>
 												</div>
-												<select class="custom-select" id="tab-long-road-people">
+												<select class="custom-select" id="tab-tour-rental-car-category">
 													{% for category in carCategoriesTourRental %}
 													<option value="{{ category }}">{{ category }}</option>
 													{% endfor %}
@@ -367,13 +367,8 @@ Trang chủ
 			Khách hàng hài lòng
 		</h4>
 		<hr class="bg-dark w-50">
-		<div id="carousel-comment" class="carousel slide d-flex">
-			<div class="flex-fill align-self-center mr-4">
-				<a href="#carousel-comment" data-slide="prev">
-					<i class="fas fa-chevron-left text-primary"></i>
-				</a>
-			</div>
-			<div class="carousel-inner flex-fill">
+		<div id="carousel-comment" class="carousel slide row no-gutters">
+			<div class="carousel-inner col-md-10 order-md-2">
 				{% for indexComment in 1..(comments|length / 3) %}
 				<div class="carousel-item {% if indexComment == 1 %}active{% endif %}">
 					<div class="row row-cols-1 row-cols-lg-3">
@@ -456,8 +451,13 @@ Trang chủ
 				</div>
 				{% endfor %}
 			</div>
-			<div class="flex-fill align-self-center ml-4">
-				<a href="#carousel-comment" data-slide="next">
+			<div class="col-md-1 col-6 order-md-1 d-flex align-items-center">
+				<a href="#carousel-comment" data-slide="prev" class="mx-auto">
+					<i class="fas fa-chevron-left text-primary"></i>
+				</a>
+			</div>
+			<div class="col-md-1 col-6 order-3 d-flex align-items-center">
+				<a href="#carousel-comment" data-slide="next" class="mx-auto">
 					<i class="fas fa-chevron-right text-primary"></i>
 				</a>
 			</div>
@@ -481,12 +481,29 @@ Trang chủ
 {% endblock %}
 
 {% block customscripts %}
+<script src="/assets/vendor/flatpickr/flatpickr.js"></script>
+<script src="/assets/vendor/flatpickr/vn.min.js"></script>
 <script>
-	$('main.wrapper').removeClass('wrapper');
+	$(document).ready(function () {
+		flatpickr.localize(flatpickr.l10ns.vn);
+
+		$('main.wrapper').removeClass('wrapper');
+
+		$('#tab-airport-time, #tab-long-road-time, #tab-tour-rental-time').flatpickr({
+			enableTime: true,
+			dateFormat: 'd/m/Y H:i',
+			minDate: 'today',
+			locale: {
+				firstDayOfWeek: 1
+			},
+			time_24hr: true,
+		});
+	});
 </script>
 {% endblock %}
 
 {% block customstyles %}
+<link rel="stylesheet" href="/assets/vendor/flatpickr/flatpickr.min.css">
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/assets/frontend/img/trang-chu/bg.jpg");
