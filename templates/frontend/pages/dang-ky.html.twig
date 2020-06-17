@@ -5,6 +5,10 @@
 {% block title %}
 Đăng ký thành viên
 {% endblock %}
+
+{% block customstyles %}
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/flatpickr.min.css">
+{% endblock %}
 {# End Nội dung trong block title #}
 
 {% block content %}
@@ -78,9 +82,8 @@
                                 <span class="input-group-text"> <i class="fas fa-stopwatch-20"></i> </span>
                             </div>
                             
-                            <input name="txtngay" class="form-control" placeholder="Ngày" type="text">
-                            <input name="txtthang" class="form-control" placeholder="Tháng" type="text">
-                            <input name="txtnam" class="form-control" placeholder="Năm" type="text">
+                            <input name="txtngaysinh" id="idngaysinh" class="form-control bg-white" placeholder="Ngày sinh" type="text">
+                            
                             
                         </div> <!-- form-group// -->
                         <div class="form-group input-group">
@@ -112,3 +115,28 @@
 
 {% endblock %}
 
+{% block customscripts %}
+<script src="/assets/vendor/flatpickr/flatpickr.js"></script>
+<script src="/assets/vendor/flatpickr/vn.min.js"></script>
+<script>
+	$(document).ready(function () {
+		flatpickr.localize(flatpickr.l10ns.vn);
+		$('#idngaysinh').flatpickr({
+			dateFormat: 'd/m/Y',			
+            defaultDate: ["01/01/2002"],
+            enable: [
+                function(dateString) {
+                    var today = new Date();
+                    var birthDate = new Date(dateString);
+                    var age = today.getFullYear() - birthDate.getFullYear();
+                    var m = today.getMonth() - birthDate.getMonth();
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    return (age > 17 && age <= 80);
+                }
+            ]
+		});
+	});
+</script>
+{% endblock %}
