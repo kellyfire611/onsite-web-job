@@ -7,28 +7,32 @@
 {% endblock %}
 {# End Nội dung trong block title #}
 
+{% block customstyles %}
+<link href="/assets/vendor/slick/slick.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 
 <div class="b-banner b-bussiness-banner block-middle">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-text col-6">
+            <div class="col-text col-6" style="display: flex; align-items: center">
                 <div class="content">
                     <h2>Đối Tác Kinh Doanh</h2>
                     <p>Với những đơn vị có khách hàng có nhu cầu đi lại cao, hãy hợp tác với chúng tôi để đem lại dịch vụ giá trị gia tăng cho khách hàng, đồng thời hưởng  doanh thu từ những giao dịch thành công.</p>
                 </div>
             </div>
             <div class="col-image col-6">
-                <img src="/assets/frontend/img/doitac.jpg" alt="">
+                <img class="img-fluid" style="width: 100%" src="/assets/frontend/img/doitac.jpg" alt="">
             </div>
         </div>
     </div>
 </div>
-<div class="block b-bussiness-benefit">
+<div class="block b-bussiness-benefit" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
         <div class="block-headder text-center">
-            <div class="block-title">Lợi Ích Khi Tham Gia</div>
-            <p class="block-sub-title">Một đàu mối đáp ứng đủ các yêu cầu di chuyển mặt đất.</p>
+            <div class="block-title display-4">Lợi Ích Khi Tham Gia</div>
+            <p class="block-sub-title display-5">Một đàu mối đáp ứng đủ các yêu cầu di chuyển mặt đất.</p>
         </div>
         <div class="row">
             <div class="item col-sm-4">
@@ -37,19 +41,19 @@
                     <h3 class="item-title">Dịch Vụ Đa Dạng</h3>
                     <p>Nhiều loại hình thừ tự lái đến có lái, từ xe 4 chổ cho đến xe 45 chổ.</p>
                 </div>
-                <div class="item col-sm-4">
-                    <div class="wrap">
-                        <img src="/assets/frontend/img/image-doi-tac/city-icon.3ScZzrZ.svg" alt="">
-                        <h3 class="item-title">Dộ Phủ Rộng Lớn</h3>
-                        <p>Có mặt tại 20 sân bay và hơn 40 tỉnh thành trên cả nước..</p>
-                    </div>
+            </div>
+            <div class="item col-sm-4">
+                <div class="wrap">
+                    <img src="/assets/frontend/img/image-doi-tac/city-icon.3ScZzrZ.svg" alt="">
+                    <h3 class="item-title">Công Nghệ Hiện Đại</h3>
+                    <p>Nền tảng trực tuyến dễ dàng tích hợp, tiết kiệm thời gian.</p>
                 </div>
-                <div class="item col-sm-4">
-                    <div class="wrap">
-                        <img src="/assets/frontend/img/image-doi-tac/city-icon.3ScZzrZ.svg" alt="">
-                        <h3 class="item-title">Công Nghệ Hiện Đại</h3>
-                        <p>Nền tảng trực tuyến dễ dàng tích hợp, tiết kiệm thời gian.</p>
-                    </div>
+            </div>
+            <div class="item col-sm-4">
+                <div class="wrap">
+                    <img src="/assets/frontend/img/image-doi-tac/city-icon.3ScZzrZ.svg" alt="">
+                    <h3 class="item-title">Dộ Phủ Rộng Lớn</h3>
+                    <p>Có mặt tại 20 sân bay và hơn 40 tỉnh thành trên cả nước..</p>
                 </div>
             </div>
         </div>
@@ -107,82 +111,46 @@
         <div class="block-headder text=center">
             <h2 class="block-title">Đối tác Của Chúng Tôi</h2>
             <p class="block-sub-title">Rất nhiều đơn vị tên tuối đã trở thành đối tác của đi chung</p>
-        </div>
-        <div class="slider">
-            <div class="slick-slider slick-initialized">
-                <button type="button" data-role="none" class="slick-arrow slick-prev" style="display: block;">Previous</button>
-                <div class="slick-list">
-                    <div class="slick-stack" style="width: 7220px; opacity: 1; transform: translate3d(-1140px, 0px, 0px);">
-                        ::before
-                        <div class="slick-slider slick-cloned" data-index="-3" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/satso.DSKUetZ.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="-2" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/abay.2WcAdVB.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="-1" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/ctrip.3nUCSBN.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="0" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/klook.2iq-ihh.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="1" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/taxi-group.Nyd-y6Z.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="2" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/thanh-cong-taxi.1oyqPLk.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slick-slider slick-cloned" data-index="3" tabindex="-1" aria-hidden="true" style="width: 380px;">
-                            <div>
-                                <div tabindex="-1" style="width: 100%; display: inline-block;">
-                                    <div class="item">
-                                        <img src="/assets/frontend/img/image-doi-tac/traveloka_xp.3h4R3sh.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" data-role="none" class="slick-arrow slick-next" style="display: block;">Next</button>
+        </div>    
+        <div class="slick-slider">
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/2511_mat-ngot.jpg"/>
             </div>
-        </div>
+            
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/4553_moi-hong-xao-xuyen.jpg"/>
+            </div>
+            
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/4733_mua-xuan-nho.jpg"/>
+            </div>
+            
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/4772_hong-tuoi.jpg"/>
+            </div>
+            
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/4776_hong-red-naomi.jpg"/>
+            </div>
+            
+            <div>
+                <img src="/assets/img/hoa/bo-hoa/4840_only-you-2.jpg"/>
+            </div>
+            
+          </div>
     </div>
 </div>
 {% endblock %}
 
+{% block customscripts %}
+<script src="/assets/vendor/slick/slick.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.slick-slider').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    });
+</script>
+{% endblock %}
