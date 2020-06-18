@@ -3,8 +3,8 @@ class Config
 {
     public static $DB_CONNECTION_HOST           = '156.67.222.148';
     public static $DB_CONNECTION_USERNAME       = 'u883604362_taxi';
-    public static $DB_CONNECTION_PASSWORD       = 'u883604362_taxi';
-    public static $DB_CONNECTION_DATABASE_NAME  = 'Db@#Taxi123';
+    public static $DB_CONNECTION_PASSWORD       = 'Db@#Taxi123';
+    public static $DB_CONNECTION_DATABASE_NAME  = 'u883604362_taxi';
 
     public static $LIMIT = 5;
     public static $PAGE = 1;
