@@ -1,4 +1,5 @@
 <?php
+define('UPLOAD_PATH',realpath(__DIR__.'/../assets/uploads/suppliers/'));
 // Include file cấu hình ban đầu của `Twig`
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -7,26 +8,26 @@ require_once __DIR__ . '/../../bootstrap.php';
 include_once(__DIR__ . '/../../dbconnect.php');
 
 // Include thư viện các hàm tiện ích
-include_once(__DIR__ . '/../../app/helpers.php');
+//include_once(__DIR__ . '/../../app/helpers.php');
 
 // Kiểm tra có đăng nhập hay chưa? (Xác thực Authentication)
 // Nếu trong SESSION có giá trị của key 'email' <-> người dùng đã đăng nhập thành công
 // Nếu chưa đăng nhập thì chuyển hướng về trang đăng nhập của Backend
-if (!isset($_SESSION['backend']['email'])) {
+/*if (!isset($_SESSION['backend']['email'])) {
     header('location:../auth/login.php');
     return;
-}
+}*/
 
 // Kiểm tra có Quyền vào chức năng này không? (Xác thực Authorization)
-$email = $_SESSION['backend']['email'];
+//$email = $_SESSION['backend']['email'];
 
 // 2. Chuẩn bị câu truy vấn $sql
 // Gọi hàm Kiểm tra email đã đăng nhập có quyền truy cập chức năng XEM hay không?
-$allow_permission_backend_shop_suppliers_view = backend_check_email_has_permission($email, StaticData::$PERMISSION_BACKEND_SHOP_SUPPLIERS_VIEW);
+//$allow_permission_backend_shop_suppliers_view = backend_check_email_has_permission($email, StaticData::$PERMISSION_BACKEND_SHOP_SUPPLIERS_VIEW);
 // dd($allow_permission_backend_shop_suppliers_view);
 
 // Nếu không có quyền thì chuyển hướng sang trang 403
-if(!$allow_permission_backend_shop_suppliers_view) {
+/*if(!$allow_permission_backend_shop_suppliers_view) {
     // Yêu cầu `Twig` vẽ giao diện được viết trong file `backend/errors/403.html.twig`
     // với dữ liệu truyền vào file giao diện được đặt tên là `error`
     $error = [
@@ -36,7 +37,7 @@ if(!$allow_permission_backend_shop_suppliers_view) {
     echo $twig->render('backend/errors/403.html.twig', ['error' => $error]);
     return;
 }
-
+*/
 // 2. Người dùng mới truy cập trang lần đầu tiên (người dùng chưa gởi dữ liệu `btnSave` - chưa nhấn nút Save) về Server
 // có nghĩa là biến $_POST['btnSave'] chưa được khởi tạo hoặc chưa có giá trị
 // => hiển thị Form nhập liệu
@@ -48,13 +49,15 @@ if (!isset($_POST['btnSave'])) {
 
 // 3. Nếu người dùng có bấm nút `Lưu dữ liệu` thì thực thi câu lệnh INSERT
 // Lấy dữ liệu người dùng hiệu chỉnh gởi từ REQUEST POST
-$supplier_code = $_POST['supplier_code'];
-$supplier_name = $_POST['supplier_name'];
-$description = $_POST['description'];
-$image = $_POST['image'];
+$supplier_code = $_POST['ncc_code'];
+$supplier_name = $_POST['ncc_ten'];
+$description = $_POST['ncc_mota'];
+//$image = $_POST['ncc_anh'];
+$upload=UPLOAD_PATH.$_FILES['ncc_anh']['name'];
+$file=$_FILES['ncc_anh']['tmp_name'];
 $created_at = date('Y-m-d H:i:s'); // Lấy ngày giờ hiện tại theo định dạng `Năm-Tháng-Ngày Giờ-Phút-Giây`. Vd: 2020-02-18 09:12:12
 $updated_at = NULL;
-
+var_dump($upload);
 // 4. Kiểm tra ràng buộc dữ liệu (Validation)
 // Tạo biến lỗi để chứa thông báo lỗi
 $errors = [];
@@ -62,25 +65,25 @@ $errors = [];
 // --- Kiểm tra Mã nhà cung cấp (validate)
 // required (bắt buộc nhập <=> không được rỗng)
 if (empty($supplier_code)) {
-    $errors['supplier_code'][] = [
+    $errors['ncc_code'][] = [
         'rule' => 'required',
         'rule_value' => true,
         'value' => $supplier_code,
         'msg' => 'Vui lòng nhập mã Nhà cung cấp'
     ];
 }
-// minlength 3 (tối thiểu 3 ký tự)
-if (!empty($supplier_code) && strlen($supplier_code) < 3) {
-    $errors['supplier_code'][] = [
+// minlength 4 (tối thiểu 4 ký tự)
+if (!empty($supplier_code) && strlen($supplier_code) < 4) {
+    $errors['ncc_code'][] = [
         'rule' => 'minlength',
-        'rule_value' => 3,
+        'rule_value' => 4,
         'value' => $supplier_code,
         'msg' => 'Mã Nhà cung cấp phải có ít nhất 3 ký tự'
     ];
 }
 // maxlength 50 (tối đa 50 ký tự)
 if (!empty($supplier_code) && strlen($supplier_code) > 50) {
-    $errors['supplier_code'][] = [
+    $errors['ncc_code'][] = [
         'rule' => 'maxlength',
         'rule_value' => 50,
         'value' => $supplier_code,
@@ -90,8 +93,36 @@ if (!empty($supplier_code) && strlen($supplier_code) > 50) {
 
 // --- Kiểm tra Tên nhà cung cấp (validate)
 // required (bắt buộc nhập <=> không được rỗng)
+if (empty($supplier_name)) {
+    $errors['ncc_ten'][] = [
+        'rule' => 'required',
+        'rule_value' => true,
+        'value' => $supplier_name,
+        'msg' => 'Vui lòng nhập mô tả Loại sản phẩm'
+    ];
+}
+// minlength 3 (tối thiểu 3 ký tự)
+if (!empty($supplier_name) && strlen($supplier_name) < 3) {
+    $errors['ncc_ten'][] = [
+        'rule' => 'minlength',
+        'rule_value' => 3,
+        'value' => $supplier_name,
+        'msg' => 'Mô tả loại sản phẩm phải có ít nhất 4 ký tự'
+    ];
+}
+// maxlength 255 (tối đa 255 ký tự)
+if (!empty($supplier_name) && strlen($supplier_name) > 50) {
+    $errors['ncc_ten'][] = [
+        'rule' => 'maxlength',
+        'rule_value' => 50,
+        'value' => $supplier_name,
+        'msg' => 'Mô tả tên nhà cung cấp không được vượt quá 50 ký tự'
+    ];
+}
+// --- Kiểm tra mô tả nhà cung cấp (validate)
+// required (bắt buộc nhập <=> không được rỗng)
 if (empty($description)) {
-    $errors['description'][] = [
+    $errors['ncc_mota'][] = [
         'rule' => 'required',
         'rule_value' => true,
         'value' => $description,
@@ -100,23 +131,22 @@ if (empty($description)) {
 }
 // minlength 3 (tối thiểu 3 ký tự)
 if (!empty($description) && strlen($description) < 3) {
-    $errors['description'][] = [
+    $errors['ncc_mota'][] = [
         'rule' => 'minlength',
         'rule_value' => 3,
         'value' => $description,
-        'msg' => 'Mô tả loại sản phẩm phải có ít nhất 3 ký tự'
+        'msg' => 'Mô tả loại sản phẩm phải có ít nhất 4 ký tự'
     ];
 }
 // maxlength 255 (tối đa 255 ký tự)
 if (!empty($description) && strlen($description) > 255) {
-    $errors['description'][] = [
+    $errors['ncc_mota'][] = [
         'rule' => 'maxlength',
         'rule_value' => 255,
         'value' => $description,
         'msg' => 'Mô tả loại sản phẩm không được vượt quá 255 ký tự'
     ];
 }
-
 // 5. Thông báo lỗi cụ thể người dùng mắc phải (nếu vi phạm bất kỳ quy luật kiểm tra ràng buộc)
 // dd($errors);
 if (!empty($errors)) {
@@ -127,7 +157,7 @@ if (!empty($errors)) {
         'supplier_code_oldvalue' => $supplier_code,
         'supplier_name_oldvalue' => $supplier_name,
         'description_oldvalue' => $description,
-        'image_oldvalue' => $image,
+        'image_oldvalue' => $upload,
     ]);
     return;
 }
@@ -136,11 +166,17 @@ if (!empty($errors)) {
 // Câu lệnh INSERT
 $sqlInsert = <<<EOT
     INSERT INTO shop_suppliers (supplier_code, supplier_name, description, image, created_at, updated_at) 
-    VALUES ('$supplier_code', '$supplier_name', '$description', '$image', '$created_at', '$updated_at')";
+    VALUES ('$supplier_code', '$supplier_name', '$description', '$upload', '$created_at', '$updated_at')";
 EOT;
 
+if(move_uploaded_file($file,$upload)){
+    echo "Tải tập tin thành công";
+}
+else{
+    echo "Tải tập tin ko được";
+}
 // Code dùng cho DEBUG
-//var_dump($sql); die;
+var_dump($sqlInsert); die;
 
 // Thực thi INSERT
 mysqli_query($conn, $sqlInsert);

@@ -1,0 +1,137 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Thêm mới Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{# Nội dung trong block headline #}
+{% block headline %}
+Thêm mới Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block headline #}
+
+{# Nội dung trong block content #}
+{% block content %}
+
+{% if errors %}
+<div id="errors-container" class="alert alert-danger face" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <ul>
+        {% for fields in errors %}
+            {% for field in fields %}
+            <li>{{ field.msg }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="post" action="/backend/shop_suppliers/create.php">
+    <div class="form-group">
+        <label for="ncc_ma">#</label>
+        <input type="text" class="form-control" id="ncc_ma" name="ncc_ma" placeholder="Mã nhà cung cấp" readonly>
+        <small id="ncc_maHelp" class="form-text text-muted">Mã nhà cung cấp không được hiệu chỉnh.</small>
+    </div>
+    <div class="form-group">
+        <label for="ncc_code">Ký hiệu nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_code" name="ncc_code" value="{{ supplier_code_oldvalue }}" placeholder="Ký hiệu nhà cung cấp gồm 3 ký tự đầu SUP+số">
+    </div>
+    <div class="form-group">
+        <label for="ncc_ten">Tên nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_ten" name="ncc_ten" value="{{ supplier_name_oldvalue }}" placeholder="Tên nhà cung cấp">
+    </div>
+    <div class="form-group">
+        <label for="ncc_mota">Mô tả nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_mota" name="ncc_mota" value="{{ description_oldvalue }}" placeholder="Mô tả nhà cung cấp">
+    </div>
+    <div class="form-group">
+        <label for="ncc_anh">Ảnh đại diện nhà cung cấp</label>
+        <input type="hidden" name="ncc_anhcu" value="">
+		<input type="file" class="form-control custom-file" id="ncc_anh" name="ncc_anh" placeholder="Ảnh đại diện nhà cung cấp">
+        <img src="{{ image_oldvalue }}" width="120" class="img-thumbnail">
+    </div>
+
+    
+    <button class="btn btn-primary" name="btnSave">Thêm nhà cung cấp</button>
+</form>
+{% endblock %}
+{# End Nội dung trong block content #}
+
+{% block customscripts %}
+<script>
+    $(document).ready(function () {
+        $("#frmNhaCungCap").validate({
+            rules: {
+                ncc_code: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 50
+                },
+                ncc_ten: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                ncc_mota: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 255
+                }
+            },
+            messages: {
+                ncc_code: {
+                    required: "Vui lòng nhập ký hiệu Nhà cung cấp gồm 3 ký tự đầu SUP kế đến là mã số nhà cung cấp tương ứng",
+                    minlength: "Tên Nhà cung cấp phải có ít nhất 4 ký tự",
+                    maxlength: "Tên Nhà cung cấp không được vượt quá 50 ký tự"
+                },
+                ncc_ten: {
+                    required: "Vui lòng nhập tên Nhà cung cấp",
+                    minlength: "Tên Nhà cung cấp phải có ít nhất 3 ký tự",
+                    maxlength: "Tên Nhà cung cấp không được vượt quá 50 ký tự"
+                },
+                ncc_mota: {
+                    required: "Vui lòng nhập mô tả cho Nhà cung cấp",
+                    minlength: "Mô tả cho Nhà cung cấp phải có ít nhất 3 ký tự",
+                    maxlength: "Mô tả cho Nhà cung cấp không được vượt quá 255 ký tự"
+                },
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Thêm class `invalid-feedback` cho field đang có lỗi
+                error.addClass("invalid-feedback");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+
+                // Thêm icon "Kiểm tra không Hợp lệ"
+                if (!element.next("span")[0]) {
+                    $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>")
+                        .insertAfter(element);
+                }
+            },
+            success: function (label, element) {
+                // Thêm icon "Kiểm tra Hợp lệ"
+                if (!$(element).next("span")[0]) {
+                    $("<span class='glyphicon glyphicon-ok form-control-feedback'></span>")
+                        .insertAfter($(element));
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-invalid").removeClass("is-valid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-valid").removeClass("is-invalid");
+            }
+        });
+
+    });
+</script>
+{% endblock %}
