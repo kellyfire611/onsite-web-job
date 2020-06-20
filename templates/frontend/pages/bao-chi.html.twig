@@ -9,10 +9,15 @@ Báo chí
 	<form>
 		<div class="form-group">
 			<div class="input-group">
-				<input type="search" class="form-control" placeholder="Tìm kiếm bài viết">
-				<div class="input-group-append">
-					<button class="btn btn-primary">
+				<div class="input-group-prepend">
+					<span class="input-group-text group-icon">
 						<i class="fas fa-search"></i>
+					</span>
+				</div>
+				<input id="input-search" class="form-control" placeholder="Tìm kiếm bài viết">
+				<div class="input-group-append">
+					<button id="button-clear" type="button" class="btn btn-secondary">
+						<i class="fas fa-times"></i>
 					</button>
 				</div>
 			</div>
@@ -46,4 +51,13 @@ Báo chí
 		<li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
 	</ul>
 </div>
+{% endblock %}
+{% block customscripts %}
+<script>
+	$(document).ready(function () {
+		$('#button-clear').click(() => {
+			$('#input-search').val('');
+		})
+	});
+</script>
 {% endblock %}
