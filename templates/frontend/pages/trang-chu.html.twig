@@ -481,8 +481,8 @@ Trang chủ
 {% endblock %}
 
 {% block customscripts %}
-<script src="/assets/vendor/flatpickr/flatpickr.js"></script>
-<script src="/assets/vendor/flatpickr/vn.min.js"></script>
+<script src="/node_modules/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/node_modules/flatpickr/dist/l10n/vn.js"></script>
 <script>
 	$(document).ready(function () {
 		flatpickr.localize(flatpickr.l10ns.vn);
@@ -503,7 +503,7 @@ Trang chủ
 {% endblock %}
 
 {% block customstyles %}
-<link rel="stylesheet" href="/assets/vendor/flatpickr/flatpickr.min.css">
+<link rel="stylesheet" href="/node_modules/flatpickr/dist/themes/material_green.css">
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/assets/frontend/img/trang-chu/bg.jpg");
