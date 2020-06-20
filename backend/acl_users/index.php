@@ -37,10 +37,8 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     'no'             => ++$index,
     'id'             => $row['id'],
     'username'       => $row['username'],
-    'name'           => [
-      'first' => $row['first_name'],
-      'last'  => $row['last_name'],
-    ],
+    'first_name'     => $row['first_name'],
+    'last_name'      => $row['last_name'],
     'email'          => $row['email'],
     'avatar'         => $row['avatar'],
     'job_title'      => $row['job_title'],
