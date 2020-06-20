@@ -1,61 +1,170 @@
 {% extends "backend/layouts/layout.html.twig" %}
 
-{# Nội dung trong block title #}
 {% block title %}
-Danh sách Nhà cung cấp
+Danh sách Người dùng
 {% endblock %}
-{# End Nội dung trong block title #}
 
-{# Nội dung trong block headline #}
 {% block headline %}
-Danh sách Nhà cung cấp
+Danh sách Người dùng
 {% endblock %}
-{# End Nội dung trong block headline #}
 
-{# Nội dung trong block content #}
 {% block content %}
-<!-- Nút thêm mới, bấm vào sẽ hiển thị form nhập thông tin Thêm mới -->
-<a href="create" class="btn btn-primary">
-    <span data-feather="plus"></span> Thêm mới
-</a>
-<!-- Nút import dữ liệu -->
-<a href="import" class="btn btn-success">
-    <span data-feather="plus"></span> Import dữ liệu
-</a>
-<table class="table table-bordered table-hover mt-2">
-    <thead class="thead-dark">
-        <tr>
-            <th>Ảnh đại diện</th>
-            <th>Mã Nhà cung cấp</th>
-            <th>Tên Nhà cung cấp</th>
-            <th>Mô tả Nhà cung cấp</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for supplier in suppliers %}
-        <tr>
-            <td>
-                <img src="/assets/uploads/{{ supplier.image }}" class="img-thumbnail"/>
-            </td>
-            <td>{{ supplier.supplier_code }}</td>
-            <td>{{ supplier.supplier_name }}</td>
-            <td>{{ supplier.description }}</td>
-            <td>
-                <!-- Nút sửa, bấm vào sẽ hiển thị form hiệu chỉnh thông tin dựa vào khóa chính `id` -->
-                <a href="edit?id={{ supplier.id }}" class="btn btn-warning">
-                    <span data-feather="edit"></span> Sửa
-                </a>
+<div id="vue" data-user="{{ data }}">
+  <b-container fluid>
+    <b-row>
+      <b-col lg="6" class="my-1">
+        <b-form-group label="Sort" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="sortBySelect" class="mb-0">
+          <b-input-group size="sm">
+            <b-form-select v-model="sortBy" id="sortBySelect" :options="sortOptions" class="w-75">
+              <template v-slot:first>
+                <option value="">-- none --</option>
+              </template>
+            </b-form-select>
+            <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy" class="w-25">
+              <option :value="false">Asc</option>
+              <option :value="true">Desc</option>
+            </b-form-select>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
 
-                <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `id` -->
-                <a href="delete?id={{ supplier.id }}" class="btn btn-danger">
-                    <span data-feather="delete"></span> Xóa
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+      <b-col lg="6" class="my-1">
+        <b-form-group label="Initial sort" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="initialSortSelect" class="mb-0">
+          <b-form-select v-model="sortDirection" id="initialSortSelect" size="sm" :options="['asc', 'desc', 'last']"></b-form-select>
+        </b-form-group>
+      </b-col>
 
+      <b-col lg="6" class="my-1">
+        <b-form-group label="Filter" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="filterInput" class="mb-0">
+          <b-input-group size="sm">
+            <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+            <b-input-group-append>
+              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6" class="my-1">
+        <b-form-group label="Filter On" label-cols-sm="3" label-align-sm="right" label-size="sm" description="Leave all unchecked to filter on all data" class="mb-0">
+          <b-form-checkbox-group v-model="filterOn" class="mt-1">
+            <b-form-checkbox value="name">Name</b-form-checkbox>
+            <b-form-checkbox value="age">Age</b-form-checkbox>
+            <b-form-checkbox value="isActive">Active</b-form-checkbox>
+          </b-form-checkbox-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col sm="5" md="6" class="my-1">
+        <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3" label-align-sm="right" label-size="sm" label-for="perPageSelect" class="mb-0">
+          <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+        </b-form-group>
+      </b-col>
+
+      <b-col sm="7" md="6" class="my-1">
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm" class="my-0"></b-pagination>
+      </b-col>
+    </b-row>
+
+    <b-table show-empty small stacked="md" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :sort-direction="sortDirection" @filtered="onFiltered">
+      <template v-slot:cell(name)="row">
+        ${ row.value.last } ${ row.value.first }
+      </template>
+
+      <template v-slot:cell(actions)="row">
+        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
+          <i class="fas fa-code"></i>
+        </b-button>
+        <b-button size="sm" @click="row.toggleDetails">
+          <i class="fas" :class="row.detailsShowing ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </b-button>
+      </template>
+
+      <template v-slot:row-details="row">
+        <b-card>
+          <ul>
+            <div v-for="(value, key) in row.item" :key="key">
+              <li v-if="!(key[0] == '_')">
+                <b>${ key }:</b> ${ value }
+              </li>
+            </div>
+          </ul>
+        </b-card>
+      </template>
+    </b-table>
+
+    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
+      <pre>${ infoModal.content }</pre>
+    </b-modal>
+  </b-container>
+</div>
 {% endblock %}
-{# End Nội dung trong block content #}
+
+{% block customscripts %}
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#vue',
+    delimiters: ['${', '}'],
+    data() {
+      return {
+        items: [],
+        fields: [
+          { key: 'username', label: 'Tài khoản', sortable: true },
+          { key: 'name', label: 'Họ và tên', sortable: true },
+          { key: 'actions', label: 'Actions' }
+        ],
+        totalRows: 1,
+        currentPage: 1,
+        perPage: 10,
+        pageOptions: [10, 50, 100],
+        sortBy: '',
+        sortDesc: false,
+        sortDirection: 'asc',
+        filter: null,
+        filterOn: [],
+        infoModal: {
+          id: 'info-modal',
+          title: '',
+          content: ''
+        }
+      }
+    },
+    beforeMount() {
+      this.items = JSON.parse(this.$el.attributes['data-user'].value);
+      this.totalRows = this.items.length
+    },
+    methods: {
+      info(item, index, button) {
+        this.infoModal.title = `Tài khoản: ${item.username}`
+        this.infoModal.content = JSON.stringify(item, null, 2)
+        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+      },
+      resetInfoModal() {
+        this.infoModal.title = ''
+        this.infoModal.content = ''
+      },
+      onFiltered(filteredItems) {
+        this.totalRows = filteredItems.length
+        this.currentPage = 1
+      }
+    },
+    computed: {
+      sortOptions() {
+        return this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return { text: f.label, value: f.key }
+          })
+      }
+    },
+  })
+</script>
+{% endblock %}
+
+{% block customstyles %}
+<link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+<style>
+</style>
+{% endblock %}
