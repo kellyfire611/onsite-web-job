@@ -1,21 +1,21 @@
 {% extends "backend/layouts/layout.html.twig" %}
 
 {% block title %}
-Danh sách Người dùng
+Tài khoản người dùng
 {% endblock %}
 
 {% block headline %}
-Danh sách Người dùng
+Tài khoản người dùng
 {% endblock %}
 
 {% block content %}
-{{ include('shared/table/content.twig') }}
+{{ include('shared/table/content.html.twig') }}
 {% endblock %}
 
 {% block customscripts %}
-{{ include('shared/table/script.twig') }}
+{{ include('shared/table/script.html.twig') }}
 {% endblock %}
 
 {% block customstyles %}
-{{ include('shared/table/style.twig') }}
+{{ include('shared/table/style.html.twig') }}
 {% endblock %}

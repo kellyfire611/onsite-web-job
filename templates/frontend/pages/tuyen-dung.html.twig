@@ -25,18 +25,18 @@ Tuyển dụng
 	<div class="bg-white">
 		<div class="container py-5">
 			<h4 class="mb-3">Các vị trí đang tuyển</h4>
-			{{ include('shared/table/content.twig') }}
+			{{ include('shared/table/content.html.twig') }}
 		</div>
 	</div>
 </div>
 {% endblock %}
 
 {% block customscripts %}
-{{ include('shared/table/script.twig') }}
+{{ include('shared/table/script.html.twig') }}
 {% endblock %}
 
 {% block customstyles %}
-{{ include('shared/table/style.twig') }}
+{{ include('shared/table/style.html.twig') }}
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("/assets/frontend/img/tuyen-dung.jpg");

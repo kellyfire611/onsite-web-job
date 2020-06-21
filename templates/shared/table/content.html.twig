@@ -92,7 +92,7 @@
   </p>
 
   <b-table bordered head-variant="light" show-empty small stacked="md" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage"
-           :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" @filtered="onFiltered"
+           :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" @filtered="onFiltered" :tbody-tr-class="rowClass"
            empty-filtered-text="Không tìm thấy dữ liệu" label-sort-asc="Nhấn vào đây để sắp xếp tăng dần" label-sort-desc="Nhấn vào đây để sắp xếp giảm dần"
            label-sort-clear="Nhấn vào đây để xóa sắp xếp" empty-text="Không có dữ liệu">
     <template v-slot:cell(actions)="row">
@@ -108,7 +108,7 @@
       <b-card>
         <ul>
           <div v-for="(value, key) in row.item" :key="key">
-            <li v-if="!(key[0] == '_')">
+            <li v-if="!(key[0] == '_' || getLabel(key) == null)">
               <b>${ getLabel(key) }:</b> ${ value }
             </li>
           </div>

@@ -69,7 +69,7 @@ $fields = [
 ];
 
 echo $twig->render('frontend/pages/tuyen-dung.html.twig', [
-  'el'   => 'vue-table-jobs',
+  'el'   => 'table-jobs',
   'data' => json_encode([
     'items'  => $items,
     'fields' => $fields,
