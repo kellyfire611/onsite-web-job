@@ -31,9 +31,9 @@ Thêm mới Loại sản phẩm
 </div>
 {% endif %}
 
-<form name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="post" action="/backend/shop_suppliers/create.php">
+<form name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="post" action="/backend/shop_suppliers/create">
     <div class="form-group">
-        <label for="ncc_ma">#</label>
+        <label for="ncc_ma">Mã số nhà cung cấp</label>
         <input type="text" class="form-control" id="ncc_ma" name="ncc_ma" placeholder="Mã nhà cung cấp" readonly>
         <small id="ncc_maHelp" class="form-text text-muted">Mã nhà cung cấp không được hiệu chỉnh.</small>
     </div>
@@ -55,7 +55,7 @@ Thêm mới Loại sản phẩm
 		<input type="file" class="form-control custom-file" id="ncc_anh" name="ncc_anh" placeholder="Ảnh đại diện nhà cung cấp">
         <img src="{{ image_oldvalue }}" width="120" class="img-thumbnail">
     </div>
-
+ 
     
     <button class="btn btn-primary" name="btnSave">Thêm nhà cung cấp</button>
 </form>

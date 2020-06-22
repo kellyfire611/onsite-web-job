@@ -20,12 +20,13 @@ $rowNum = 1;
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     $data[] = array(
         'rowNum' => $rowNum, // sử dụng biến tự tăng để làm dữ liệu cột STT
+        'id' => $row['id'],
         'supplier_code' => $row['supplier_code'],
         'supplier_name' => $row['supplier_name'],
         'description' => $row['description'],
         'image' => $row['image'],
         'created_at' => $row['created_at'],
-        'updated_at' => $row['updated_at'],
+        'updated_at' => $row['updated_at']
     );
     $rowNum++;
 }

@@ -1,5 +1,5 @@
 <?php
-define('UPLOAD_PATH',realpath(__DIR__.'/../assets/uploads/suppliers/'));
+//define('UPLOAD_PATH',realpath(__DIR__.'/../../'));
 // Include file cấu hình ban đầu của `Twig`
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -53,11 +53,12 @@ $supplier_code = $_POST['ncc_code'];
 $supplier_name = $_POST['ncc_ten'];
 $description = $_POST['ncc_mota'];
 //$image = $_POST['ncc_anh'];
-$upload=UPLOAD_PATH.$_FILES['ncc_anh']['name'];
+//$upload=UPLOAD_PATH.$_FILES['ncc_anh']['name'];
+$upload='./../../assets/uploads/suppliers/'.$_FILES['ncc_anh']['name'];
 $file=$_FILES['ncc_anh']['tmp_name'];
 $created_at = date('Y-m-d H:i:s'); // Lấy ngày giờ hiện tại theo định dạng `Năm-Tháng-Ngày Giờ-Phút-Giây`. Vd: 2020-02-18 09:12:12
 $updated_at = NULL;
-var_dump($upload);
+//var_dump(UPLOAD_PATH);
 // 4. Kiểm tra ràng buộc dữ liệu (Validation)
 // Tạo biến lỗi để chứa thông báo lỗi
 $errors = [];
@@ -157,17 +158,16 @@ if (!empty($errors)) {
         'supplier_code_oldvalue' => $supplier_code,
         'supplier_name_oldvalue' => $supplier_name,
         'description_oldvalue' => $description,
-        'image_oldvalue' => $upload,
+        'image_oldvalue' => $upload
     ]);
     return;
 }
 
-// 6. Nếu không có lỗi dữ liệu sẽ thực thi câu lệnh SQL
-// Câu lệnh INSERT
-$sqlInsert = <<<EOT
+
+/*$sqlInsert = <<<EOT
     INSERT INTO shop_suppliers (supplier_code, supplier_name, description, image, created_at, updated_at) 
     VALUES ('$supplier_code', '$supplier_name', '$description', '$upload', '$created_at', '$updated_at')";
-EOT;
+EOT;*/
 
 if(move_uploaded_file($file,$upload)){
     echo "Tải tập tin thành công";
@@ -175,11 +175,17 @@ if(move_uploaded_file($file,$upload)){
 else{
     echo "Tải tập tin ko được";
 }
+// 6. Nếu không có lỗi dữ liệu sẽ thực thi câu lệnh SQL
+// Câu lệnh INSERT
+$sql="INSERT INTO shop_suppliers (supplier_code, supplier_name, description, image, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
+$stmt=$conn->prepare($sql);
+$stmt->bind_param("ssssss",$supplier_code,$supplier_name,$description,$upload,$created_at,$updated_at);
+$stmt->execute();
 // Code dùng cho DEBUG
-var_dump($sqlInsert); die;
+//var_dump($sql); die;
 
 // Thực thi INSERT
-mysqli_query($conn, $sqlInsert);
+//mysqli_query($conn, $sql);
 
 // Đóng kết nối
 mysqli_close($conn);
