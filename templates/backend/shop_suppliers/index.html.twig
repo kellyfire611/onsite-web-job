@@ -16,9 +16,10 @@ Danh sách Nhà cung cấp
 {# Nội dung trong block content #}
 {% block content %}
 <!-- Nút thêm mới, bấm vào sẽ hiển thị form nhập thông tin Thêm mới -->
-<a href="create" class="btn btn-primary">
+<a href="create.php" class="btn btn-primary">
     <span data-feather="plus"></span> Thêm mới
 </a>
+
 <!-- Nút import dữ liệu -->
 <a href="import" class="btn btn-success">
     <span data-feather="plus"></span> Import dữ liệu
@@ -34,10 +35,11 @@ Danh sách Nhà cung cấp
         </tr>
     </thead>
     <tbody>
+
         {% for supplier in suppliers %}
         <tr>
             <td>
-                <img src="/assets/uploads/{{ supplier.image }}" class="img-thumbnail"/>
+                <img src="./../../assets/uploads/{{ supplier.image }}" width="80" class="img-thumbnail"/>
             </td>
             <td>{{ supplier.supplier_code }}</td>
             <td>{{ supplier.supplier_name }}</td>
