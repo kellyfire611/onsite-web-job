@@ -1,0 +1,16 @@
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#{{ el }}',
+    delimiters: ['${', '}'],
+    data() {
+      return {
+
+      }
+    },
+    beforeMount() {
+      const data = JSON.parse(this.$el.attributes['data-user'].value);
+    },
+  });
+</script>

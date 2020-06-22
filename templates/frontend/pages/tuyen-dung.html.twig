@@ -25,57 +25,18 @@ Tuyển dụng
 	<div class="bg-white">
 		<div class="container py-5">
 			<h4 class="mb-3">Các vị trí đang tuyển</h4>
-			<form>
-				<div class="form-row">
-					<div class="form-group col-lg-4">
-						<input type="search" class="form-control" placeholder="Nhập từ khoá tìm kiếm">
-					</div>
-					<div class="form-group col-lg-3 col-md-6">
-						<select class="custom-select">
-							<option value="null" selected>Bộ phận</option>
-							{% for department in departments %}
-							<option value="{{ loop.index }}">{{ department }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="form-group col-lg-3 col-md-6">
-						<select class="custom-select">
-							<option value="null" selected>Địa điểm</option>
-							{% for location in locations %}
-							<option value="{{ location }}">{{ location }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="form-group col-lg-2">
-						<button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
-					</div>
-			</form>
-			<table class="table table-sm table-bordered table-hover table-responsive-sm bg-white">
-				<thead class="bg-light">
-					<tr>
-						<th scope="col">STT</th>
-						<th scope="col">Vị trí cần tuyển</th>
-						<th scope="col">Bộ phận</th>
-						<th scope="col">Địa điểm</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for job in jobs %}
-					<tr>
-						<th scope="row">{{ loop.index }}</th>
-						<td>{{ job.position }}</td>
-						<td>{{ job.department }}</td>
-						<td>{{ job.location }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+			{{ include('shared/table/content.html.twig') }}
 		</div>
 	</div>
 </div>
 {% endblock %}
 
+{% block customscripts %}
+{{ include('shared/table/script.html.twig') }}
+{% endblock %}
+
 {% block customstyles %}
+{{ include('shared/table/style.html.twig') }}
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("/assets/frontend/img/tuyen-dung.jpg");

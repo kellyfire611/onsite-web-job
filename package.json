@@ -1,0 +1,16 @@
+{
+  "name": "onsite-web-job",
+  "version": "1.0.0",
+  "description": "Onsite Web Job",
+  "repository": "https://github.com/kellyfire611/onsite-web-job.git",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.1",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
+    "flatpickr": "^4.6.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "vue": "^2.6.11"
+  }
+}

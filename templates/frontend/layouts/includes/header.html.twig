@@ -14,9 +14,9 @@
             <i class="fas fa-handshake mr-1"></i> Đối tác
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow-sm">
-            <a class="dropdown-item" href="/frontend/pages/doi-tac-van-chuyen">Đối tác vận chuyển</a>
-            <a class="dropdown-item" href="/frontend/pages/doi-tac-kinh-doanh">Đối tác kinh doanh</a>
-            <a class="dropdown-item" href="/frontend/pages/khach-hang-doanh-nghiep">Khách hàng doanh nghiệp</a>
+            <a class="dropdown-item" href="/frontend/pages/doi-tac-van-chuyen.php">Đối tác vận chuyển</a>
+            <a class="dropdown-item" href="/frontend/pages/doi-tac-kinh-doanh.php">Đối tác kinh doanh</a>
+            <a class="dropdown-item" href="/frontend/pages/khach-hang-doanh-nghiep.php">Khách hàng doanh nghiệp</a>
           </div>
         </li>
         {% if session['email'] %}
@@ -25,14 +25,14 @@
             <i class="fas fa-user mr-1"></i> Cá nhân
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow-sm">
-            <a class="dropdown-item" href="/frontend/auth/account">Thông tin tài khoản</a>
-            <a class="dropdown-item" href="/frontend/auth/dashboard">Quản lý chuyến đi</a>
-            <a class="dropdown-item" href="/frontend/auth/logout">Đăng xuất</a>
+            <a class="dropdown-item" href="/frontend/auth/account.php">Thông tin tài khoản</a>
+            <a class="dropdown-item" href="/frontend/auth/dashboard.php">Quản lý chuyến đi</a>
+            <a class="dropdown-item" href="/frontend/auth/logout.php">Đăng xuất</a>
           </div>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="/frontend/auth/dang-nhap"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập</a>
+          <a class="nav-link" href="/frontend/auth/dang-nhap.php"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập</a>
         </li>
         {% endif %}
       </ul>
@@ -45,17 +45,17 @@
         <a class="dropdown-item" href="/"><i class="fas fa-home mr-1"></i> Trang chủ</a>
         <div class="dropdown-divider"></div>
         <span class="dropdown-header"><i class="fas fa-handshake mr-1"></i> Đối tác</span>
-        <a class="dropdown-item" href="/frontend/pages/doi-tac-van-chuyen">Đối tác vận chuyển</a>
-        <a class="dropdown-item" href="/frontend/pages/doi-tac-kinh-doanh">Đối tác kinh doanh</a>
-        <a class="dropdown-item" href="/frontend/pages/khach-hang-doanh-nghiep">Khách hàng doanh nghiệp</a>
+        <a class="dropdown-item" href="/frontend/pages/doi-tac-van-chuyen.php">Đối tác vận chuyển</a>
+        <a class="dropdown-item" href="/frontend/pages/doi-tac-kinh-doanh.php">Đối tác kinh doanh</a>
+        <a class="dropdown-item" href="/frontend/pages/khach-hang-doanh-nghiep.php">Khách hàng doanh nghiệp</a>
         <div class="dropdown-divider"></div>
         {% if session['email'] %}
         <span class="dropdown-header"><i class="fas fa-user mr-1"></i> Cá nhân</span>
-        <a class="dropdown-item" href="/frontend/auth/account">Thông tin tài khoản</a>
-        <a class="dropdown-item" href="/frontend/auth/dashboard">Quản lý chuyến đi</a>
-        <a class="dropdown-item" href="/frontend/auth/logout">Đăng xuất</a>
+        <a class="dropdown-item" href="/frontend/auth/account.php">Thông tin tài khoản</a>
+        <a class="dropdown-item" href="/frontend/auth/dashboard.php">Quản lý chuyến đi</a>
+        <a class="dropdown-item" href="/frontend/auth/logout.php">Đăng xuất</a>
         {% else %}
-        <a class="dropdown-item" href="/frontend/auth/dang-nhap"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập</a>
+        <a class="dropdown-item" href="/frontend/auth/dang-nhap.php"><i class="fas fa-sign-in-alt mr-1"></i> Đăng nhập</a>
         {% endif %}
       </div>
     </div>

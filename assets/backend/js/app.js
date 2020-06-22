@@ -1,8 +1,7 @@
-/* globals Chart:false, feather:false */
+// /* globals Chart:false, feather:false */
 
-(function () {
-    'use strict'
-  
-    feather.replace()
-}())
-  
+// (function () {
+//     'use strict'
+
+//     feather.replace()
+// }())
