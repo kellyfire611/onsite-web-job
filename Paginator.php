@@ -1,99 +1,95 @@
 <?php
-class Paginator
-{
-    /**
-     * Biến kết nối đến database
-     */
-    private $conn;
+class Paginator {
+  /**
+   * Biến kết nối đến database
+   */
+  private $__conn;
 
-    /**
-     * Số mẫu tin TỐI ĐA cần hiển thị trong 1 trang
-     * Mặc định hiển thị 10 mẫu tin trong 1 trang
-     */
-    private $limit;
+  /**
+   * Số mẫu tin TỐI ĐA cần hiển thị trong 1 trang
+   * Mặc định hiển thị 10 mẫu tin trong 1 trang
+   */
+  private $__limit;
 
-    /**
-     * Số trang muốn hiển thị dữ liệu
-     */
-    private $page;
+  /**
+   * Số trang muốn hiển thị dữ liệu
+   */
+  private $__page;
 
-    /**
-     * Câu lệnh truy vấn database
-     * SELECT ... FROM ...
-     */
-    private $query;
+  /**
+   * Câu lệnh truy vấn database
+   * SELECT ... FROM ...
+   */
+  private $__query;
 
-    /**
-     * Tổng số mẫu tin lấy được sau khi thực thi câu lệnh SQL
-     */
-    private $total;
+  /**
+   * Tổng số mẫu tin lấy được sau khi thực thi câu lệnh SQL
+   */
+  private $__total;
 
-    /**
-     * Biến quản lý TWIG template engine
-     */
-    private $twig;
+  /**
+   * Biến quản lý TWIG template engine
+   */
+  private $__twig;
 
-    /**
-     * Hàm khởi tạo
-     */
-    public function __construct($twig, $conn, $query)
-    {
-        $this->twig = $twig;
-        $this->conn = $conn;
-        $this->query = $query;
+  /**
+   * Hàm khởi tạo
+   */
+  public function __construct($twig, $conn, $query) {
+    $this->twig  = $twig;
+    $this->conn  = $conn;
+    $this->query = $query;
 
-        $rs = $this->conn->query($this->query);
-        $this->total = $rs->num_rows;
+    $rs          = $this->conn->query($this->query);
+    $this->total = $rs->num_rows;
+  }
+
+  /**
+   * Lấy dữ liệu
+   */
+  public function getData($limit = 10, $page = 1) {
+    $this->limit = $limit;
+    $this->page  = $page;
+
+    if ($this->limit == 'all') {
+      $query = $this->query;
+    } else {
+      $offset = (($this->page - 1) * $this->limit);
+      $query  = $this->query . " LIMIT " . $offset . ", $this->limit";
+    }
+    $rs = $this->conn->query($query);
+
+    while ($row = $rs->fetch_assoc()) {
+      $results[] = $row;
     }
 
-    /**
-     * Lấy dữ liệu
-     */
-    public function getData($limit = 10, $page = 1)
-    {
-        $this->limit   = $limit;
-        $this->page    = $page;
+    $result        = new stdClass();
+    $result->page  = $this->page;
+    $result->limit = $this->limit;
+    $result->total = $this->total;
+    $result->data  = $results;
 
-        if ($this->limit == 'all') {
-            $query      = $this->query;
-        } else {
-            $offset = (($this->page - 1) * $this->limit);
-            $query      = $this->query . " LIMIT " . $offset . ", $this->limit";
-        }
-        $rs             = $this->conn->query($query);
+    return $result;
+  }
 
-        while ($row = $rs->fetch_assoc()) {
-            $results[]  = $row;
-        }
-
-        $result         = new stdClass();
-        $result->page   = $this->page;
-        $result->limit  = $this->limit;
-        $result->total  = $this->total;
-        $result->data   = $results;
-
-        return $result;
+  /**
+   * Tạo HTML phân trang
+   */
+  public function createLinks() {
+    if ($this->limit == 'all') {
+      return '';
     }
 
-    /**
-     * Tạo HTML phân trang
-     */
-    public function createLinks()
-    {
-        if ($this->limit == 'all') {
-            return '';
-        }
+    $first = 1;
+    $last  = ceil($this->total / $this->limit);
 
-        $first      = 1;
-        $last        = ceil($this->total / $this->limit);
-
-        $html = $this->twig->render('shared/pagination/index.html.twig', [
-            'page' => $this->page,
-            'limit' => $this->limit,
-            'total' => $this->total,
-            'first' => $first,
-            'last' => $last
-        ]);
-        return $html;
-    }
+    $html = $this->twig->render('shared/pagination/index.html.twig', [
+      'page'  => $this->page,
+      'limit' => $this->limit,
+      'total' => $this->total,
+      'first' => $first,
+      'last'  => $last,
+    ]);
+    return $html;
+  }
 }

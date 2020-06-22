@@ -14,7 +14,7 @@ Tài khoản người dùng
     <h6>Thông tin bắt buộc</h6>
     <b-row>
       <b-col lg="6">
-        <b-form-group label="Tên đăng nhập" label-for="input-username" description="Tối tiểu 5 kí tự và không chứa kí tự đặc biệt (VD: dnpcuong)"
+        <b-form-group label="Tên đăng nhập" label-for="input-username" description="Tối thiểu 5 kí tự và không chứa kí tự đặc biệt (VD: dnpcuong)"
                       invalid-feedback="Tài khoản không hợp lệ" :state="state.username">
           <b-input-group>
             <template v-slot:prepend>
@@ -247,9 +247,17 @@ Tài khoản người dùng
       }
     },
     beforeMount() {
-      this.regex = JSON.parse(this.$el.attributes['data-user'].value);
+      const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.regex = data.regex;
+      this.form = Object.assign(this.form, data.form);
       for (const key in this.regex) {
         this.regex[key].pattern = new RegExp(this.regex[key].pattern);
+      }
+      if (data.response) {
+        this.$bvToast.toast(data.response.content, {
+          title: data.response.title,
+          variant: data.response.variant,
+        });
       }
     },
     mounted() {
@@ -277,107 +285,46 @@ Tài khoản người dùng
     },
     watch: {
       'form.username'() {
-        this.state.username = !(
-          this.form.username.length < this.regex.username.min ||
-          this.form.username.length > this.regex.username.max ||
-          !this.regex.username.pattern.test(this.form.username)
-        );
+        this.state.username = Regex.test(this.regex.username.pattern, this.regex.username.min, this.regex.username.max, this.form.username);
       },
       'form.last_name'() {
-        this.state.last_name = !(
-          this.form.last_name.length < this.regex.last_name.min ||
-          this.form.last_name.length > this.regex.last_name.max ||
-          !this.regex.last_name.pattern.test(this.form.last_name)
-        );
+        this.state.last_name = Regex.test(this.regex.last_name.pattern, this.regex.last_name.min, this.regex.last_name.max, this.form.last_name);
       },
       'form.first_name'() {
-        this.state.first_name = !(
-          this.form.first_name.length < this.regex.first_name.min ||
-          this.form.first_name.length > this.regex.first_name.max ||
-          !this.regex.first_name.pattern.test(this.form.first_name)
-        );
+        this.state.first_name = Regex.test(this.regex.first_name.pattern, this.regex.first_name.min, this.regex.first_name.max, this.form.first_name);
       },
       'form.email'() {
-        this.state.email = !(
-          this.form.email.length < this.regex.email.min ||
-          this.form.email.length > this.regex.email.max ||
-          !this.regex.email.pattern.test(this.form.email)
-        );
+        this.state.email = Regex.test(this.regex.email.pattern, this.regex.email.min, this.regex.email.max, this.form.email);
       },
       'form.avatar'() {
         this.state.avatar = this.form.avatar != null ? true : null;
       },
       'form.job_title'() {
-        this.state.job_title =
-          this.form.job_title.length == 0 ? null : !(
-            this.form.job_title.length < this.regex.job_title.min ||
-            this.form.job_title.length > this.regex.job_title.max ||
-            !this.regex.job_title.pattern.test(this.form.job_title)
-          );
+        this.state.job_title = this.form.job_title.length == 0 ? null : Regex.test(this.regex.job_title.pattern, this.regex.job_title.min, this.regex.job_title.max, this.form.job_title);
       },
       'form.department'() {
-        this.state.department =
-          this.form.department.length == 0 ? null : !(
-            this.form.department.length < this.regex.department.min ||
-            this.form.department.length > this.regex.department.max ||
-            !this.regex.department.pattern.test(this.form.department)
-          );
+        this.state.department = this.form.department.length == 0 ? null : Regex.test(this.regex.department.pattern, this.regex.department.min, this.regex.department.max, this.form.department);
       },
       'form.phone'() {
-        this.state.phone =
-          this.form.phone.length == 0 ? null : !(
-            this.form.phone.length < this.regex.phone.min ||
-            this.form.phone.length > this.regex.phone.max ||
-            !this.regex.phone.pattern.test(this.form.phone)
-          );
+        this.state.phone = this.form.phone.length == 0 ? null : Regex.test(this.regex.phone.pattern, this.regex.phone.min, this.regex.phone.max, this.form.phone);
       },
       'form.address1'() {
-        this.state.address1 =
-          this.form.address1.length == 0 ? null : !(
-            this.form.address1.length < this.regex.address1.min ||
-            this.form.address1.length > this.regex.address1.max ||
-            !this.regex.address1.pattern.test(this.form.address1)
-          );
+        this.state.address1 = this.form.address1.length == 0 ? null : Regex.test(this.regex.address1.pattern, this.regex.address1.min, this.regex.address1.max, this.form.address1);
       },
       'form.address2'() {
-        this.state.address2 =
-          this.form.address2.length == 0 ? null : !(
-            this.form.address2.length < this.regex.address2.min ||
-            this.form.address2.length > this.regex.address2.max ||
-            !this.regex.address2.pattern.test(this.form.address2)
-          );
+        this.state.address2 = this.form.address2.length == 0 ? null : Regex.test(this.regex.address2.pattern, this.regex.address2.min, this.regex.address2.max, this.form.address2);
       },
       'form.city'() {
-        this.state.city =
-          this.form.city.length == 0 ? null : !(
-            this.form.city.length < this.regex.city.min ||
-            this.form.city.length > this.regex.city.max ||
-            !this.regex.city.pattern.test(this.form.city)
-          );
+        this.state.city = this.form.city.length == 0 ? null : Regex.test(this.regex.city.pattern, this.regex.city.min, this.regex.city.max, this.form.city);
       },
       'form.state'() {
-        this.state.state =
-          this.form.state.length == 0 ? null : !(
-            this.form.state.length < this.regex.state.min ||
-            this.form.state.length > this.regex.state.max ||
-            !this.regex.state.pattern.test(this.form.state)
-          );
+        this.state.state = this.form.state.length == 0 ? null : Regex.test(this.regex.state.pattern, this.regex.state.min, this.regex.state.max, this.form.state);
       },
       'form.postal_code'() {
-        this.state.postal_code =
-          this.form.postal_code.length == 0 ? null : !(
-            this.form.postal_code.length < this.regex.postal_code.min ||
-            this.form.postal_code.length > this.regex.postal_code.max ||
-            !this.regex.postal_code.pattern.test(this.form.postal_code)
-          );
+        this.state.postal_code = this.form.postal_code.length == 0 ? null : Regex.test(this.regex.postal_code.pattern, this.regex.postal_code.min, this.regex.postal_code.max, this.form.postal_code);
       },
       'form.country'() {
-        this.state.country =
-          this.form.country.length == 0 ? null : !(
-            this.form.country.length < this.regex.country.min ||
-            this.form.country.length > this.regex.country.max ||
-            !this.regex.country.pattern.test(this.form.country)
-          );
+        this.state.country = this.form.country.length == 0 ? null : Regex.test(this.regex.country.pattern, this.regex.country.min, this.regex.country.max, this.form.country);
       },
     },
   });

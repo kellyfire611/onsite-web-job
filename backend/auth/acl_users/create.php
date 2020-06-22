@@ -1,69 +1,72 @@
 <?php
 require_once __DIR__ . '/../../../bootstrap.php';
+require_once __DIR__ . '/../../../utils/regex.php';
 
-$regex = [
+$template = 'backend/auth/acl_users/create.html.twig';
+$el       = 'form-create';
+$regex    = [
   'username'    => [
-    'pattern' => Config::$REGEX_PATTERN['username'],
+    'pattern' => Regex::$PATTERN['username'],
     'min'     => 5,
     'max'     => 191,
   ],
   'last_name'   => [
-    'pattern' => Config::$REGEX_PATTERN['vietnamese_name'],
+    'pattern' => Regex::$PATTERN['vietnamese_name'],
     'min'     => 1,
     'max'     => 255,
   ],
   'first_name'  => [
-    'pattern' => Config::$REGEX_PATTERN['vietnamese_name'],
+    'pattern' => Regex::$PATTERN['vietnamese_name'],
     'min'     => 1,
     'max'     => 255,
   ],
   'email'       => [
-    'pattern' => Config::$REGEX_PATTERN['email'],
+    'pattern' => Regex::$PATTERN['email'],
     'min'     => 12,
     'max'     => 191,
   ],
   'job_title'   => [
-    'pattern' => Config::$REGEX_PATTERN['any'],
+    'pattern' => Regex::$PATTERN['any'],
     'min'     => 0,
     'max'     => 255,
   ],
   'department'  => [
-    'pattern' => Config::$REGEX_PATTERN['any'],
+    'pattern' => Regex::$PATTERN['any'],
     'min'     => 0,
     'max'     => 255,
   ],
   'phone'       => [
-    'pattern' => Config::$REGEX_PATTERN['phone'],
+    'pattern' => Regex::$PATTERN['phone'],
     'min'     => 10,
     'max'     => 25,
   ],
   'address1'    => [
-    'pattern' => Config::$REGEX_PATTERN['any'],
+    'pattern' => Regex::$PATTERN['any'],
     'min'     => 0,
     'max'     => 500,
   ],
   'address2'    => [
-    'pattern' => Config::$REGEX_PATTERN['any'],
+    'pattern' => Regex::$PATTERN['any'],
     'min'     => 0,
     'max'     => 500,
   ],
   'city'        => [
-    'pattern' => Config::$REGEX_PATTERN['vietnamese_name'],
+    'pattern' => Regex::$PATTERN['vietnamese_name'],
     'min'     => 0,
     'max'     => 255,
   ],
   'state'       => [
-    'pattern' => Config::$REGEX_PATTERN['vietnamese_name'],
+    'pattern' => Regex::$PATTERN['vietnamese_name'],
     'min'     => 0,
     'max'     => 255,
   ],
   'postal_code' => [
-    'pattern' => Config::$REGEX_PATTERN['number'],
+    'pattern' => Regex::$PATTERN['number'],
     'min'     => 0,
     'max'     => 15,
   ],
   'country'     => [
-    'pattern' => Config::$REGEX_PATTERN['vietnamese_name'],
+    'pattern' => Regex::$PATTERN['vietnamese_name'],
     'min'     => 0,
     'max'     => 255,
   ],
@@ -72,24 +75,155 @@ $regex = [
 if (isset($_POST['submit'])) {
   include_once __DIR__ . '/../../../dbconnect.php';
 
-$target_dir    = "uploads/";
-$target_file   = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk      = 1;
-$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if (isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if ($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
+  if (Regex::test('username', 5, 191, $_POST['username'])) {
+    $query = <<<query
+      select id
+      from acl_users
+      where username = ?;
+    query;
+
+    if ($statement = $conn->prepare($query)) {
+      if ($statement->bind_param('s', $_POST['username'])) {
+        if ($statement->execute()) {
+          if ($result = $statement->get_result()) {
+            if ($result->num_rows == 1) {
+              echo $twig->render($template, [
+                'el'   => $el,
+                'data' => json_encode([
+                  'regex'    => $regex,
+                  'form'     => $_POST,
+                  'response' => [
+                    'title'   => 'Tạo mới không thành công',
+                    'variant' => 'danger',
+                    'content' => 'Tài khoản này đã tồn tại',
+                  ],
+                ]),
+              ]);
+            } else {
+              if (
+                Regex::test('vietnamese_name', 1, 255, $_POST['last_name']) &&
+                Regex::test('vietnamese_name', 1, 255, $_POST['first_name']) &&
+                Regex::test('email', 12, 191, $_POST['email']) &&
+                (strlen($_POST['job_title']) == 0 || Regex::test('any', 0, 255, $_POST['job_title'])) &&
+                (strlen($_POST['department']) == 0 || Regex::test('any', 0, 255, $_POST['department'])) &&
+                (strlen($_POST['phone']) == 0 || Regex::test('phone', 10, 25, $_POST['phone'])) &&
+                (strlen($_POST['address1']) == 0 || Regex::test('any', 0, 500, $_POST['address1'])) &&
+                (strlen($_POST['address2']) == 0 || Regex::test('any', 0, 500, $_POST['address2'])) &&
+                (strlen($_POST['city']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['city'])) &&
+                (strlen($_POST['state']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['state'])) &&
+                (strlen($_POST['postal_code']) == 0 || Regex::test('number', 0, 15, $_POST['postal_code'])) &&
+                (strlen($_POST['country']) == 0 || Regex::test('vietnamese_name', 5, 255, $_POST['country']))
+              ) {
+                $query = <<<query
+                  insert into acl_users values (
+                    null,
+                    ?, -- username
+                    ?, -- password
+                    ?, -- last_name
+                    ?, -- first_name
+                    ?, -- email
+                    ?, -- avatar
+                    ?, -- job_title
+                    ?, -- department
+                    null, -- manager_id
+                    ?, -- phone
+                    ?, -- address1
+                    ?, -- address2
+                    ?, -- city
+                    ?, -- state
+                    ?, -- postal_code
+                    ?, -- country
+                    null, -- remember_token
+                    null, -- active_code
+                    0, -- status
+                    current_timestamp(), -- created_at
+                    null -- updated_at
+                  );
+                query;
+
+                if ($statement = $conn->prepare($query)) {
+                  $password = password_hash('user@123', PASSWORD_DEFAULT);
+                  var_dump($_POST['department']);
+                  if ($statement->bind_param('sssssssssssssss',
+                    $_POST['username'],
+                    $password,
+                    $_POST['last_name'],
+                    $_POST['first_name'],
+                    $_POST['email'],
+                    '',
+                    $_POST['job_title'],
+                    $_POST['department'],
+                    $_POST['phone'],
+                    $_POST['address1'],
+                    $_POST['address2'],
+                    $_POST['city'],
+                    $_POST['state'],
+                    $_POST['postal_code'],
+                    $_POST['country'],
+                  )) {
+                    if ($statement->execute()) {
+                      header('location:./');
+                    } else {
+                      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+                    }
+                  } else {
+                    die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+                  }
+                } else {
+                  die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+                }
+              } else {
+                echo $twig->render($template, [
+                  'el'   => $el,
+                  'data' => json_encode([
+                    'regex'    => $regex,
+                    'form'     => $_POST,
+                    'response' => [
+                      'title'   => 'Tạo mới không thành công',
+                      'variant' => 'danger',
+                      'content' => 'Dữ liệu không hợp lệ',
+                    ],
+                  ]),
+                ]);
+              }
+            }
+          } else {
+            die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+          }
+        } else {
+          die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+        }
+      } else {
+        die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+      }
+    } else {
+      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+    }
   } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
+    echo $twig->render($template, [
+      'el'   => $el,
+      'data' => json_encode([
+        'regex'    => $regex,
+        'form'     => $_POST,
+        'response' => [
+          'title'   => 'Tạo mới không thành công',
+          'variant' => 'danger',
+          'content' => 'Dữ liệu không hợp lệ',
+        ],
+      ]),
+    ]);
   }
-}
+
+  // if ($_FILES['avatar']['error']) {
+  //   die('Không tải được ảnh đại diện.');
+  // } else {
+  //   $temp       = explode(".", $_FILES['avatar']["name"]);
+  //   $fileUpload = __DIR__ . '/../../../assets/uploads/users/avatars/' . $_POST['username'] . '.' . end($temp);
+  //   move_uploaded_file($_FILES['avatar']["tmp_name"], $fileUpload);
+  // }
 } else {
-  echo $twig->render('backend/auth/acl_users/create.html.twig', [
-    'el'   => 'form-create',
-    'data' => json_encode($regex),
+  echo $twig->render($template, [
+    'el'   => $el,
+    'data' => json_encode(['regex' => $regex]),
   ]);
 }
