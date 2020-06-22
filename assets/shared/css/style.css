@@ -37,3 +37,19 @@
   padding: 0 !important;
   text-align: center !important;
 }
+
+.custom-file.b-form-file,
+.custom-file-input {
+  height: calc(1.5rem + 0.75rem + 2px);
+}
+
+.custom-file-label {
+  height: 100%;
+  margin: 0;
+}
+
+.custom-file-label::after {
+  height: calc(100% - 0.5px);
+  margin: 0;
+  content: 'Chọn' !important;
+}
