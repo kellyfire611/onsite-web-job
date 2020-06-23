@@ -3,31 +3,31 @@ require_once __DIR__ . '/../../../bootstrap.php';
 include_once __DIR__ . '/../../../dbconnect.php';
 
 $query = <<<query
-select
-  id,
-  username,
-  concat(last_name, ' ', first_name) as full_name,
-  last_name,
-  first_name,
-  email,
-  avatar,
-  job_title,
-  department,
-  manager_id,
-  phone,
-  address1,
-  address2,
-  city,
-  state,
-  postal_code,
-  country,
-  remember_token,
-  active_code,
-  status,
-  case when status = 1 then 'Đã kích hoạt' else 'Chưa kích hoạt' end as status_name,
-  created_at,
-  updated_at
-from acl_users
+  select
+    id,
+    username,
+    concat(last_name, ' ', first_name) as full_name,
+    last_name,
+    first_name,
+    email,
+    avatar,
+    job_title,
+    department,
+    manager_id,
+    phone,
+    address1,
+    address2,
+    city,
+    state,
+    postal_code,
+    country,
+    remember_token,
+    active_code,
+    status,
+    case when status = 1 then 'Đã kích hoạt' else 'Chưa kích hoạt' end as status_name,
+    created_at,
+    updated_at
+  from acl_users;
 query;
 
 if ($result = mysqli_query($conn, $query)) {
@@ -215,6 +215,6 @@ if ($result = mysqli_query($conn, $query)) {
       'rowClass' => 'if (item.status != 1) return "bg-light"',
     ]),
   ]);
-} else {
-  die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
 }
+
+die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
