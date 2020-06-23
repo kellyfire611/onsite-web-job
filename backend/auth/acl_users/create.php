@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
                     ?, -- last_name
                     ?, -- first_name
                     ?, -- email
-                    ?, -- avatar
+                    '', -- avatar
                     ?, -- job_title
                     ?, -- department
                     null, -- manager_id
@@ -143,14 +143,12 @@ if (isset($_POST['submit'])) {
 
                 if ($statement = $conn->prepare($query)) {
                   $password = password_hash('user@123', PASSWORD_DEFAULT);
-                  var_dump($_POST['department']);
-                  if ($statement->bind_param('sssssssssssssss',
+                  if ($statement->bind_param('ssssssssssssss',
                     $_POST['username'],
                     $password,
                     $_POST['last_name'],
                     $_POST['first_name'],
                     $_POST['email'],
-                    '',
                     $_POST['job_title'],
                     $_POST['department'],
                     $_POST['phone'],
@@ -162,6 +160,13 @@ if (isset($_POST['submit'])) {
                     $_POST['country'],
                   )) {
                     if ($statement->execute()) {
+                      if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
+                        $temp       = explode(".", $_FILES['avatar']["name"]);
+                        $fileUpload = __DIR__ . '/../../../assets/uploads/users/avatars/' . $_POST['username'] . '.' . end($temp);
+                        move_uploaded_file($_FILES['avatar']["tmp_name"], $fileUpload);
+                      } elseif ($_FILES['avatar']['error'] != UPLOAD_ERR_NO_FILE) {
+                        die('Không tải được ảnh đại diện.');
+                      }
                       header('location:./');
                     } else {
                       die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
@@ -213,14 +218,6 @@ if (isset($_POST['submit'])) {
       ]),
     ]);
   }
-
-  // if ($_FILES['avatar']['error']) {
-  //   die('Không tải được ảnh đại diện.');
-  // } else {
-  //   $temp       = explode(".", $_FILES['avatar']["name"]);
-  //   $fileUpload = __DIR__ . '/../../../assets/uploads/users/avatars/' . $_POST['username'] . '.' . end($temp);
-  //   move_uploaded_file($_FILES['avatar']["tmp_name"], $fileUpload);
-  // }
 } else {
   echo $twig->render($template, [
     'el'   => $el,
