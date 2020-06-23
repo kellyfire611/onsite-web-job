@@ -177,7 +177,7 @@ else{
 }
 // 6. Nếu không có lỗi dữ liệu sẽ thực thi câu lệnh SQL
 // Câu lệnh INSERT
-$sql="INSERT INTO shop_suppliers (supplier_code, supplier_name, description, image, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
+$sql="INSERT INTO shop_suppliers (supplier_code, supplier_name, `description`, `image`, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt=$conn->prepare($sql);
 $stmt->bind_param("ssssss",$supplier_code,$supplier_name,$description,$upload,$created_at,$updated_at);
 $stmt->execute();
