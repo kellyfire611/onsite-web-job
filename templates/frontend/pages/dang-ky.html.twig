@@ -1,0 +1,142 @@
+{# Kế thừa layout frontend #}
+{% extends "frontend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Đăng ký thành viên
+{% endblock %}
+
+{% block customstyles %}
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/flatpickr.min.css">
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{% block content %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-10 offset-1">
+			<div class="card bg-light">
+				<h2 class="card-title mt-3 text-center">Đăng ký</h2>
+            	<p class="text-center">Tạo tài khoản</p>
+			</div>
+		</div>
+	</div> <!-- end row header -->
+	<div class="row">
+		<div class="col-md-10 offset-1">
+			<form class="card"  name="frmdangky" id="frmdangky" method="post" action="./dang-ky.php">
+				<div class="row card-body">
+					<div class="col-md-4">
+						<div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                             </div>
+                            <input name="txttentk" class="form-control" placeholder="Tên tài khoản" type="text">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                             </div>
+                            <input name="txtpass" class="form-control" placeholder="Mật khẩu" type="password">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                             </div>
+                            <input name="txthoten" class="form-control" placeholder="Họ tên" type="text">
+                        </div> <!-- form-group// -->
+					</div>
+					<div class="col-md-4">
+						<div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-mars-stroke-h"></i> </span>
+                            </div>
+                            <select class="form-control" name="txtgioitinh">
+                                <option value="0">Nam</option>
+                                <option value="1">Nử</option>
+                        
+                            </select>
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-globe"></i> </span>
+                             </div>
+                            <input name="txtdiachi" class="form-control" placeholder="Địa chỉ" type="text">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-phone-square"></i> </span>
+                             </div>
+                            <input name="txtsdt" class="form-control" placeholder="Số điện thoại" type="text">
+                        </div> <!-- form-group// -->
+					</div>
+					<div class="col-md-4">
+						<div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-envelope-square"></i> </span>
+                             </div>
+                            <input name="txtemail" class="form-control" placeholder="Địa chỉ E-mail" type="email">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-stopwatch-20"></i> </span>
+                            </div>
+                            
+                            <input name="txtngaysinh" id="idngaysinh" class="form-control bg-white" placeholder="Ngày sinh" type="text">
+                            
+                            
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="far fa-id-badge"></i> </span>
+                             </div>
+                            <input name="txtcmnd" class="form-control" placeholder="CMND" type="text">
+                        </div> <!-- form-group// -->
+					</div>
+					<div class="col-md-6 offset-3 m-auto">
+						<div class="form-group">
+                            <button name="btnsubmit" type="submit" class="btn btn-primary btn-block"> Tạo tài khoản  </button>
+                        </div> <!-- form-group// -->  
+					</div>
+				</div> <!-- end row body -->
+				<div class="row card-footer bg-light m-0">
+					<div class="col-md-6 offset-3 m-auto">
+						<p class="text-center">Nếu bạn đã có tài khoản, xin mời đăng nhập.</p>
+                     	<a href="./dang-nhap.php" class="btn btn-success btn-block">
+                         Đăng nhập  
+                    	</a>
+					</div>
+                    					
+                </div> <!-- end card-footer -->
+			</form>
+		</div> <!-- end col-md-10 -->
+	</div>
+</div> <!-- end container-fluid -->
+
+{% endblock %}
+
+{% block customscripts %}
+<script src="/assets/vendor/flatpickr/flatpickr.js"></script>
+<script src="/assets/vendor/flatpickr/vn.min.js"></script>
+<script>
+	$(document).ready(function () {
+		flatpickr.localize(flatpickr.l10ns.vn);
+		$('#idngaysinh').flatpickr({
+			dateFormat: 'd/m/Y',			
+            defaultDate: ["01/01/2002"],
+            enable: [
+                function(dateString) {
+                    var today = new Date();
+                    var birthDate = new Date(dateString);
+                    var age = today.getFullYear() - birthDate.getFullYear();
+                    var m = today.getMonth() - birthDate.getMonth();
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    return (age > 17 && age <= 80);
+                }
+            ]
+		});
+	});
+</script>
+{% endblock %}

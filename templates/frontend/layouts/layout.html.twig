@@ -1,67 +1,40 @@
 <!doctype html>
-<html lang="vi" class="h-100">
+<html lang="vi">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/assets/shared/ico/logo.ico">
 
-  <!-- Bootstrap CSS -->
-  {# <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css" type="text/css" /> #}
-  <!-- Custom Bootstrap CSS -->
   <link rel="stylesheet" href="/assets/shared/css/custom.bootstrap.css" type="text/css" />
-  <!-- Font awesome -->
-  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" type="text/css" />
-
-  <!-- Custom css - Các file css do chúng ta tự viết -->
+  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" type="text/css" />
   <link rel="stylesheet" href="/assets/shared/css/style.css" type="text/css" />
   <link rel="stylesheet" href="/assets/frontend/css/style.css" type="text/css" />
-  <link rel="stylesheet" href="/assets/frontend/css/cau-hoi.css" type="text/css" />
-  <!-- Block title - Đục lỗ trên giao diện bố cục chung, đặt tên là `title` -->
+
   <title>
     Onsite Web Job -
-    {% block title %}
-    {% endblock %}
+    {% block title %}{% endblock %}
   </title>
-  <!-- End block title -->
 
-  <!-- Block custom-styles - Đục lỗ trên giao diện bố cục chung, đặt tên là `custom-styles` -->
-  {% block customstyles %}
-  {% endblock %}
-  <!-- End block custom-styles -->
+  {% block customstyles %}{% endblock %}
 </head>
 
 <body>
-  <!-- header -->
   {{ include('frontend/layouts/includes/header.html.twig') }}
-  <!-- end header -->
 
-  <main role="main" class="wrapper vh-min-100">
-    <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
-    {% block content %}
-    {% endblock %}
-    <!-- End block content -->
+  <main role="main" class="wrapper">
+    {% block content %}{% endblock %}
   </main>
 
-  <!-- footer -->
   {{ include('frontend/layouts/includes/footer.html.twig') }}
-  <!-- end footer -->
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/assets/vendor/popperjs/popper.min.js"></script>
-  <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/assets/vendor/feather/feather.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/assets/frontend/js/script.js"></script>
+  <script src="/assets/shared/js/script.js"></script>
 
-  <!-- Custom script - Các file js do mình tự viết -->
-  <script src="/assets/frontend/js/app.js"></script>
-  <script src="/assets/frontend/js/cau-hoi.js"></script>
-  <!-- Block custom-scripts - Đục lỗ trên giao diện bố cục chung, đặt tên là `custom-scripts` -->
-  {% block customscripts %}
-  {% endblock %}
-  <!-- End block custom-scripts -->
+  {% block customscripts %}{% endblock %}
 </body>
 
 </html>

@@ -35,7 +35,7 @@ Trang chủ
 									<label for="tab-airport-begin">Điểm đón</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input type="search" class="form-control" id="tab-airport-begin">
 									</div>
@@ -44,7 +44,7 @@ Trang chủ
 									<label for="tab-airport-end">Điểm trả</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input type="search" class="form-control" id="tab-airport-end">
 									</div>
@@ -55,9 +55,9 @@ Trang chủ
 											<label for="tab-airport-time">Thời gian đón</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-clock"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-clock"></i></span>
 												</div>
-												<input type="datetime-local" class="form-control" id="tab-airport-time">
+												<input class="form-control bg-white" id="tab-airport-time">
 											</div>
 										</div>
 									</div>
@@ -66,7 +66,7 @@ Trang chủ
 											<label for="tab-airport-people">Số người</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-user-friends"></i></span>
 												</div>
 												<select class="custom-select" id="tab-airport-people">
 													{% for number in 1..peopleAirport %}
@@ -84,7 +84,7 @@ Trang chủ
 									<label for="tab-long-road-begin">Điểm đón</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input type="search" class="form-control" id="tab-long-road-begin">
 									</div>
@@ -93,7 +93,7 @@ Trang chủ
 									<label for="tab-long-road-end">Điểm trả</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input type="search" class="form-control" id="tab-long-road-end">
 									</div>
@@ -104,9 +104,9 @@ Trang chủ
 											<label for="tab-long-road-time">Thời gian đón</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-clock"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-clock"></i></span>
 												</div>
-												<input type="datetime-local" class="form-control" id="tab-long-road-time">
+												<input class="form-control bg-white" id="tab-long-road-time">
 											</div>
 										</div>
 									</div>
@@ -115,7 +115,7 @@ Trang chủ
 											<label for="tab-long-road-people">Số người</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-user-friends"></i></span>
 												</div>
 												<select class="custom-select" id="tab-long-road-people">
 													{% for number in 1..peopleLongRoad %}
@@ -133,7 +133,7 @@ Trang chủ
 									<label for="tab-tour-rental-begin">Điểm đón</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-map-marker-alt"></i></span>
 										</div>
 										<input type="search" class="form-control" id="tab-tour-rental-begin">
 									</div>
@@ -142,9 +142,9 @@ Trang chủ
 									<label for="tab-tour-rental-time">Thời gian đón</label>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-clock"></i></span>
+											<span class="input-group-text group-icon"><i class="fas fa-clock"></i></span>
 										</div>
-										<input type="datetime-local" class="form-control" id="tab-tour-rental-time">
+										<input class="form-control bg-white" id="tab-tour-rental-time">
 									</div>
 								</div>
 								<div class="row no-gutters">
@@ -153,7 +153,7 @@ Trang chủ
 											<label for="tab-tour-rental-duration">Thời lượng</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-hourglass-half"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-hourglass-half"></i></span>
 												</div>
 												<select class="custom-select" id="tab-tour-rental-duration">
 													{% for duration in durationTourRentals %}
@@ -165,12 +165,12 @@ Trang chủ
 									</div>
 									<div class="col-md-6 pl-md-2">
 										<div class="form-group">
-											<label for="tab-long-road-people">Loại xe</label>
+											<label for="tab-tour-rental-car-category">Loại xe</label>
 											<div class="input-group mb-3">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><i class="fas fa-car"></i></span>
+													<span class="input-group-text group-icon"><i class="fas fa-car"></i></span>
 												</div>
-												<select class="custom-select" id="tab-long-road-people">
+												<select class="custom-select" id="tab-tour-rental-car-category">
 													{% for category in carCategoriesTourRental %}
 													<option value="{{ category }}">{{ category }}</option>
 													{% endfor %}
@@ -326,14 +326,14 @@ Trang chủ
 						<p class="card-text">{{ news.shortContent }}</p>
 					</div>
 					<div class="card-footer text-center">
-						<a href="/frontend/pages/bao-chi/{{ news.name }}">Xem thêm</a>
+						<a href="/frontend/pages/bao-chi.php?name={{ news.name }}">Xem thêm</a>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
 		</div>
 		<div class="text-center mt-4">
-			<a class="btn btn-primary" href="/frontend/pages/bao-chi">Tìm hiểu thêm</a>
+			<a class="btn btn-primary" href="/frontend/pages/bao-chi.php">Tìm hiểu thêm</a>
 		</div>
 	</div>
 </div>
@@ -347,7 +347,7 @@ Trang chủ
 			{% for sale in saleList %}
 			<div class="col my-3">
 				<div class="card h-100 shadow-sm">
-					<img src="/assets/uploads/blog/{{ sale.name }}.jpg" alt="" class="card-img-top">
+					<img src="/assets/uploads/blogs/{{ sale.name }}.jpg" alt="" class="card-img-top">
 					<div class="card-body">
 						<h5 class="card-title">{{ sale.title }}</h5>
 						<p class="card-text">{{ sale.shortContent }}</p>
@@ -367,13 +367,8 @@ Trang chủ
 			Khách hàng hài lòng
 		</h4>
 		<hr class="bg-dark w-50">
-		<div id="carousel-comment" class="carousel slide d-flex">
-			<div class="flex-fill align-self-center mr-4">
-				<a href="#carousel-comment" data-slide="prev">
-					<i class="fas fa-chevron-left text-primary"></i>
-				</a>
-			</div>
-			<div class="carousel-inner flex-fill">
+		<div id="carousel-comment" class="carousel slide row no-gutters">
+			<div class="carousel-inner col-md-10 order-md-2">
 				{% for indexComment in 1..(comments|length / 3) %}
 				<div class="carousel-item {% if indexComment == 1 %}active{% endif %}">
 					<div class="row row-cols-1 row-cols-lg-3">
@@ -456,8 +451,13 @@ Trang chủ
 				</div>
 				{% endfor %}
 			</div>
-			<div class="flex-fill align-self-center ml-4">
-				<a href="#carousel-comment" data-slide="next">
+			<div class="col-md-1 col-6 order-md-1 d-flex align-items-center">
+				<a href="#carousel-comment" data-slide="prev" class="mx-auto">
+					<i class="fas fa-chevron-left text-primary"></i>
+				</a>
+			</div>
+			<div class="col-md-1 col-6 order-3 d-flex align-items-center">
+				<a href="#carousel-comment" data-slide="next" class="mx-auto">
 					<i class="fas fa-chevron-right text-primary"></i>
 				</a>
 			</div>
@@ -481,12 +481,29 @@ Trang chủ
 {% endblock %}
 
 {% block customscripts %}
+<script src="/node_modules/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/node_modules/flatpickr/dist/l10n/vn.js"></script>
 <script>
-	$('main.wrapper').removeClass('wrapper');
+	$(document).ready(function () {
+		flatpickr.localize(flatpickr.l10ns.vn);
+
+		$('main.wrapper').removeClass('wrapper');
+
+		$('#tab-airport-time, #tab-long-road-time, #tab-tour-rental-time').flatpickr({
+			enableTime: true,
+			dateFormat: 'd/m/Y H:i',
+			minDate: 'today',
+			locale: {
+				firstDayOfWeek: 1
+			},
+			time_24hr: true,
+		});
+	});
 </script>
 {% endblock %}
 
 {% block customstyles %}
+<link rel="stylesheet" href="/node_modules/flatpickr/dist/themes/material_green.css">
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("/assets/frontend/img/trang-chu/bg.jpg");

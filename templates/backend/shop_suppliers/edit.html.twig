@@ -1,0 +1,49 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Sửa Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{# Nội dung trong block headline #}
+{% block headline %}
+Sửa Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block headline #}
+
+{# Nội dung trong block content #}
+{% block content %}
+
+<form name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="POST" action="/backend/shop_suppliers/edit?id={{ suppliers.id }}">
+    <div class="form-group">
+        <label for="ncc_ma">Mã số nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_ma" name="ncc_ma" placeholder="Mã nhà cung cấp" readonly value="{{ suppliers.id }}">
+        <small id="ncc_maHelp" class="form-text text-muted">Mã nhà cung cấp không được hiệu chỉnh.</small>
+    </div>
+    <div class="form-group">
+        <label for="ncc_code">Ký hiệu nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_code" name="ncc_code" value="{{ suppliers.supplier_code }}" placeholder="Ký hiệu nhà cung cấp gồm 3 ký tự đầu SUP+số">
+    </div>
+    <div class="form-group">
+        <label for="ncc_ten">Tên nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_ten" name="ncc_ten" value="{{ suppliers.supplier_name }}" placeholder="Tên nhà cung cấp">
+    </div>
+    <div class="form-group">
+        <label for="ncc_mota">Mô tả nhà cung cấp</label>
+        <input type="text" class="form-control" id="ncc_mota" name="ncc_mota" value="{{ suppliers.description }}" placeholder="Mô tả nhà cung cấp">
+    </div>
+    <div class="form-group">
+        <label for="ncc_anh">Ảnh đại diện nhà cung cấp</label>
+        <input type="hidden" name="ncc_anhcu" value="./../../{{ suppliers.image }}">
+		<input type="file" class="form-control custom-file" id="ncc_anh" name="ncc_anh">
+        <img src="./../../{{ suppliers.image }}" width="120" class="img-thumbnail">
+    </div>
+ 
+    
+    <button class="btn btn-primary" name="btnSave">Cập nhật nhà cung cấp</button>
+</form>
+
+{% endblock %}
+{# End Nội dung trong block content #}

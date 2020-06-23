@@ -1,0 +1,66 @@
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#{{ el }}',
+    delimiters: ['${', '}'],
+    data() {
+      return {
+        items: [],
+        fields: [],
+        totalRows: 1,
+        currentPage: 1,
+        perPage: 10,
+        pageOptions: [
+          { text: '5 dòng', value: 5 },
+          { text: '10 dòng', value: 10 },
+          { text: '50 dòng', value: 50 },
+          { text: '100 dòng', value: 100 },
+        ],
+        sortBy: '',
+        sortDesc: false,
+        filter: null,
+        filterOn: [],
+        infoModal: {
+          id: 'info-modal',
+          title: '',
+          content: '',
+        },
+      };
+    },
+    beforeMount() {
+      const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.items = data.items;
+      this.fields = data.fields;
+      this.fields.filter((field) => field.formatter).map((field) => {
+        field.formatter = new Function('value', 'key', 'item', field.formatter);
+      });
+      this.totalRows = this.items.length;
+      this.rowClass = data.rowClass ? new Function('item', 'type', `if (!item || type !== 'row') return ''; ${data.rowClass}`) : '';
+    },
+    methods: {
+      info(item, index, button) {
+        this.infoModal.title = 'Dữ liệu JSON';
+        this.infoModal.content = JSON.stringify(item, null, 2);
+        this.$root.$emit('bv::show::modal', this.infoModal.id, button);
+      },
+      resetInfoModal() {
+        this.infoModal.title = '';
+        this.infoModal.content = '';
+      },
+      onFiltered(filteredItems) {
+        this.totalRows = filteredItems.length;
+        this.currentPage = 1;
+      },
+      getLabel(key) {
+        const fields = this.fields.filter((field) => field.key == key);
+        return fields.length ? fields[0].label : null;
+      },
+    },
+    computed: {
+      options() {
+        return this.fields.filter((field) => field.sortable).map((field) => ({ text: field.label, value: field.key }));
+      },
+    },
+  });
+</script>

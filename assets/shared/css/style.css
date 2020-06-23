@@ -1,3 +1,55 @@
 .wrapper {
   padding-top: 3.6rem;
 }
+
+.input-group-sm .group-icon {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+
+  width: 2.25rem !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.input-group .group-icon {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+
+  width: 2.5rem !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.custom-file.b-form-file,
+.custom-file-input {
+  height: calc(1.5rem + 0.75rem + 2px);
+}
+
+.custom-file-label {
+  height: 100%;
+  margin: 0;
+}
+
+.custom-file-label::after {
+  height: calc(100% - 0.5px);
+  margin: 0;
+  content: 'Chọn' !important;
+}
