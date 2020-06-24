@@ -7,106 +7,158 @@
 {# End Nội dung trong block title #}
 {# Nội dung trong block headline #}
 {% block headline %}
-  Thêm mới hhách hàng
+  Thêm mới khách hàng
 {% endblock %}
 {# End Nội dung trong block headline #}
 {# Nội dung trong block content #}
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_customers/create.php" enctype="multipart/form-data">
-          <table>
-            <div class="form-group ">
-              <tr>
-                <td><label for="id">&emsp;Mã khách hàng</label></td>
-                <td class="w-25"><input type="text" class="form-control" id="id" name="txtid" placeholder="Mã khách hàng" readonly></br>
-                </td>
-                <td><label for="username">&emsp;UserName</label></td>
-                <td><input type="text" class="form-control" id="idusername" name="txtusername" placeholder="UserName" required=""></br></td>
-              </tr>
-            </div>
-            <div class="form-group">
-              <tr>
-                <td> <label for="password">&emsp;Password</label></td>
-                <td> <input type="password" class="form-control" id="idpassword" name="txtpassword" placeholder="Password"></br></td>
-                <td> <label for="lastname">&emsp;LastName</label></td>
-                <td> <input type="text" class="form-control" id="idlastname" name="txtlastname" placeholder="Tên Khách hàng">
-                </br>
-              </td>
-            </tr>
+  <div class="container-fuild">
+    
+    <form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_customers/create.php" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group ">
+            <label for="id">&emsp;Mã khách hàng</label>
+            <input type="text" class="form-control" id="id" name="txtid" placeholder="Mã khách hàng" readonly>
           </div>
-          <div class="form-group">
-            <tr>
-              <td><label for="firstname">&emsp;FirstName</label></td>
-              <td><input type="text" class="form-control" id="idfirstname" name="txtfirstname" placeholder="Họ Khách Hàng"></br></td>
-              
-              <td> <label for="email">&emsp;Email</label></td>
-              <td><input type="email" class="form-control" id="idemail" name="txtemail" placeholder="Email Khách hàng"></br></td>
-            </tr>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group ">
+            <label for="username">&emsp;UserName</label></td>
+            <input type="text" class="form-control" id="idusername" name="txtusername" placeholder="UserName" required="">
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
           <div class="form-group">
-            <tr>
-              <td> <label for="avatar">&emsp;Avatar</label></td>
-              <td> <input type="file" class="form-control" id="idavatar" name="txtavatar" placeholder=""></br></td>
-              <td><label for="company">&emsp;Company</label></td>
-              <td> <input type="text" class="form-control" id="idcompany" name="txtcompany" placeholder="Công ty">
-            </br></td>
-          </tr>
+            <label for="password">&emsp;Password</label>
+            <input type="password" class="form-control" id="idpassword" name="txtpassword" placeholder="Password">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td> <label for="phone">&emsp;Phone</label></td>
-            <td> <input type="text" class="form-control" id="idphone" name="txtphone" placeholder="Số điện thoại"></br></td>
-            <td> <label for="billingaddress">&emsp;Billing Address</label></td>
-            <td><input type="text" class="form-control" id="idbillingaddress" name="txtbillingaddress" placeholder="Địa chỉ thanh toán"></br></td>
-          </tr>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group ">
+            <label for="lastname">&emsp;LastName</label>
+            <input type="text" class="form-control" id="idlastname" name="txtlastname" placeholder="Tên Khách hàng">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td> <label for="shippingaddress">&emsp;Shipping Address</label></td>
-            <td> <input type="text" class="form-control" id="idshippingaddress" name="txtshippingaddress" placeholder="Địa chỉ giao hàng"></br></td>
-            <td><label for="city">&emsp;City</label></td>
-            <td><input type="text" class="form-control" id="idcity" name="txtcity" placeholder="Thành phố"></br></td>
-          </tr>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="firstname">&emsp;FirstName</label>
+            <input type="text" class="form-control" id="idfirstname" name="txtfirstname" placeholder="Họ Khách Hàng">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td><label for="state">&emsp;State</label></td>
-            <td><input type="text" class="form-control" id="idstate" name="txtstate" placeholder="Bang"></br></td>
-            <td><label for="postalcode">&emsp;Postal Code</label></td>
-            <td><input type="text" class="form-control" id="idpostalcode" name="txtpostalcode" placeholder="Mã bưu chính"></br></td>
-          </tr>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group ">
+            <label for="email">&emsp;Email</label></td>
+            <input type="email" class="form-control" id="idemail" name="txtemail" placeholder="Email Khách hàng">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td> <label for="country">&emsp;Country</label></td>
-            <td><input type="text" class="form-control" id="idcountry" name="txtcountry" placeholder="Quốc Gia"></br></td>
-            <td><label for="remembertoken">&emsp;Remember Token</label></td>
-            <td><input type="text" class="form-control" id="idremembertoken" name="txtremembertoken" placeholder="Token ghi nhớ đăng nhập"></br></td>
-          </tr>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="avatar">&emsp;Avatar</label>
+            <input type="file" class="form-control" id="idavatar" name="txtavatar" placeholder="">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td><label for="activecode">&emsp;Active Code</label></td>
-            <td><input type="text" class="form-control" id="idactivecode" name="txtactivecode" placeholder="Mã kích hoạt"></br></td>
-            <td><label for="status">&emsp;Status</label></td>
-            <td><input type="text" class="form-control" id="idstatus" name="txtstatus" placeholder="Trạng thái"></br></td>
-          </tr>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="company">&emsp;Company</label>
+            <input type="text" class="form-control" id="idcompany" name="txtcompany" placeholder="Công ty">
+          </div>
         </div>
-        <div class="form-group">
-          <tr>
-            <td><label for="createdat">&emsp;Created At</label></td>
-            <td><input type="text" class="form-control" id="idcreatedat" name="txtcreatedat" placeholder="Ngày tạo"readonly></br></td>
-            <td> <label for="updated_at">&emsp;Updated At</label></td>
-            <td><input type="text" class="form-control" id="idupdatedat" name="txtupdatedat" placeholder="Ngày Sửa"readonly></td>
-          </tr>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="phone">&emsp;Phone</label>
+            <input type="text" class="form-control" id="idphone" name="txtphone" placeholder="Số điện thoại">
+          </div>
         </div>
-      </table>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="billingaddress">&emsp;Billing Address</label>
+            <input type="text" class="form-control" id="idbillingaddress" name="txtbillingaddress" placeholder="Địa chỉ thanh toán">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="shippingaddress">&emsp;Shipping Address</label>
+            <input type="text" class="form-control" id="idshippingaddress" name="txtshippingaddress" placeholder="Địa chỉ giao hàng">
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="city">&emsp;City</label>
+            <input type="text" class="form-control" id="idcity" name="txtcity" placeholder="Thành phố">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="state">&emsp;State</label>
+            <input type="text" class="form-control" id="idstate" name="txtstate" placeholder="Bang">
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="postalcode">&emsp;Postal Code</label></td>
+            <input type="text" class="form-control" id="idpostalcode" name="txtpostalcode" placeholder="Mã bưu chính">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="country">&emsp;Country</label>
+            <input type="text" class="form-control" id="idcountry" name="txtcountry" placeholder="Quốc Gia">
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="remembertoken">&emsp;Remember Token</label>
+            <input type="text" class="form-control" id="idremembertoken" name="txtremembertoken" placeholder="Token ghi nhớ đăng nhập">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="activecode">&emsp;Active Code</label>
+            <input type="text" class="form-control" id="idactivecode" name="txtactivecode" placeholder="Mã kích hoạt">
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="status">&emsp;Status</label>
+            <input type="text" class="form-control" id="idstatus" name="txtstatus" placeholder="Trạng thái">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="createdat">&emsp;Created At</label>
+            <input type="text" class="form-control" id="idcreatedat" name="txtcreatedat" placeholder="Ngày tạo"readonly>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+          <div class="form-group">
+            <label for="updated_at">&emsp;Updated At</label></td>
+            <input type="text" class="form-control" id="idupdatedat" name="txtupdatedat" placeholder="Ngày Sửa"readonly>
+          </div>
+        </div>
+      </div>
       <button class="btn btn-primary" name="btnSave">Cập nhật</button>
     </form>
+    
   </div>
-</div>
-</div>
+  
 {% endblock %}
 {# End Nội dung trong block content #}

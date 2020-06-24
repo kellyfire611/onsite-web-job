@@ -42,17 +42,17 @@ if(isset($_POST['btnSave']))
     //$avatar = $_POST['lsp_mota'];
     // Câu lệnh UPDATE
     $link="customers/avatars/";
-    $oldimage=$_POST['txtavatarcu'];
+    $avatarcu=$_POST['txtavatarcu'];
     $newimage=($link.$_FILES['txtavatar']['name']);
    $newimage="../../assets/uploads/".$link.$_FILES['txtavatar']['name'];
-    //var_dump($oldimage);
+    //var_dump($avatarcu);
     if(isset($_FILES['txtavatar']['name'])&&($_FILES['txtavatar']['name']!="")){
         
         
         move_uploaded_file($_FILES['txtavatar']['tmp_name'], $newimage);
     }
     else{
-        $newimage=$oldimage;
+        $newimage=$avatarcu;
     }
      
     
@@ -75,5 +75,5 @@ if(isset($_POST['btnSave']))
 // Yêu cầu `Twig` vẽ giao diện được viết trong file `backend/loaisanpham/edit.html.twig`
 // với dữ liệu truyền vào file giao diện được đặt tên là `loaisanpham`
 echo $twig->render('backend/shop_customers/edit.html.twig', ['shop_customers' => $customersRow] );
-var_dump($customersRow);
+
 die();
