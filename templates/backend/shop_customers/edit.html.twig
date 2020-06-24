@@ -1,0 +1,113 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+{# Nội dung trong block title #}
+{% block title %}
+  Sửa khách hàng
+{% endblock %}
+{# End Nội dung trong block title #}
+{# Nội dung trong block headline #}
+{% block headline %}
+  Sửa khách hàng
+{% endblock %}
+{# End Nội dung trong block headline #}
+{# Nội dung trong block content #}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_customers/edit.php?id={{ shop_customers.id }}" enctype="multipart/form-data">
+    <table>
+      <div class="form-group ">
+        <tr>
+          <td><label for="id">&emsp;Mã khách hàng</label></td>
+          <td class="w-25"><input type="text" class="form-control" id="id" name="txtid" placeholder="Mã khách hàng" readonly value="{{ shop_customers.id }}"></br>
+          </td>
+          <td><label for="username">&emsp;UserName</label></td>
+          <td><input type="text" class="form-control" id="idusername" name="txtusername" placeholder="UserName" value="{{ shop_customers.username }}" required=""></br></td>
+        </tr>
+      </div>
+      <div class="form-group">
+        <tr>
+          <td> <label for="password">&emsp;Password</label></td>
+          <td> <input type="password" class="form-control" id="idpassword" name="txtpassword" placeholder="Password" value="{{ shop_customers.password }}"required=""></br></td>
+          <td> <label for="lastname">&emsp;LastName</label></td>
+          <td> <input type="text" class="form-control" id="idlastname" name="txtlastname" placeholder="Tên Khách hàng" value="{{ shop_customers.last_name }}"required="">
+          </br>
+          </td>
+        </tr>
+      </div>
+      <div class="form-group">
+        <tr>
+          <td><label for="firstname">&emsp;FirstName</label></td>
+          <td><input type="text" class="form-control" id="idfirstname" name="txtfirstname" placeholder="Họ Khách Hàng" value="{{ shop_customers.first_name }}"required=""></br></td>
+          
+          <td> <label for="email">&emsp;Email</label></td>
+          <td><input type="email" class="form-control" id="idemail" name="txtemail" placeholder="Email Khách hàng" value="{{ shop_customers.email }}"></br></td>
+        </tr>
+      </div>
+      <div class="form-group">
+        <tr>
+          <td> <label for="email">&emsp;Avatar</label></td>
+          <input type="text" id="idavatarcu" name="txtavatarcu" value="{{ shop_customers.avatar }}" hidden>
+          <td><input type="file" class="form-control" id="idavatar" name="txtavatar" placeholder=""></br></td>
+          <td><label for="company">&emsp;Company</label></td>
+          <td> <input type="text" class="form-control" id="idcompany" name="txtcompany" placeholder="Công ty" value="{{ shop_customers.company }}">
+        </br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td> <label for="phone">&emsp;Phone</label></td>
+        <td> <input type="text" class="form-control" id="idphone" name="txtphone" placeholder="Số điện thoại" value="{{ shop_customers.phone }}"></br></td>
+        <td> <label for="billingaddress">&emsp;Billing Address</label></td>
+        <td><input type="text" class="form-control" id="idbillingaddress" name="txtbillingaddress" placeholder="Địa chỉ thanh toán" value="{{ shop_customers.billing_address }}"></br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td> <label for="shippingaddress">&emsp;Shipping Address</label></td>
+        <td> <input type="text" class="form-control" id="idshippingaddress" name="txtshippingaddress" placeholder="Địa chỉ giao hàng" value="{{ shop_customers.shipping_address }}"></br></td>
+        <td><label for="city">&emsp;City</label></td>
+        <td><input type="text" class="form-control" id="idcity" name="txtcity" placeholder="Thành phố" value="{{ shop_customers.city }}"></br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td><label for="state">&emsp;State</label></td>
+        <td><input type="text" class="form-control" id="idstate" name="txtstate" placeholder="Bang"></br></td>
+        <td><label for="postalcode">&emsp;Postal Code</label></td>
+        <td><input type="text" class="form-control" id="idpostalcode" name="txtpostalcode" placeholder="Mã bưu chính" value="{{ shop_customers.postal_code }}"></br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td> <label for="country">&emsp;Country</label></td>
+        <td><input type="text" class="form-control" id="idcountry" name="txtcountry" placeholder="Quốc Gia"value="{{ shop_customers.country }}"></br></td>
+        <td><label for="remembertoken">&emsp;Remember Token</label></td>
+        <td><input type="text" class="form-control" id="idremembertoken" name="txtremembertoken" placeholder="Token ghi nhớ đăng nhập" value="{{ shop_customers.remember_token }}"></br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td><label for="activecode">&emsp;Active Code</label></td>
+        <td><input type="text" class="form-control" id="idactivecode" name="txtactivecode" placeholder="Mã kích hoạt" value="{{ shop_customers.active_code }}"></br></td>
+        <td><label for="status">&emsp;Status</label></td>
+        <td><input type="text" class="form-control" id="idstatus" name="txtstatus" placeholder="Trạng thái" value="{{ shop_customers.status }}"></br></td>
+      </tr>
+    </div>
+    <div class="form-group">
+      <tr>
+        <td><label for="createdat">&emsp;Created At</label></td>
+        <td><input type="text" class="form-control" id="idcreatedat" name="txtcreatedat" placeholder="Ngày tạo"readonly value="{{ shop_customers.created_at }}"required=""></br></td>
+        <td> <label for="updated_at">&emsp;Updated At</label></td>
+        <td><input type="text" class="form-control" id="idupdatedat" name="txtupdatedat" placeholder="Ngày Sửa"readonly value="{{ shop_customers.updated_at }}"required=""></td>
+      </tr>
+         <button class="btn btn-primary" name="btnSave">Cập nhật</button>
+    </div>
+  </table>
+</form>
+     </div>
+    </div>
+  </div>
+{% endblock %}
+{# End Nội dung trong block content #}
