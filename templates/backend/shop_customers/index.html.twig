@@ -1,0 +1,78 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Danh sách khách hàng
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{# Nội dung trong block headline #}
+{% block headline %}
+Danh sách khách hàng
+{% endblock %}
+{# End Nội dung trong block headline #}
+
+{# Nội dung trong block content #}
+{% block content %}
+<!-- Nút thêm mới, bấm vào sẽ hiển thị form nhập thông tin Thêm mới -->
+<a href="create.php" class="btn btn-primary">
+    <span data-feather="plus"></span> Thêm mới
+</a>
+<table class="table table-bordered table-hover mt-2">
+    <thead class="thead-dark">
+        <tr>
+            <th>Mã khách hàng</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Avatar</th>
+            <th>Công Ty</th>
+            <th>SĐT</th>
+            <th>Địa chỉ Thanh toán</th>
+            <th>Địa chỉ Giao hàng</th>
+            <th>Thành phố</th>
+            <th>Mã bưu chính</th>
+            <th>Quốc gia</th>
+            <th>Bang</th>
+            <th>Trạng thái</th>
+            <th>Chức Năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for db_customers in customers %}
+        <tr>
+            <td>{{ db_customers.id }}</td>
+            <td>{{ db_customers.username }}</td>
+            <td>{{ db_customers.password }}</td>
+            <td>{{ db_customers.first_name }}</td>
+            <td>{{ db_customers.last_name }}</td>
+            <td>{{ db_customers.email }}</td>
+            <td><img src="/../assets/uploads/{{ db_customers.avatar }}" class="img-fluid"></td>
+            <td>{{ db_customers.company }}</td>
+            <td>{{ db_customers.phone }}</td>
+            <td>{{ db_customers.billing_address }}</td>
+            <td>{{ db_customers.shipping_address }}</td>
+            <td>{{ db_customers.city }}</td>
+            <td>{{ db_customers.postal_code }}</td>
+            <td>{{ db_customers.country }}</td>
+            <td>{{ db_customers.state }}</td>
+            <td>{{ db_customers.status }}</td>
+            <td>
+                <!-- Nút sửa, bấm vào sẽ hiển thị form hiệu chỉnh thông tin dựa vào khóa chính `lsp_ma` -->
+                <a href="edit.php?id={{ db_customers.id }}" class="btn btn-warning">
+                    <span data-feather="edit"></span> Sửa
+                </a>
+                <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `lsp_ma` -->
+                <a href="delete.php?id={{ db_customers.id }}" class="btn btn-danger">
+                    <span data-feather="delete"></span> Xóa
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{# End Nội dung trong block content #}

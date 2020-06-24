@@ -209,4 +209,4 @@ $stmt->execute();
 mysqli_close($conn);
 
 // Sau khi cập nhật dữ liệu, tự động điều hướng về trang Danh sách
-header('location:index.php');
+header('location:./');
