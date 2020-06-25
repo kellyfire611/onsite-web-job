@@ -13,7 +13,6 @@
 {# Nội dung trong block content #}
 {% block content %}
   <div class="container-fuild">
-    
     <form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_customers/create.php" enctype="multipart/form-data">
       <div class="row">
         <div class="col-sm-6 col-xs-6">
@@ -75,7 +74,7 @@
         <div class="col-sm-6 col-xs-6">
           <div class="form-group">
             <label for="phone">&emsp;Phone</label>
-            <input type="text" class="form-control" id="idphone" name="txtphone" placeholder="Số điện thoại">
+            <input type="number" class="form-control" id="idphone" name="txtphone" placeholder="Số điện thoại">
           </div>
         </div>
         <div class="col-sm-6 col-xs-6">
@@ -138,6 +137,7 @@
           <div class="form-group">
             <label for="status">&emsp;Status</label>
             <input type="text" class="form-control" id="idstatus" name="txtstatus" placeholder="Trạng thái">
+            <div id="error"></div>
           </div>
         </div>
       </div>
@@ -151,14 +151,26 @@
         <div class="col-sm-6 col-xs-6">
           <div class="form-group">
             <label for="updated_at">&emsp;Updated At</label></td>
-            <input type="text" class="form-control" id="idupdatedat" name="txtupdatedat" placeholder="Ngày Sửa"readonly>
+            <input type="text" class="form-control" id="idupdatedat" name="txtupdatedat" placeholder="Ngày Sửa"readonly >
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" name="btnSave">Cập nhật</button>
+      <button class="btn btn-primary" name="btnSave" onclick="myFunction();">Cập nhật</button>
     </form>
-    
   </div>
-  
+  <script>
+  console.log("echo");
+  function myFunction() {
+    var idstatus = document.getElementById("idstatus").value;
+    if (idstatus=='') {
+      alert("Trạng thái khác rỗng");
+      //document.getElementById("error").innerHTML = "Paragraph changed!";
+      return false;
+    }else if(idstatus !=1 && idstatus !=0){
+      alert("Nhập sai định dạng trạng thái");
+      return false;
+    }
+  }
+  </script>
 {% endblock %}
 {# End Nội dung trong block content #}
