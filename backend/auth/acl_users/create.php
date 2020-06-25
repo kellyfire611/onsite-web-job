@@ -73,136 +73,210 @@ $regex    = [
 ];
 
 if (isset($_POST['submit'])) {
-  include_once __DIR__ . '/../../../dbconnect.php';
+  if (Regex::test('username', 5, 191, $_POST['username']) && Regex::test('email', 12, 191, $_POST['email'])) {
+    require_once __DIR__ . '/../../../dbconnect.php';
 
-  if (Regex::test('username', 5, 191, $_POST['username'])) {
-    $query = <<<query
-      select id
-      from acl_users
-      where username = ?;
-    query;
+    // Check exist username
+    try {
+      $statement = $conn->prepare(<<<query
+        select id
+        from acl_users
+        where username = ?;
+      query);
 
-    if ($statement = $conn->prepare($query)) {
-      if ($statement->bind_param('s', $_POST['username'])) {
-        if ($statement->execute()) {
-          if ($result = $statement->get_result()) {
-            if ($result->num_rows == 1) {
-              echo $twig->render($template, [
-                'el'   => $el,
-                'data' => json_encode([
-                  'regex'    => $regex,
-                  'form'     => $_POST,
-                  'response' => [
-                    'title'   => 'Tạo mới không thành công',
-                    'variant' => 'danger',
-                    'content' => 'Tài khoản này đã tồn tại',
-                  ],
-                ]),
-              ]);
-            } else {
-              if (
-                Regex::test('vietnamese_name', 1, 255, $_POST['last_name']) &&
-                Regex::test('vietnamese_name', 1, 255, $_POST['first_name']) &&
-                Regex::test('email', 12, 191, $_POST['email']) &&
-                (strlen($_POST['job_title']) == 0 || Regex::test('any', 0, 255, $_POST['job_title'])) &&
-                (strlen($_POST['department']) == 0 || Regex::test('any', 0, 255, $_POST['department'])) &&
-                (strlen($_POST['phone']) == 0 || Regex::test('phone', 10, 25, $_POST['phone'])) &&
-                (strlen($_POST['address1']) == 0 || Regex::test('any', 0, 500, $_POST['address1'])) &&
-                (strlen($_POST['address2']) == 0 || Regex::test('any', 0, 500, $_POST['address2'])) &&
-                (strlen($_POST['city']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['city'])) &&
-                (strlen($_POST['state']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['state'])) &&
-                (strlen($_POST['postal_code']) == 0 || Regex::test('number', 0, 15, $_POST['postal_code'])) &&
-                (strlen($_POST['country']) == 0 || Regex::test('vietnamese_name', 5, 255, $_POST['country']))
-              ) {
-                $query = <<<query
-                  insert into acl_users values (
-                    null,
-                    ?, -- username
-                    ?, -- password
-                    ?, -- last_name
-                    ?, -- first_name
-                    ?, -- email
-                    '', -- avatar
-                    ?, -- job_title
-                    ?, -- department
-                    null, -- manager_id
-                    ?, -- phone
-                    ?, -- address1
-                    ?, -- address2
-                    ?, -- city
-                    ?, -- state
-                    ?, -- postal_code
-                    ?, -- country
-                    null, -- remember_token
-                    null, -- active_code
-                    0, -- status
-                    current_timestamp(), -- created_at
-                    null -- updated_at
-                  );
-                query;
+      $statement->bind_param('s', $_POST['username']);
+      $statement->execute();
+      if ($statement->get_result()->num_rows) {
+        $conn->close();
+        die($twig->render($template, [
+          'el'   => $el,
+          'data' => json_encode([
+            'regex'    => $regex,
+            'form'     => $_POST,
+            'response' => [
+              'title'   => 'Tạo mới không thành công',
+              'variant' => 'danger',
+              'content' => 'Tài khoản này đã tồn tại',
+            ],
+          ]),
+        ]));
+      }
+    } catch (Exception $e) {
+      $conn->close();
+      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+    }
 
-                if ($statement = $conn->prepare($query)) {
-                  $password = password_hash('user@123', PASSWORD_DEFAULT);
-                  if ($statement->bind_param('ssssssssssssss',
-                    $_POST['username'],
-                    $password,
-                    $_POST['last_name'],
-                    $_POST['first_name'],
-                    $_POST['email'],
-                    $_POST['job_title'],
-                    $_POST['department'],
-                    $_POST['phone'],
-                    $_POST['address1'],
-                    $_POST['address2'],
-                    $_POST['city'],
-                    $_POST['state'],
-                    $_POST['postal_code'],
-                    $_POST['country'],
-                  )) {
-                    if ($statement->execute()) {
-                      if ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
-                        $temp       = explode(".", $_FILES['avatar']["name"]);
-                        $fileUpload = __DIR__ . '/../../../assets/uploads/users/avatars/' . $_POST['username'] . '.' . end($temp);
-                        move_uploaded_file($_FILES['avatar']["tmp_name"], $fileUpload);
-                      } elseif ($_FILES['avatar']['error'] != UPLOAD_ERR_NO_FILE) {
-                        die('Không tải được ảnh đại diện.');
-                      }
-                      header('location:./');
-                    } else {
-                      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
-                    }
-                  } else {
-                    die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
-                  }
-                } else {
-                  die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
-                }
-              } else {
-                echo $twig->render($template, [
-                  'el'   => $el,
-                  'data' => json_encode([
-                    'regex'    => $regex,
-                    'form'     => $_POST,
-                    'response' => [
-                      'title'   => 'Tạo mới không thành công',
-                      'variant' => 'danger',
-                      'content' => 'Dữ liệu không hợp lệ',
-                    ],
-                  ]),
-                ]);
-              }
-            }
-          } else {
-            die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
-          }
-        } else {
-          die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+    // Check exist email
+    try {
+      $statement = $conn->prepare(<<<query
+        select id
+        from acl_users
+        where email = ?;
+      query);
+
+      $statement->bind_param('s', $_POST['email']);
+      $statement->execute();
+      if ($statement->get_result()->num_rows) {
+        $conn->close();
+        die($twig->render($template, [
+          'el'   => $el,
+          'data' => json_encode([
+            'regex'    => $regex,
+            'form'     => $_POST,
+            'response' => [
+              'title'   => 'Tạo mới không thành công',
+              'variant' => 'danger',
+              'content' => 'Email này đã được sử dụng',
+            ],
+          ]),
+        ]));
+      }
+    } catch (Exception $e) {
+      $conn->close();
+      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+    }
+
+    // Upload avatar
+    $isUploaded = false;
+    if ($_FILES['avatar']['error'] == UPLOAD_ERR_NO_FILE) {
+      $avatar = '/assets/shared/img/no-avatar.png';
+    } elseif ($_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
+      if (getimagesize($_FILES["avatar"]["tmp_name"])) {
+        $temp       = explode(".", $_FILES['avatar']["name"]);
+        $avatar     = '/assets/uploads/users/avatars/' . $_POST['username'] . '.' . end($temp);
+        $isUploaded = move_uploaded_file($_FILES['avatar']["tmp_name"], __DIR__ . "/../../..$avatar");
+        if (!$isUploaded) {
+          $conn->close();
+          die($twig->render($template, [
+            'el'   => $el,
+            'data' => json_encode([
+              'regex'    => $regex,
+              'form'     => $_POST,
+              'response' => [
+                'title'   => 'Tạo mới không thành công',
+                'variant' => 'danger',
+                'content' => 'Đã có lỗi xảy ra trong quá trình tải lên ảnh đại diện',
+              ],
+            ]),
+          ]));
         }
       } else {
-        die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+        $conn->close();
+        die($twig->render($template, [
+          'el'   => $el,
+          'data' => json_encode([
+            'regex'    => $regex,
+            'form'     => $_POST,
+            'response' => [
+              'title'   => 'Tạo mới không thành công',
+              'variant' => 'danger',
+              'content' => 'Ảnh đại diện không hợp lệ',
+            ],
+          ]),
+        ]));
       }
     } else {
-      die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
+      $conn->close();
+      die($twig->render($template, [
+        'el'   => $el,
+        'data' => json_encode([
+          'regex'    => $regex,
+          'form'     => $_POST,
+          'response' => [
+            'title'   => 'Tạo mới không thành công',
+            'variant' => 'danger',
+            'content' => 'Không thể tải lên ảnh đại diện',
+          ],
+        ]),
+      ]));
+    }
+
+    // Insert user
+    if (
+      Regex::test('vietnamese_name', 1, 255, $_POST['last_name']) &&
+      Regex::test('vietnamese_name', 1, 255, $_POST['first_name']) &&
+      (strlen($_POST['job_title']) == 0 || Regex::test('any', 0, 255, $_POST['job_title'])) &&
+      (strlen($_POST['department']) == 0 || Regex::test('any', 0, 255, $_POST['department'])) &&
+      (strlen($_POST['phone']) == 0 || Regex::test('phone', 10, 25, $_POST['phone'])) &&
+      (strlen($_POST['address1']) == 0 || Regex::test('any', 0, 500, $_POST['address1'])) &&
+      (strlen($_POST['address2']) == 0 || Regex::test('any', 0, 500, $_POST['address2'])) &&
+      (strlen($_POST['city']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['city'])) &&
+      (strlen($_POST['state']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['state'])) &&
+      (strlen($_POST['postal_code']) == 0 || Regex::test('number', 0, 15, $_POST['postal_code'])) &&
+      (strlen($_POST['country']) == 0 || Regex::test('vietnamese_name', 5, 255, $_POST['country']))
+    ) {
+      try {
+        $password  = password_hash('user@123', PASSWORD_DEFAULT);
+        $statement = $conn->prepare(<<<query
+          insert into acl_users values (
+            null,
+            ?, -- username
+            ?, -- password
+            ?, -- last_name
+            ?, -- first_name
+            ?, -- email
+            ?, -- avatar
+            ?, -- job_title
+            ?, -- department
+            null, -- manager_id
+            ?, -- phone
+            ?, -- address1
+            ?, -- address2
+            ?, -- city
+            ?, -- state
+            ?, -- postal_code
+            ?, -- country
+            null, -- remember_token
+            null, -- active_code
+            0, -- status
+            current_timestamp(), -- created_at
+            null -- updated_at
+          );
+        query);
+
+        $statement->bind_param('sssssssssssssss',
+          $_POST['username'],
+          $password,
+          $_POST['last_name'],
+          $_POST['first_name'],
+          $_POST['email'],
+          $avatar,
+          $_POST['job_title'],
+          $_POST['department'],
+          $_POST['phone'],
+          $_POST['address1'],
+          $_POST['address2'],
+          $_POST['city'],
+          $_POST['state'],
+          $_POST['postal_code'],
+          $_POST['country'],
+        );
+
+        $statement->execute();
+        header('location:./');
+      } catch (Exception $e) {
+        var_dump($e);
+        echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
+        if ($isUploaded) {
+          unlink(__DIR__ . "/../../..$avatar");
+        }
+      } finally {
+        $conn->close();
+      }
+    } else {
+      $conn->close();
+      echo $twig->render($template, [
+        'el'   => $el,
+        'data' => json_encode([
+          'regex'    => $regex,
+          'form'     => $_POST,
+          'response' => [
+            'title'   => 'Tạo mới không thành công',
+            'variant' => 'danger',
+            'content' => 'Dữ liệu không hợp lệ',
+          ],
+        ]),
+      ]);
     }
   } else {
     echo $twig->render($template, [
