@@ -70,7 +70,7 @@ Tài khoản người dùng
     <b-row>
       <b-col lg="6">
         <b-form-group label="Ảnh đại diện" label-for="input-avatar" description="Tải ảnh đại diện, để trống với mặc định là ảnh đại hiện của hệ thống"
-                      :state="valid.avatar">
+                      :state="state.avatar">
           <b-input-group>
             <template v-slot:prepend>
               <b-input-group-text class="group-icon">
@@ -78,7 +78,7 @@ Tài khoản người dùng
               </b-input-group-text>
             </template>
             <b-form-file id="input-avatar" name="avatar" v-model="form.avatar" placeholder="Chọn hoặc kẻo thả ảnh vào đây..."
-                         drop-placeholder="Thả ảnh vào đây..." :state="valid.avatar" accept="image/*"
+                         drop-placeholder="Thả ảnh vào đây..." :state="state.avatar" accept="image/*"
                          :file-name-formatter="(files) => (files.length == 1 ? 'Đã chọn ảnh đại diện' : 'Chọn hoặc kẻo thả ảnh vào đây...')">
             </b-form-file>
           </b-input-group>
@@ -206,6 +206,7 @@ Tài khoản người dùng
 {% block customscripts %}
 <script src="/node_modules/vue/dist/vue.min.js"></script>
 <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script src="/assets/shared/js/regex.js"></script>
 <script>
   new Vue({
     el: '#{{ el }}',
