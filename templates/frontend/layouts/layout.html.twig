@@ -8,7 +8,6 @@
 
   <link rel="stylesheet" href="/assets/shared/css/custom.bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" type="text/css" />
-  <link rel="stylesheet" href="/assets/shared/css/style.css" type="text/css" />
 
   <title>
     Onsite Web Job -
@@ -19,13 +18,13 @@
 </head>
 
 <body>
-  {{ include('frontend/layouts/includes/header.html.twig') }}
+  {% include 'frontend/layouts/includes/header.html.twig' %}
 
   <main role="main" class="wrapper">
     {% block content %}{% endblock %}
   </main>
 
-  {{ include('frontend/layouts/includes/footer.html.twig') }}
+  {% include 'frontend/layouts/includes/footer.html.twig' %}
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>

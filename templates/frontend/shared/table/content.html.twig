@@ -1,0 +1,116 @@
+<div id="{{ el }}" data-user="{{ data }}">
+  <b-form>
+    <b-row>
+      <b-col md="6">
+        <b-form-group label="Sắp xếp" label-size="sm" label-for="sortBySelect">
+          <b-row no-gutters>
+            <b-col xl="8" class="pr-xl-1 mb-2 mb-xl-0">
+              <b-input-group size="sm">
+                <template v-slot:prepend>
+                  <b-input-group-text class="group-icon">
+                    <i class="fas fa-sort-amount-down-alt"></i>
+                  </b-input-group-text>
+                </template>
+                <b-form-select v-model="sortBy" id="sortBySelect" size="sm" :options="options" class="w-75">
+                  <template v-slot:first>
+                    <option value="">-- Không sắp xếp --</option>
+                  </template>
+                </b-form-select>
+              </b-input-group>
+            </b-col>
+            <b-col xl="4">
+              <b-input-group size="sm">
+                <template v-slot:prepend>
+                  <b-input-group-text class="group-icon">
+                    <i class="fas fa-random"></i>
+                  </b-input-group-text>
+                </template>
+                <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy">
+                  <option :value="false">Tăng dần</option>
+                  <option :value="true">Giảm dần</option>
+                </b-form-select>
+              </b-input-group>
+            </b-col>
+          </b-row>
+        </b-form-group>
+      </b-col>
+      <b-col md="6">
+        <b-form-group label="Phân trang" label-size="sm" label-for="perPageSelect">
+          <b-row no-gutters>
+            <b-col xl="4" class="pr-xl-1 mb-2 mb-xl-0">
+              <b-input-group size="sm">
+                <template v-slot:prepend>
+                  <b-input-group-text class="group-icon">
+                    <i class="fas fa-list-ol"></i>
+                  </b-input-group-text>
+                </template>
+                <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+              </b-input-group>
+            </b-col>
+            <b-col xl="8">
+              <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm" class="my-0">
+                <template v-slot:first-text>
+                  <i class="fas fa-angle-double-left"></i>
+                </template>
+                <template v-slot:prev-text>
+                  <i class="fas fa-angle-left"></i>
+                </template>
+                <template v-slot:next-text>
+                  <i class="fas fa-angle-right"></i>
+                </template>
+                <template v-slot:last-text>
+                  <i class="fas fa-angle-double-right"></i>
+                </template>
+              </b-pagination>
+            </b-col>
+          </b-row>
+        </b-form-group>
+      </b-col>
+    </b-row>
+
+    <b-form-group label="Tìm kiếm" label-size="sm" label-for="filterInput">
+      <b-input-group size="sm">
+        <template v-slot:prepend>
+          <b-input-group-text class="group-icon">
+            <i class="fas fa-search"></i>
+          </b-input-group-text>
+        </template>
+        <b-form-input v-model="filter" id="filterInput"></b-form-input>
+        <b-input-group-append>
+          <b-button :disabled="!filter" @click="filter = ''" class="group-icon">
+            <i class="fas fa-times"></i>
+          </b-button>
+        </b-input-group-append>
+      </b-input-group>
+    </b-form-group>
+  </b-form>
+
+  <p>
+    Đang hiển thị từ ${ currentPage * perPage - perPage + 1 }
+    đến ${ currentPage * perPage > totalRows ? totalRows : currentPage * perPage }
+    trong tổng số ${ totalRows } dòng
+  </p>
+
+  <b-table bordered head-variant="light" show-empty small stacked="md" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage"
+           :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" @filtered="onFiltered" :tbody-tr-class="rowClass"
+           empty-filtered-text="Không tìm thấy dữ liệu" label-sort-asc="Nhấn vào đây để sắp xếp tăng dần" label-sort-desc="Nhấn vào đây để sắp xếp giảm dần"
+           label-sort-clear="Nhấn vào đây để xóa sắp xếp" empty-text="Không có dữ liệu">
+  </b-table>
+
+  <b-container class="p-0">
+    <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm">
+      <template v-slot:first-text>
+        <i class="fas fa-angle-double-left"></i>
+      </template>
+      <template v-slot:prev-text>
+        <i class="fas fa-angle-left"></i>
+      </template>
+      <template v-slot:next-text>
+        <i class="fas fa-angle-right"></i>
+      </template>
+      <template v-slot:last-text>
+        <i class="fas fa-angle-double-right"></i>
+      </template>
+    </b-pagination>
+  </b-container>
+</div>

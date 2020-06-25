@@ -67,7 +67,7 @@ try {
       'key'      => 'no',
       'label'    => 'Stt',
       'sortable' => true,
-      'class'    => 'align-middle text-md-right',
+      'class'    => 'align-middle text-md-right fit',
     ],
     1  => [
       'key'      => 'id',
@@ -203,13 +203,14 @@ try {
     23 => [
       'key'   => 'actions',
       'label' => 'Hành động',
-      'class' => 'align-middle',
+      'class' => 'align-middle fit',
     ],
   ];
 
   echo $twig->render('backend/auth/acl_users/index.html.twig', [
     'el'   => 'table-users',
     'data' => json_encode([
+      'url'      => '/backend/auth/acl_users',
       'items'    => $items,
       'fields'   => $fields,
       'rowClass' => 'if (item.status != 1) return "bg-light"',

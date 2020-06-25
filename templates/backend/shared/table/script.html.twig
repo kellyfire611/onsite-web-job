@@ -30,6 +30,7 @@
     },
     beforeMount() {
       const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.url = data.url;
       this.items = data.items;
       this.fields = data.fields;
       this.fields.filter((field) => field.formatter).map((field) => {
