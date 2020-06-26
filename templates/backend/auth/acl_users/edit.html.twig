@@ -14,15 +14,14 @@ Tài khoản người dùng
     <h6>Thông tin bắt buộc</h6>
     <b-row>
       <b-col lg="6">
-        <b-form-group label="Tên đăng nhập" label-for="input-username" description="Tối thiểu 5 kí tự và không chứa kí tự đặc biệt (VD: dnpcuong)"
-                      invalid-feedback="Tài khoản không hợp lệ" :state="state.username">
+        <b-form-group label="Tên đăng nhập" label-for="input-username" description="Tên đăng nhập không được phép thay đổi">
           <b-input-group>
             <template v-slot:prepend>
               <b-input-group-text class="group-icon">
                 <i class="fas fa-user"></i>
               </b-input-group-text>
             </template>
-            <b-form-input id="input-username" name="username" v-model="form.username" :state="state.username"></b-form-input>
+            <b-form-input id="input-username" v-model="username" readonly></b-form-input>
           </b-input-group>
         </b-form-group>
 
@@ -69,8 +68,7 @@ Tài khoản người dùng
     <h6>Thông tin không bắt buộc</h6>
     <b-row>
       <b-col lg="6">
-        <b-form-group label="Ảnh đại diện" label-for="input-avatar" description="Tải ảnh đại diện, để trống với mặc định là ảnh đại hiện của hệ thống"
-                      :state="state.avatar">
+        <b-form-group label="Ảnh đại diện" label-for="input-avatar" description="Tải ảnh đại diện, để trống nếu không thay đổi" :state="state.avatar">
           <b-input-group>
             <template v-slot:prepend>
               <b-input-group-text class="group-icon">
@@ -197,7 +195,7 @@ Tài khoản người dùng
     </b-row>
 
     <b-form-group class="text-center">
-      <b-button type="submit" variant="primary" name="submit" :disabled="!valid">Tạo mới</b-button>
+      <b-button type="submit" variant="primary" name="submit" :disabled="!valid">Thay đổi</b-button>
     </b-form-group>
   </b-form>
 </div>
@@ -214,7 +212,6 @@ Tài khoản người dùng
     data() {
       return {
         form: {
-          username: '',
           last_name: '',
           first_name: '',
           email: '',
@@ -230,7 +227,6 @@ Tài khoản người dùng
           country: '',
         },
         state: {
-          username: false,
           last_name: false,
           first_name: false,
           email: false,
@@ -249,6 +245,7 @@ Tài khoản người dùng
     },
     beforeMount() {
       const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.username = data.username;
       this.regex = data.regex;
       this.form = Object.assign(this.form, data.form);
       for (const key in this.regex) {
@@ -268,7 +265,7 @@ Tài khoản người dùng
         if (!this.valid) {
           event.preventDefault();
           this.$bvToast.toast('Thông tin không hợp lệ, vui lòng kiểm tra lại', {
-            title: 'Tạo mới không thành công',
+            title: 'Thay đổi không thành công',
             variant: 'danger',
           })
         }
@@ -285,9 +282,6 @@ Tài khoản người dùng
       },
     },
     watch: {
-      'form.username'() {
-        this.state.username = Regex.test(this.regex.username.pattern, this.regex.username.min, this.regex.username.max, this.form.username);
-      },
       'form.last_name'() {
         this.state.last_name = Regex.test(this.regex.last_name.pattern, this.regex.last_name.min, this.regex.last_name.max, this.form.last_name);
       },

@@ -251,17 +251,15 @@ if (isset($_POST['submit'])) {
           $_POST['postal_code'],
           $_POST['country'],
         );
-
         $statement->execute();
+        $conn->close();
         header('location:./');
       } catch (Exception $e) {
-        var_dump($e);
-        echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
+        $conn->close();
         if ($isUploaded) {
           unlink(__DIR__ . "/../../..$avatar");
         }
-      } finally {
-        $conn->close();
+        echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
       }
     } else {
       $conn->close();

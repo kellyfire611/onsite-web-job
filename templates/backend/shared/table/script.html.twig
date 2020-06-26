@@ -57,6 +57,9 @@
         const fields = this.fields.filter((field) => field.key == key);
         return fields.length ? fields[0].label : null;
       },
+      delete(id) {
+        console.log(id);
+      }
     },
     computed: {
       options() {

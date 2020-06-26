@@ -108,10 +108,10 @@
       <b-button size="sm" @click="row.toggleDetails">
         <i class="fas" :class="row.detailsShowing ? 'fa-eye-slash' : 'fa-eye'"></i>
       </b-button>
-      <b-button size="sm" href="`${url}/edit.php`" variant="primary">
+      <b-button size="sm" :href="`${url}/edit.php?id=${row.item.id}`" variant="primary">
         <i class="fas fa-edit"></i>
       </b-button>
-      <b-button size="sm" @click="row.toggleDetails" variant="danger">
+      <b-button size="sm" @click="delete(row.item.id)" variant="danger">
         <i class="fas fa-trash"></i>
       </b-button>
     </template>
