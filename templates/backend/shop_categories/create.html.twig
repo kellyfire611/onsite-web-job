@@ -1,0 +1,35 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Thêm mới Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{# Nội dung trong block headline #}
+{% block headline %}
+Thêm mới Loại sản phẩm
+{% endblock %}
+{# End Nội dung trong block headline #}
+
+{# Nội dung trong block content #}
+{% block content %}
+<form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_tategories/create.php">
+    <div class="form-group">
+        <label for="category_code">Mã loại sản phẩm</label>
+        <input type="text" class="form-control" id="category_code" name="category_code" placeholder="Mã loại sản phẩm" readonly>
+        <small id="lsp_maHelp" class="form-text text-muted">Mã loại sản phẩm không được hiệu chỉnh.</small>
+    </div>
+    <div class="form-group">
+        <label for="category_name">Tên loại sản phẩm</label>
+        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Tên loại sản phẩm">
+    </div>
+    <div class="form-group">
+        <label for="description">Mô tả loại sản phẩm</label>
+        <input type="text" class="form-control" id="description" name="description" placeholder="Mô tả loại sản phẩm">
+    </div>
+    <button class="btn btn-primary" name="btnSave">Cập nhật</button>
+</form>
+{% endblock %}
+{# End Nội dung trong block content #}
