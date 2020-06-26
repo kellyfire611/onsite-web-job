@@ -253,7 +253,7 @@ if (isset($_POST['submit'])) {
         );
         $statement->execute();
         $conn->close();
-        header('location:./');
+        header('location:/backend/auth/acl_users');
       } catch (Exception $e) {
         $conn->close();
         if ($isUploaded) {

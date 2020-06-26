@@ -276,7 +276,7 @@ if (isset($_POST['submit'])) {
       if ($isUploaded) {
         rename(__DIR__ . "/../../..$avatar.tmp", __DIR__ . "/../../..$avatar");
       }
-      header('location:./');
+      header('location:/backend/auth/acl_users');
     } catch (Exception $e) {
       $conn->close();
       if ($isUploaded) {

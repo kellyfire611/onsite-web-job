@@ -1,7 +1,7 @@
 <script src="/node_modules/vue/dist/vue.min.js"></script>
 <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
 <script>
-  new Vue({
+  a = new Vue({
     el: '#{{ el }}',
     delimiters: ['${', '}'],
     data() {
@@ -57,8 +57,22 @@
         const fields = this.fields.filter((field) => field.key == key);
         return fields.length ? fields[0].label : null;
       },
-      delete(id) {
-        console.log(id);
+      deleteRow(id) {
+        this.$bvModal.msgBoxConfirm('Bạn có chắc muốn xoá?', {
+          title: 'Xác nhận',
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          okTitle: 'Có, hãy xoá',
+          cancelTitle: 'Không',
+          footerClass: 'p-2',
+          hideHeaderClose: false,
+          centered: true
+        }).then(confirm => {
+          if (confirm) {
+            window.location.replace(`${this.url}/delete.php?id=${id}`);
+          }
+        })
       }
     },
     computed: {
