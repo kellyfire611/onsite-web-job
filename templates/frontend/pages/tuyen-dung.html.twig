@@ -15,28 +15,27 @@ Tuyển dụng
 				<span class="font-logo">Onsite Web Job</span> là một môi trường năng động, cởi mở, nơi tập trung những cá nhân luôn khát khao đóng góp cho cộng đồng.
 				Kiến thức tại <span class="font-logo">Onsite Web Job</span> là không giới hạn và không có tính sở hữu.<br>
 				Chúng tôi chia sẻ với nhau hàng ngày những gì chúng tôi biết, quan tâm qua hoạt động đào tạo hàng ngày, hàng tuần.
-				Thiền, học ngoại ngữ, thể thao, yoga, kịch ứng tác,... cũng là một thứ không thể thiếu trong định nghĩa công việc của mỗi "<span class="font-logo">Owjer</span>".<br>
+				Thiền, học ngoại ngữ, thể thao, yoga, kịch ứng tác,... cũng là một thứ không thể thiếu trong định nghĩa công việc của mỗi "<span
+							class="font-logo">Owjer</span>".<br>
 				Mỗi ngày, chúng tôi cùng nhau tốt hơn như vậy đó.<br>
 			</p>
 			<strong class="pt-2">Together we are Better!</strong>
 		</article>
 	</div>
+</div>
 
-	<div class="bg-white">
-		<div class="container py-5">
-			<h4 class="mb-3">Các vị trí đang tuyển</h4>
-			{{ include('shared/table/content.html.twig') }}
-		</div>
-	</div>
+<div class="container py-5">
+	<h4 class="mb-3">Các vị trí đang tuyển</h4>
+	{% include 'frontend/shared/table/content.html.twig' %}
 </div>
 {% endblock %}
 
 {% block customscripts %}
-{{ include('shared/table/script.html.twig') }}
+{% include 'frontend/shared/table/script.html.twig' %}
 {% endblock %}
 
 {% block customstyles %}
-{{ include('shared/table/style.html.twig') }}
+{% include 'frontend/shared/table/style.html.twig' %}
 <style>
 	.bg {
 		background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("/assets/frontend/img/tuyen-dung.jpg");

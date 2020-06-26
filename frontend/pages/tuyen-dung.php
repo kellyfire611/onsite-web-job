@@ -34,7 +34,7 @@ $items = [
     'location'   => 'Hà Nội',
   ],
   5 => [
-    'no'         => 7,
+    'no'         => 6,
     'position'   => 'Hỗ trợ khách hàng',
     'department' => 'Hỗ trợ khách hàng',
     'location'   => 'Hà Nội',
@@ -46,7 +46,7 @@ $fields = [
     'key'      => 'no',
     'label'    => 'Stt',
     'sortable' => true,
-    'class'    => 'align-middle text-md-right',
+    'class'    => 'align-middle text-md-right fit',
   ],
   1 => [
     'key'      => 'position',
@@ -64,7 +64,7 @@ $fields = [
     'key'      => 'location',
     'label'    => 'Địa điểm',
     'sortable' => true,
-    'class'    => 'align-middle',
+    'class'    => 'align-middle fit',
   ],
 ];
 

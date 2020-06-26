@@ -19,7 +19,7 @@
         ],
         sortBy: '',
         sortDesc: false,
-        filter: null,
+        filter: '',
         filterOn: [],
         infoModal: {
           id: 'info-modal',
@@ -38,23 +38,13 @@
       this.totalRows = this.items.length;
       this.rowClass = data.rowClass ? new Function('item', 'type', `if (!item || type !== 'row') return ''; ${data.rowClass}`) : '';
     },
+    mounted() {
+      this.$el.removeAttribute('data-user');
+    },
     methods: {
-      info(item, index, button) {
-        this.infoModal.title = 'Dữ liệu JSON';
-        this.infoModal.content = JSON.stringify(item, null, 2);
-        this.$root.$emit('bv::show::modal', this.infoModal.id, button);
-      },
-      resetInfoModal() {
-        this.infoModal.title = '';
-        this.infoModal.content = '';
-      },
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
         this.currentPage = 1;
-      },
-      getLabel(key) {
-        const fields = this.fields.filter((field) => field.key == key);
-        return fields.length ? fields[0].label : null;
       },
     },
     computed: {
