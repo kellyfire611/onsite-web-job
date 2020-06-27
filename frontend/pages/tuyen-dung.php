@@ -3,37 +3,37 @@ require_once __DIR__ . '/../../bootstrap.php';
 // include_once __DIR__ . '/../../dbconnect.php';
 
 $items = [
-  0 => [
+  [
     'no'         => 1,
     'position'   => 'Phát triển Web Front-end',
     'department' => 'Phát triển',
     'location'   => 'Hà Nội',
   ],
-  1 => [
+  [
     'no'         => 2,
     'position'   => 'Nhân viên kiểm thử',
     'department' => 'Sản phẩm',
     'location'   => 'Hà Nội',
   ],
-  2 => [
+  [
     'no'         => 3,
     'position'   => 'Trưởng nhóm tiếp thị hiệu suất',
     'department' => 'Marketing',
     'location'   => 'Hà Nội',
   ],
-  3 => [
+  [
     'no'         => 4,
     'position'   => 'Phát triển Web Back-end PHP',
     'department' => 'Phát triển',
     'location'   => 'Hà Nội',
   ],
-  4 => [
+  [
     'no'         => 5,
     'position'   => 'Chuyên gia SEO',
     'department' => 'Marketing',
     'location'   => 'Hà Nội',
   ],
-  5 => [
+  [
     'no'         => 6,
     'position'   => 'Hỗ trợ khách hàng',
     'department' => 'Hỗ trợ khách hàng',

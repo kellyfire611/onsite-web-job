@@ -24,7 +24,7 @@ try {
         postal_code,
         country
       from acl_users
-      where id = ?;
+      where id = ?
     query);
 
   $statement->bind_param('i', $_GET['id']);
@@ -39,7 +39,7 @@ try {
     $conn->close();
     die('Không tìm thấy người dùng.');
   }
-} catch (Exception $e) {
+} catch (mysqli_sql_exception $exception) {
   $conn->close();
   die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
 }
@@ -47,7 +47,7 @@ try {
 require_once __DIR__ . '/../../../bootstrap.php';
 require_once __DIR__ . '/../../../utils/regex.php';
 
-$template = 'backend/auth/acl_users/edit.html.twig';
+$template = 'backend/auth/nguoi-dung/sua.html.twig';
 $el       = 'form-edit';
 $regex    = [
   'last_name'   => [
@@ -177,7 +177,7 @@ if (isset($_POST['submit'])) {
         from acl_users
         where
           username <> ? and
-          email = ?;
+          email = ?
       query);
 
       $statement->bind_param('ss', $username, $_POST['email']);
@@ -198,7 +198,7 @@ if (isset($_POST['submit'])) {
           ]),
         ]));
       }
-    } catch (Exception $e) {
+    } catch (mysqli_sql_exception $exception) {
       $conn->close();
       die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
     }
@@ -276,8 +276,8 @@ if (isset($_POST['submit'])) {
       if ($isUploaded) {
         rename(__DIR__ . "/../../..$avatar.tmp", __DIR__ . "/../../..$avatar");
       }
-      header('location:/backend/auth/acl_users');
-    } catch (Exception $e) {
+      header('location:/backend/auth/nguoi-dung');
+    } catch (mysqli_sql_exception $exception) {
       $conn->close();
       if ($isUploaded) {
         unlink(__DIR__ . "/../../..$avatar.tmp");

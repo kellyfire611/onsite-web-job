@@ -10,7 +10,7 @@ try {
   $statement = $conn->prepare(<<<query
       select avatar
       from acl_users
-      where id = ?;
+      where id = ?
     query);
   $statement->bind_param('i', $_GET['id']);
   $statement->execute();
@@ -21,7 +21,7 @@ try {
     $conn->close();
     die('Không tìm thấy người dùng.');
   }
-} catch (Exception $e) {
+} catch (mysqli_sql_exception $exception) {
   $conn->close();
   die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
 }
@@ -34,15 +34,15 @@ try {
       select id
       from shop_orders
       where employee_id = ?
-    );
+    )
   query);
   $statement2 = $conn->prepare(<<<query
     delete from shop_orders
-    where employee_id = ?;
+    where employee_id = ?
   query);
   $statement3 = $conn->prepare(<<<query
     delete from acl_users
-    where id = ?;
+    where id = ?
   query);
 
   $statement1->bind_param('i', $_GET['id']);
@@ -57,8 +57,8 @@ try {
   if ($avatar != '/assets/shared/img/no-avatar.png') {
     unlink(__DIR__ . "/../../..$avatar");
   }
-  header('location:/backend/auth/acl_users');
-} catch (Exception $e) {
+  header('location:/backend/auth/nguoi-dung');
+} catch (mysqli_sql_exception $exception) {
   $conn->close();
   die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
 }

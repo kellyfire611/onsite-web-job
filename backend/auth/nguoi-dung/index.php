@@ -28,7 +28,7 @@ try {
       case when status = 1 then 'Đã kích hoạt' else 'Chưa kích hoạt' end as status_name,
       created_at,
       updated_at
-    from acl_users;
+    from acl_users
   query);
 
   $items = [];
@@ -63,160 +63,170 @@ try {
   }
 
   $fields = [
-    0  => [
+    [
       'key'      => 'no',
       'label'    => 'Stt',
       'sortable' => true,
       'class'    => 'align-middle text-md-right fit',
     ],
-    1  => [
+    [
       'key'      => 'id',
       'label'    => 'ID',
       'sortable' => true,
-      'class'    => 'align-middle',
+      'class'    => 'align-middle fit',
     ],
-    2  => [
+    [
       'key'      => 'username',
       'label'    => 'Tài khoản',
       'sortable' => true,
       'class'    => 'align-middle',
     ],
-    3  => [
+    [
       'key'      => 'full_name',
       'label'    => 'Họ và tên',
       'sortable' => true,
       'class'    => 'align-middle',
     ],
-    4  => [
+    [
       'key'      => 'last_name',
       'label'    => 'Họ',
       'sortable' => true,
       'class'    => 'd-none',
     ],
-    5  => [
+    [
       'key'      => 'first_name',
       'label'    => 'Tên',
       'sortable' => true,
       'class'    => 'd-none',
     ],
-    6  => [
+    [
       'key'      => 'email',
       'label'    => 'Email',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none d-xl-table-cell',
     ],
-    7  => [
+    [
       'key'   => 'avatar',
       'label' => 'Ảnh đại diện',
       'class' => 'd-none',
     ],
-    8  => [
+    [
       'key'      => 'job_title',
       'label'    => 'Công việc',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    9  => [
+    [
       'key'      => 'department',
       'label'    => 'Bộ phận',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none d-xl-table-cell',
     ],
-    10 => [
+    [
       'key'      => 'manager_id',
       'label'    => 'Mã quản lý',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    11 => [
+    [
       'key'      => 'phone',
       'label'    => 'Điện thoại',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    12 => [
+    [
       'key'      => 'address1',
       'label'    => 'Địa chỉ 1',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    13 => [
+    [
       'key'      => 'address2',
       'label'    => 'Địa chỉ 2',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    14 => [
+    [
       'key'      => 'city',
       'label'    => 'Thành phố',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    15 => [
+    [
       'key'      => 'state',
       'label'    => 'Bang',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    16 => [
+    [
       'key'      => 'postal_code',
       'label'    => 'Mã bưu điện',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    17 => [
+    [
       'key'      => 'country',
       'label'    => 'Quốc gia',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    18 => [
+    [
       'key'      => 'remember_token',
       'label'    => 'Mã ghi nhớ',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    19 => [
+    [
       'key'      => 'active_code',
       'label'    => 'Mã kích hoạt',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    20 => [
+    [
       'key'      => 'status_name',
       'label'    => 'Trạng thái',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    21 => [
+    [
       'key'      => 'created_at',
       'label'    => 'Ngày tạo',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    22 => [
+    [
       'key'      => 'updated_at',
       'label'    => 'Ngày sửa đổi',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
-    23 => [
+    [
       'key'   => 'actions',
       'label' => 'Hành động',
       'class' => 'align-middle fit',
     ],
   ];
 
-  echo $twig->render('backend/auth/acl_users/index.html.twig', [
+  $url      = '/backend/auth/nguoi-dung';
+  $rowClass = 'if (item.status != 1) return "text-secondary bg-light font-weight-light"';
+  $notes    = [
+    [
+      'class'   => 'text-secondary bg-light font-weight-light',
+      'content' => 'Chưa kích hoạt',
+    ],
+  ];
+
+  echo $twig->render('backend/auth/nguoi-dung/index.html.twig', [
     'el'   => 'table-users',
     'data' => json_encode([
-      'url'      => '/backend/auth/acl_users',
+      'url'      => $url,
       'items'    => $items,
       'fields'   => $fields,
-      'rowClass' => 'if (item.status != 1) return "bg-light"',
+      'rowClass' => $rowClass,
+      'notes'    => $notes,
     ]),
   ]);
-} catch (\Throwable $th) {
+} catch (mysqli_sql_exception $exception) {
   echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
 } finally {
   $conn->close();
