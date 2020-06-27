@@ -104,7 +104,7 @@ if (empty($supplier_code)) {
         'rule' => 'required',
         'rule_value' => true,
         'value' => $supplier_code,
-        'msg' => 'Vui lòng nhập mã Nhà cung cấp'
+        'msg' => 'Vui lòng nhập Ký hiệu Nhà cung cấp'
     ];
 }
 // minlength 4 (tối thiểu 4 ký tự)
@@ -113,7 +113,7 @@ if (!empty($supplier_code) && strlen($supplier_code) < 4) {
         'rule' => 'minlength',
         'rule_value' => 4,
         'value' => $supplier_code,
-        'msg' => 'Mã Nhà cung cấp phải có ít nhất 3 ký tự'
+        'msg' => 'Ký hiệu Nhà cung cấp phải có ít nhất 3 ký tự'
     ];
 }
 // maxlength 50 (tối đa 50 ký tự)
@@ -122,7 +122,7 @@ if (!empty($supplier_code) && strlen($supplier_code) > 50) {
         'rule' => 'maxlength',
         'rule_value' => 50,
         'value' => $supplier_code,
-        'msg' => 'Mã Nhà cung cấp không được vượt quá 50 ký tự'
+        'msg' => 'Ký hiệu Nhà cung cấp không được vượt quá 50 ký tự'
     ];
 }
 
@@ -133,7 +133,7 @@ if (empty($supplier_name)) {
         'rule' => 'required',
         'rule_value' => true,
         'value' => $supplier_name,
-        'msg' => 'Vui lòng nhập mô tả Loại sản phẩm'
+        'msg' => 'Vui lòng nhập tên nhà cung cấp'
     ];
 }
 // minlength 3 (tối thiểu 3 ký tự)
@@ -142,7 +142,7 @@ if (!empty($supplier_name) && strlen($supplier_name) < 3) {
         'rule' => 'minlength',
         'rule_value' => 3,
         'value' => $supplier_name,
-        'msg' => 'Mô tả loại sản phẩm phải có ít nhất 4 ký tự'
+        'msg' => 'Tên nhà cung cấp phải có ít nhất 4 ký tự'
     ];
 }
 // maxlength 255 (tối đa 255 ký tự)
@@ -151,7 +151,7 @@ if (!empty($supplier_name) && strlen($supplier_name) > 50) {
         'rule' => 'maxlength',
         'rule_value' => 50,
         'value' => $supplier_name,
-        'msg' => 'Mô tả tên nhà cung cấp không được vượt quá 50 ký tự'
+        'msg' => 'Tên nhà cung cấp không được vượt quá 50 ký tự'
     ];
 }
 // --- Kiểm tra mô tả nhà cung cấp (validate)
@@ -161,7 +161,7 @@ if (empty($description)) {
         'rule' => 'required',
         'rule_value' => true,
         'value' => $description,
-        'msg' => 'Vui lòng nhập mô tả Loại sản phẩm'
+        'msg' => 'Vui lòng nhập mô tả nhà cung cấp'
     ];
 }
 // minlength 3 (tối thiểu 3 ký tự)
@@ -170,7 +170,7 @@ if (!empty($description) && strlen($description) < 3) {
         'rule' => 'minlength',
         'rule_value' => 3,
         'value' => $description,
-        'msg' => 'Mô tả loại sản phẩm phải có ít nhất 4 ký tự'
+        'msg' => 'Mô tả nhà cung cấp phải có ít nhất 4 ký tự'
     ];
 }
 // maxlength 255 (tối đa 255 ký tự)
@@ -179,7 +179,7 @@ if (!empty($description) && strlen($description) > 255) {
         'rule' => 'maxlength',
         'rule_value' => 255,
         'value' => $description,
-        'msg' => 'Mô tả loại sản phẩm không được vượt quá 255 ký tự'
+        'msg' => 'Mô tả nhà cung cấp không được vượt quá 255 ký tự'
     ];
 }
 
