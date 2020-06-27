@@ -57,7 +57,7 @@ try {
   if ($avatar != '/assets/shared/img/no-avatar.png') {
     unlink(__DIR__ . "/../../..$avatar");
   }
-  header('location:/backend/auth/nguoi-dung');
+  header('location: ./');
 } catch (mysqli_sql_exception $exception) {
   $conn->close();
   die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');

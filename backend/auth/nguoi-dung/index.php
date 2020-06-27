@@ -70,10 +70,9 @@ try {
       'class'    => 'align-middle text-md-right fit',
     ],
     [
-      'key'      => 'id',
-      'label'    => 'ID',
-      'sortable' => true,
-      'class'    => 'align-middle fit',
+      'key'   => 'id',
+      'label' => 'ID',
+      'class' => 'd-none',
     ],
     [
       'key'      => 'username',

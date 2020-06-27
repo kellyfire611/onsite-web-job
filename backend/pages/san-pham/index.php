@@ -13,11 +13,11 @@ try {
       shop_products.list_price,
       shop_products.quantity_per_unit,
       shop_products.discontinued,
-      case when shop_products.discontinued = 1 then 'Ngừng bán' else 'Đang bán' end as discontinued_name,
+      case when shop_products.discontinued = 1 then 'Đúng' else 'Sai' end as discontinued_name,
       shop_products.is_featured,
-      case when shop_products.is_featured = 1 then 'Có' else 'Không' end as is_featured_name,
+      case when shop_products.is_featured = 1 then 'Đúng' else 'Sai' end as is_featured_name,
       shop_products.is_new,
-      case when shop_products.is_new = 1 then 'Có' else 'Không' end as is_new_name,
+      case when shop_products.is_new = 1 then 'Đúng' else 'Sai' end as is_new_name,
       shop_suppliers.supplier_code,
       shop_suppliers.supplier_name,
       shop_categories.category_code,
@@ -25,8 +25,8 @@ try {
       shop_products.created_at,
       shop_products.updated_at
     from shop_products
-      join shop_suppliers on shop_products.supplier_id = shop_suppliers.id
-      join shop_categories on shop_products.category_id = shop_categories.id
+      left outer join shop_suppliers on shop_products.supplier_id = shop_suppliers.id
+      left outer join shop_categories on shop_products.category_id = shop_categories.id
   query);
 
   $items = [];
@@ -64,10 +64,9 @@ try {
       'class'    => 'align-middle text-md-right fit',
     ],
     [
-      'key'      => 'id',
-      'label'    => 'ID',
-      'sortable' => true,
-      'class'    => 'align-middle fit',
+      'key'   => 'id',
+      'label' => 'ID',
+      'class' => 'd-none',
     ],
     [
       'key'      => 'product_code',
@@ -88,66 +87,64 @@ try {
     ],
     [
       'key'       => 'standard_cost',
-      'label'     => 'Chí phí định mức',
+      'label'     => 'Giá nhập',
       'sortable'  => true,
-      'class'     => 'align-middle text-md-right',
+      'class'     => 'align-middle text-md-right d-block d-md-none d-lg-table-cell',
       'formatter' => 'return Formatter.Number.separate(value);',
     ],
     [
       'key'       => 'list_price',
-      'label'     => 'Giá',
+      'label'     => 'Giá niêm yết',
       'sortable'  => true,
-      'class'     => 'align-middle text-md-right',
+      'class'     => 'align-middle text-md-right d-block d-md-none d-lg-table-cell',
       'formatter' => 'return Formatter.Number.separate(value);',
     ],
     [
       'key'       => 'quantity_per_unit',
-      'label'     => 'Số lượng',
+      'label'     => 'Số lượng trên mỗi đơn vị',
       'sortable'  => true,
       'class'     => 'align-middle text-md-right',
       'formatter' => 'return Formatter.Number.separate(value);',
     ],
     [
       'key'      => 'discontinued_name',
-      'label'    => 'Trạng thái bán',
+      'label'    => 'Là sản phẩm ngừng bán?',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
     [
       'key'      => 'is_featured_name',
-      'label'    => 'Nổi bật',
+      'label'    => 'Là sản phẩm nổi bật?',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
     [
       'key'      => 'is_new_name',
-      'label'    => 'Hàng mới',
+      'label'    => 'Là sản phẩm mới nhất?',
       'sortable' => true,
       'class'    => 'align-middle d-block d-md-none',
     ],
     [
-      'key'      => 'supplier_code',
-      'label'    => 'Mã nhà cung cấp',
-      'sortable' => true,
-      'class'    => 'align-middle',
+      'key'   => 'supplier_code',
+      'label' => 'Mã nhà cung cấp',
+      'class' => 'd-none',
     ],
     [
       'key'      => 'supplier_name',
-      'label'    => 'Tên nhà cung cấp',
+      'label'    => 'Nhà cung cấp',
       'sortable' => true,
-      'class'    => 'align-middle',
+      'class'    => 'align-middle d-block d-md-none d-xl-table-cell',
     ],
     [
-      'key'      => 'category_code',
-      'label'    => 'Mã loại sản phẩm',
-      'sortable' => true,
-      'class'    => 'align-middle',
+      'key'   => 'category_code',
+      'label' => 'Mã loại',
+      'class' => 'd-none',
     ],
     [
       'key'      => 'category_name',
-      'label'    => 'Tên loại sản phẩm',
+      'label'    => 'Loại',
       'sortable' => true,
-      'class'    => 'align-middle',
+      'class'    => 'align-middle d-block d-md-none d-xl-table-cell',
     ],
     [
       'key'      => 'created_at',
@@ -168,7 +165,7 @@ try {
     ],
   ];
 
-  $url      = '/backend/auth/san-pham';
+  $url      = '/backend/pages/san-pham';
   $rowClass = <<<code
     let className = '';
     if (item.discontinued == 1) {
@@ -194,7 +191,7 @@ try {
     ],
     [
       'class'   => 'text-primary',
-      'content' => 'Hàng mới',
+      'content' => 'Mới nhất',
     ],
   ];
 
