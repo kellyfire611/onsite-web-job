@@ -51,6 +51,15 @@ $avatar=($link.$_FILES['txtavatar']['name']);
 //     var_dump($avatar);
 
 //  die();
+if(empty($status)){
+    echo "<script>alert('Trạng thái không được rỗng')</script>";
+       header('location:create.php');
+    return false;
+}if($status !=1 && $status !=0){
+    echo "<script>alert('Nhập Sai giá trị của trạng thái')</script>";
+       header('location:create.php');
+    return false; 
+}
     // Câu lệnh INSERT
     $sql = "INSERT INTO `shop_customers`
     (`id`,`username`,`password`,`last_name`,`first_name`,`email`,`avatar`,`company`,`phone`,`billing_address`,`shipping_address`,`city`,`state`,`postal_code`,`country`,`remember_token`,`active_code`,`status`,`created_at`,`updated_at`)

@@ -1,0 +1,47 @@
+{# Kế thừa layout backend #}
+{% extends "backend/layouts/layout.html.twig" %}
+
+{# Nội dung trong block title #}
+{% block title %}
+Thêm mới vai trò
+{% endblock %}
+{# End Nội dung trong block title #}
+
+{# Nội dung trong block headline #}
+{% block headline %}
+Thêm mới vai trò
+{% endblock %}
+{# End Nội dung trong block headline #}
+
+{# Nội dung trong block content #}
+{% block content %}
+<form name="frmVaiTro" id="frmVaiTro" method="post" action="/backend/vaitro/create.php">
+    <div class="form-group">
+        <label for="ID">ID</label>
+        <input type="text" class="form-control" id="ID" name="ID" placeholder="ID" readonly>
+        <small id="ID_maHelp" class="form-text text-muted">ID không được hiệu chỉnh.</small>
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Tên vai trò">
+    </div>
+    <div class="form-group">
+        <label for="display_name">Display Name</label>
+        <input type="text" class="form-control" id="display_name" name="display_name" placeholder="Tên hiển thị">
+    </div>
+        <div class="form-group">
+        <label for="guard_name">Guard Name</label>
+        <input type="text" class="form-control" id="guard_name" name="guard_name" placeholder="Tên xác thực">
+    </div>
+    <div class="form-group">
+        <label for="created_at">created_at</label>
+        <input type="text" class="form-control" id="created_at" name="created_at" placeholder="Ngày tạo">
+    </div>
+    <div class="form-group">
+        <label for="updated_at">updated_at</label>
+        <input type="text" class="form-control" id="updated_at" name="updated_at" placeholder="Cập nhật lúc">
+    </div>
+    <button class="btn btn-primary" name="btnSave">Lưu lại</button>
+</form>
+{% endblock %}
+{# End Nội dung trong block content #}

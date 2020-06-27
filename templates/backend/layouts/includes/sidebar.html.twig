@@ -64,13 +64,13 @@
                 </a>
                 <ul class="collapse" id="acl_usersSubMenu">
                     <li class="nav-item">
-                        <a class="nav-link" href="/backend/auth/acl_users/">
+                        <a class="nav-link" href="/backend/auth/nguoi-dung/">
                             <span data-feather="list"></span>
                             Danh sách
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/backend/auth/acl_users/create.php">
+                        <a class="nav-link" href="/backend/auth/nguoi-dung/them.php">
                             <span data-feather="plus"></span>
                             Thêm mới
                         </a>
@@ -79,7 +79,7 @@
             </li>
             <!-- End Menu Tài khoản Backend (acl_users) -->
             <!-- #################### End Menu chức năng Xác thực và Phân quyền #################### -->
-            
+
             <!-- #################### Menu chức năng Danh mục #################### -->
             <li class="nav-item sidebar-heading">
                 <a href="#" class="nav-link">Danh mục</a>
@@ -135,13 +135,13 @@
                 </a>
                 <ul class="collapse" id="shop_productsSubMenu">
                     <li class="nav-item">
-                        <a class="nav-link" href="/backend/shop_products/">
+                        <a class="nav-link" href="/backend/pages/san-pham/">
                             <span data-feather="list"></span>
                             Danh sách
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/backend/shop_products/create.php">
+                        <a class="nav-link" href="/backend/pages/san-pham/them.php">
                             <span data-feather="plus"></span>
                             Thêm mới
                         </a>
@@ -171,7 +171,7 @@
                 </ul>
             </li>
             <!-- End Menu Hình Sản phẩm -->
-            
+
             <!-- Menu Đánh giá Sản phẩm -->
             <li class="nav-item">
                 <a href="#shop_product_reviewsSubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -194,7 +194,7 @@
             </li>
             <!-- End Menu Đánh giá Sản phẩm -->
             <!-- #################### End Menu chức năng Danh mục #################### -->
-           
+
             <!-- #################### Menu chức năng Khuyến mãi #################### -->
             <li class="nav-item sidebar-heading">
                 <a href="#" class="nav-link">Khuyến mãi / Giảm giá</a>
@@ -297,7 +297,7 @@
                 </a>
             </li>
             <!-- End Menu Báo cáo Doanh thu -->
-            
+
             <!-- Menu Thống kê lượng Khách hàng -->
             <li class="nav-item">
                 <a class="nav-link" href="/backend/reports/baocaodoanhthu.php">
@@ -307,6 +307,34 @@
             </li>
             <!-- End Thống kê lượng Khách hàng -->
             <!-- #################### End Menu chức năng Quản lý Đơn hàng #################### -->
+
+
+            <li class="nav-item">
+                <a class="nav-link active" href="/backend/pages/dashboard.php">
+                    <span data-feather="home"></span>
+                    Bảng tin <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <!-- Menu khách hàng -->
+            <li class="nav-item">
+                <a href="#loaisanphamSubMenu" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                    <span data-feather="package"></span> Khách hàng
+                </a>
+                <ul class="collapse" id="loaisanphamSubMenu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend/shop_customers/index.php">
+                            <span data-feather="list"></span>
+                            Danh sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/backend/shop_customers/create.php">
+                            <span data-feather="plus"></span>
+                            Thêm mới
+                        </a>
+                    </li>
+                </ul>
         </ul>
     </div>
 </nav>

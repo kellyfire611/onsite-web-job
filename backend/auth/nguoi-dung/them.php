@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../../bootstrap.php';
 require_once __DIR__ . '/../../../utils/regex.php';
 
-$template = 'backend/auth/acl_users/create.html.twig';
+$template = 'backend/auth/nguoi-dung/them.html.twig';
 $el       = 'form-create';
 $regex    = [
   'username'    => [
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
       $statement = $conn->prepare(<<<query
         select id
         from acl_users
-        where username = ?;
+        where username = ?
       query);
 
       $statement->bind_param('s', $_POST['username']);
@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
           ]),
         ]));
       }
-    } catch (Exception $e) {
+    } catch (mysqli_sql_exception $exception) {
       $conn->close();
       die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
     }
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
       $statement = $conn->prepare(<<<query
         select id
         from acl_users
-        where email = ?;
+        where email = ?
       query);
 
       $statement->bind_param('s', $_POST['email']);
@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
           ]),
         ]));
       }
-    } catch (Exception $e) {
+    } catch (mysqli_sql_exception $exception) {
       $conn->close();
       die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
     }
@@ -231,7 +231,7 @@ if (isset($_POST['submit'])) {
             0, -- status
             current_timestamp(), -- created_at
             null -- updated_at
-          );
+          )
         query);
 
         $statement->bind_param('sssssssssssssss',
@@ -251,17 +251,15 @@ if (isset($_POST['submit'])) {
           $_POST['postal_code'],
           $_POST['country'],
         );
-
         $statement->execute();
-        header('location:./');
-      } catch (Exception $e) {
-        var_dump($e);
-        echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
+        $conn->close();
+        header('location:/backend/auth/nguoi-dung');
+      } catch (mysqli_sql_exception $exception) {
+        $conn->close();
         if ($isUploaded) {
           unlink(__DIR__ . "/../../..$avatar");
         }
-      } finally {
-        $conn->close();
+        echo 'Xin lỗi, không thể truy vấn cơ sở dữ liệu.';
       }
     } else {
       $conn->close();

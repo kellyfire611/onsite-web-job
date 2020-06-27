@@ -11,7 +11,7 @@ try {
     Config::$DB_CONNECTION_PASSWORD,
     Config::$DB_CONNECTION_DATABASE_NAME
   );
-} catch (\Throwable $th) {
+} catch (mysqli_sql_exception $exception) {
   die('Xin lỗi, không thể kết nối cơ sở dữ liệu.');
 }
 
@@ -19,7 +19,7 @@ try {
   $conn->query('set names utf8mb4');
   $conn->query('set character set utf8mb4');
   $conn->query('set session collation_connection = utf8mb4_unicode_ci');
-} catch (\Throwable $th) {
+} catch (mysqli_sql_exception $exception) {
   $conn->close();
   die('Xin lỗi, không thể truy vấn cơ sở dữ liệu.');
 }
