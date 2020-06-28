@@ -31,8 +31,8 @@ if (isset($_POST['btnImport'])) {
         // Kiểm tra các cột dữ liệu có đúng mẫu hay không?
         $arrayCount = count($allDataInSheet);
         $flag = 0;
-        $createArray = array('ncc_code', 'ncc_ten', 'ncc_mota');
-        $makeArray = array('ncc_code' => 'ncc_code', 'ncc_ten' => 'ncc_ten', 'ncc_mota' => 'ncc_mota');
+        $createArray = array('ncc_code', 'ncc_ten', 'ncc_mota', 'ncc_anh', 'ncc_ngaytao', 'ncc_ngaycapnhat');
+        $makeArray = array('ncc_code' => 'ncc_code', 'ncc_ten' => 'ncc_ten', 'ncc_mota' => 'ncc_mota', 'ncc_anh' => 'ncc_anh', 'ncc_ngaytao' => 'ncc_ngaytao', 'ncc_ngaycapnhat' => 'ncc_ngaycapnhat');
         $SheetDataKey = array();
         foreach ($allDataInSheet as $dataInSheet) {
             foreach ($dataInSheet as $key => $value) {
@@ -53,11 +53,16 @@ if (isset($_POST['btnImport'])) {
                 $supplier_code = $SheetDataKey['ncc_code'];
                 $supplier_name = $SheetDataKey['ncc_ten'];
                 $description = $SheetDataKey['ncc_mota'];
-
+                $image = $SheetDataKey['ncc_anh'];
+                $created_at = $SheetDataKey['ncc_ngaytao']; 
+                $updated_at = $SheetDataKey['ncc_ngaycapnhat'];
                 $supplier_code = filter_var(trim($allDataInSheet[$i][$supplier_code]), FILTER_SANITIZE_STRING);
                 $supplier_name = filter_var(trim($allDataInSheet[$i][$supplier_name]), FILTER_SANITIZE_STRING);
                 $description = filter_var(trim($allDataInSheet[$i][$description]), FILTER_SANITIZE_STRING);
-                $fetchData[] = array('ncc_code' => $supplier_code, 'ncc_ten' => $supplier_name, 'ncc_mota' => $description,);
+                $image = filter_var(trim($allDataInSheet[$i][$image]), FILTER_SANITIZE_STRING);
+                $created_at = filter_var(trim($allDataInSheet[$i][$created_at]), FILTER_SANITIZE_STRING);
+                $updated_at = filter_var(trim($allDataInSheet[$i][$updated_at]), FILTER_SANITIZE_STRING);               
+                $fetchData[] = array('ncc_code' => $supplier_code, 'ncc_ten' => $supplier_name, 'ncc_mota' => $description, 'ncc_anh' => $image, 'ncc_ngaytao' => $created_at, 'ncc_ngaycapnhat' => $updated_at);
             }
             $data['dataInfo'] = $fetchData;
             
@@ -67,10 +72,12 @@ if (isset($_POST['btnImport'])) {
                 $ncc_code = $row['ncc_code'];
                 $ncc_ten = $row['ncc_ten'];
                 $ncc_mota = $row['ncc_mota'];
-
-                $sql = "INSERT INTO `shop_suppliers` (`supplier_code`, `supplier_name`, `description`) VALUES (?,?,?)";
+                $ncc_anh = $row['ncc_anh'];
+                $ncc_ngaytao = $row['ncc_ngaytao'];
+                $ncc_ngaycapnhat = $row['ncc_ngaycapnhat'];
+                $sql = "INSERT INTO `shop_suppliers` (`supplier_code`, `supplier_name`, `description`, `image`, created_at, updated_at) VALUES (?,?,?,?,?,?)";
                 $stmt=$conn->prepare($sql);
-                $stmt->bind_param("sss",$ncc_code,$ncc_ten,$ncc_mota);
+                $stmt->bind_param("ssssss",$ncc_code,$ncc_ten,$ncc_mota,$ncc_anh,$ncc_ngaytao,$ncc_ngaycapnhat);
                
                 // Thực thi INSERT
                 $stmt->execute();
