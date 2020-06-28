@@ -101,7 +101,7 @@ $regex    = [
     'max'     => 255,
   ],
   'postal_code' => [
-    'pattern' => Regex::$PATTERN['number'],
+    'pattern' => Regex::$PATTERN['number_pos'],
     'min'     => 0,
     'max'     => 15,
   ],
@@ -230,7 +230,7 @@ if (isset($_POST['submit'])) {
     (strlen($_POST['address2']) == 0 || Regex::test('any', 0, 500, $_POST['address2'])) &&
     (strlen($_POST['city']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['city'])) &&
     (strlen($_POST['state']) == 0 || Regex::test('vietnamese_name', 0, 255, $_POST['state'])) &&
-    (strlen($_POST['postal_code']) == 0 || Regex::test('number', 0, 15, $_POST['postal_code'])) &&
+    (strlen($_POST['postal_code']) == 0 || Regex::test('number_pos', 0, 15, $_POST['postal_code'])) &&
     (strlen($_POST['country']) == 0 || Regex::test('vietnamese_name', 5, 255, $_POST['country']))
   ) {
     try {
@@ -276,7 +276,7 @@ if (isset($_POST['submit'])) {
       if ($isUploaded) {
         rename(__DIR__ . "/../../..$avatar.tmp", __DIR__ . "/../../..$avatar");
       }
-      header('location:/backend/auth/nguoi-dung');
+      header('location: ./');
     } catch (mysqli_sql_exception $exception) {
       $conn->close();
       if ($isUploaded) {
