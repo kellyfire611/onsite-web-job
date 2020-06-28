@@ -37,7 +37,7 @@ try {
     unset($form['username'], $form['avatar']);
   } else {
     $conn->close();
-    die('Không tìm thấy người dùng.');
+    die('Xin lỗi, không tìm thấy người dùng.');
   }
 } catch (mysqli_sql_exception $exception) {
   $conn->close();
