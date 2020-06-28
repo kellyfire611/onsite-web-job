@@ -14,15 +14,14 @@ Quản lý sản phẩm
     <h6>Thông tin bắt buộc</h6>
     <b-row>
       <b-col lg="6">
-        <b-form-group label="Mã sản phẩm" label-for="input-product_code" description="Không chứa kí tự đặc biệt (VD: P1234)"
-                      invalid-feedback="Mã sản phẩm không hợp lệ" :state="state.product_code">
+        <b-form-group label="Mã sản phẩm" label-for="input-product_code" description="Mã sản phẩm không được phép thay đổi">
           <b-input-group>
             <template v-slot:prepend>
               <b-input-group-text class="group-icon">
                 <i class="fas fa-truck-loading"></i>
               </b-input-group-text>
             </template>
-            <b-form-input id="input-product_code" name="product_code" v-model="form.product_code" :state="state.product_code"></b-form-input>
+            <b-form-input id="input-product_code" name="product_code" v-model="product_code" readonly></b-form-input>
           </b-input-group>
         </b-form-group>
 
@@ -200,7 +199,6 @@ Quản lý sản phẩm
           { text: 'Sai', value: 0 }
         ],
         form: {
-          product_code: '',
           product_name: '',
           image: null,
           short_description: '',
@@ -215,7 +213,6 @@ Quản lý sản phẩm
           supplier_id: '',
         },
         state: {
-          product_code: false,
           product_name: false,
           image: null,
           short_description: null,
@@ -233,6 +230,7 @@ Quản lý sản phẩm
     },
     beforeMount() {
       const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.product_code = data.product_code;
       this.regex = data.regex;
       this.form = Object.assign(this.form, data.form);
       this.shop_suppliers = data.shop_suppliers;
@@ -272,9 +270,6 @@ Quản lý sản phẩm
       },
     },
     watch: {
-      'form.product_code'() {
-        this.state.product_code = Regex.test(this.regex.product_code.pattern, this.regex.product_code.min, this.regex.product_code.max, this.form.product_code);
-      },
       'form.product_name'() {
         this.state.product_name = Regex.test(this.regex.product_name.pattern, this.regex.product_name.min, this.regex.product_name.max, this.form.product_name);
       },
@@ -306,10 +301,10 @@ Quản lý sản phẩm
         this.state.image = this.form.image != null ? true : null;
       },
       'form.category_id'() {
-        this.state.category_id = this.form.category_id == null ? null : Regex.test(this.regex.category_id.pattern, this.regex.category_id.min, this.regex.category_id.max, this.form.category_id);
+        this.state.category_id = this.form.category_id == '' ? null : Regex.test(this.regex.category_id.pattern, this.regex.category_id.min, this.regex.category_id.max, this.form.category_id);
       },
       'form.supplier_id'() {
-        this.state.supplier_id = this.form.supplier_id == null ? null : Regex.test(this.regex.supplier_id.pattern, this.regex.supplier_id.min, this.regex.supplier_id.max, this.form.supplier_id);
+        this.state.supplier_id = this.form.supplier_id == '' ? null : Regex.test(this.regex.supplier_id.pattern, this.regex.supplier_id.min, this.regex.supplier_id.max, this.form.supplier_id);
       },
       'form.short_description'() {
         this.state.short_description = this.form.short_description.length == 0 ? null : Regex.test(this.regex.short_description.pattern, this.regex.short_description.min, this.regex.short_description.max, this.form.short_description);

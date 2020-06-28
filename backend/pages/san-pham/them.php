@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
       Regex::test('number_pos', 1, 4, $_POST['discontinued']) &&
       Regex::test('number_pos', 1, 1, $_POST['is_featured']) &&
       Regex::test('number_pos', 1, 1, $_POST['is_new']) &&
-      strlen($_POST['is_new']) <= 5000
+      strlen($_POST['description']) <= 5000
     ) {
       try {
         $password  = password_hash('user@123', PASSWORD_DEFAULT);

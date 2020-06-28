@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
             'username' => $username,
             'form'     => $_POST,
             'response' => [
-              'title'   => 'Tạo mới không thành công',
+              'title'   => 'Thay đổi không thành công',
               'variant' => 'danger',
               'content' => 'Đã có lỗi xảy ra trong quá trình tải lên ảnh đại diện',
             ],

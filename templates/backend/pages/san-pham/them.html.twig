@@ -306,10 +306,10 @@ Quản lý sản phẩm
         this.state.image = this.form.image != null ? true : null;
       },
       'form.category_id'() {
-        this.state.category_id = this.form.category_id == null ? null : Regex.test(this.regex.category_id.pattern, this.regex.category_id.min, this.regex.category_id.max, this.form.category_id);
+        this.state.category_id = this.form.category_id == '' ? null : Regex.test(this.regex.category_id.pattern, this.regex.category_id.min, this.regex.category_id.max, this.form.category_id);
       },
       'form.supplier_id'() {
-        this.state.supplier_id = this.form.supplier_id == null ? null : Regex.test(this.regex.supplier_id.pattern, this.regex.supplier_id.min, this.regex.supplier_id.max, this.form.supplier_id);
+        this.state.supplier_id = this.form.supplier_id == '' ? null : Regex.test(this.regex.supplier_id.pattern, this.regex.supplier_id.min, this.regex.supplier_id.max, this.form.supplier_id);
       },
       'form.short_description'() {
         this.state.short_description = this.form.short_description.length == 0 ? null : Regex.test(this.regex.short_description.pattern, this.regex.short_description.min, this.regex.short_description.max, this.form.short_description);
