@@ -38,22 +38,11 @@ class ComposerStaticInit6ece0a031a40eca4a34f85c2a69d31ed
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'T' => 
-        array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
-        ),
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6ece0a031a40eca4a34f85c2a69d31ed::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6ece0a031a40eca4a34f85c2a69d31ed::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6ece0a031a40eca4a34f85c2a69d31ed::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
