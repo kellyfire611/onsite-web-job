@@ -280,7 +280,7 @@ if (isset($_POST['submit'])) {
             is_new = ?,
             category_id = ?,
             supplier_id = ?,
-            updated_at = current_timestamp(),
+            updated_at = current_timestamp()
           where id = ?
         query);
 
