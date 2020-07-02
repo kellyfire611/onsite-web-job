@@ -22,13 +22,11 @@ if(isset($_POST['btnSave']))
     $name = $_POST['name'];
     $display_name = $_POST['display_name'];
     $guard_name = $_POST['guard_name'];
-    $created_at = $_POST['created_at'];
-    $updated_at = $_POST['updated_at'];
+    $updated_at = date('Y/m/d H:i:s');;
 
     // Câu lệnh UPDATE
     $sql = "UPDATE `acl_roles` SET name='$name', display_name='$display_name' ,
-    guard_name='$guard_name', created_at='$created_at',updated_at='$updated_at'
-    
+    guard_name='$guard_name',updated_at='$updated_at'    
     WHERE id=$ID;";
 
     // Thực thi UPDATE
