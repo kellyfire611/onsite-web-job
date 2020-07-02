@@ -6,7 +6,7 @@ include_once(__DIR__.'/../../dbconnect.php');
 // 2. Chuẩn bị câu truy vấn $sql
 // Lấy giá trị khóa chính được truyền theo dạng QueryString Parameter key1=value1&key2=value2...
 $category_code = $_GET['category_code'];
-$sql = "DELETE FROM `shop_categories` WHERE category_code=" . $category_code;
+$sql = "DELETE FROM `shop_categories` WHERE category_code='.$category_code';";
 
 // 3. Thực thi câu lệnh DELETE
 $result = mysqli_query($conn, $sql);

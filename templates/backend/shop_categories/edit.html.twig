@@ -17,7 +17,7 @@ Sửa Loại sản phẩm
 {% block content %}
 <form name="frmLoaiSanPham" id="frmLoaiSanPham" method="post" action="/backend/shop_categories/edit.php?category_code={{ shop_categories.category_code }}">
     <div class="form-group">
-        <label for="lsp_ma">Mã loại sản phẩm</label>
+        <label for="category_code">Mã loại sản phẩm</label>
         <input type="text" class="form-control" id="category_code" name="category_code" placeholder="Mã loại sản phẩm" readonly value="{{ shop_categories.category_code }}">
         <small id="category_code_help" class="form-text text-muted">Mã loại sản phẩm không được hiệu chỉnh.</small>
     </div>
