@@ -1,7 +1,7 @@
 <script src="/node_modules/vue/dist/vue.min.js"></script>
 <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
 <script>
-  new Vue({
+  a = new Vue({
     el: '#{{ el }}',
     delimiters: ['${', '}'],
     data() {
@@ -38,7 +38,6 @@
       });
       this.totalRows = this.items.length;
       this.rowClass = data.rowClass ? new Function('item', 'type', `if (!item || type !== 'row') return ''; ${data.rowClass}`) : '';
-      this.notes = data.notes;
     },
     mounted() {
       this.$el.removeAttribute('data-user');
@@ -74,7 +73,7 @@
           centered: true
         }).then(confirm => {
           if (confirm) {
-            window.location.replace(`${this.url}/xoa.php?id=${id}`);
+            window.location.replace(`${this.url}/delete.php?id=${id}`);
           }
         })
       }

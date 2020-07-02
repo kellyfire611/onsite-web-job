@@ -1,8 +1,8 @@
 <div id="{{ el }}" data-user="{{ data }}">
   <div class="mb-3">
-    <b-button size="sm" :href="`${url}/them.php`" variant="primary">Thêm mới</b-button>
-    <b-button size="sm" :href="`${url}/nhap.php`">Nhập dữ liệu</b-button>
-    <b-button size="sm" :href="`${url}/xuat.php`">Xuất dữ liệu</b-button>
+    <b-button size="sm" :href="`${url}/create.php`" variant="primary">Thêm mới</b-button>
+    <b-button size="sm" :href="`${url}/import.php`">Nhập dữ liệu</b-button>
+    <b-button size="sm" :href="`${url}/export.php`">Xuất dữ liệu</b-button>
   </div>
 
   <b-form>
@@ -91,16 +91,7 @@
     </b-form-group>
   </b-form>
 
-  <div class="mb-3" v-if="notes">
-    <label>Chú thích</label>
-    <div class="d-flex align-items-center">
-      <div class="rounded border border py-1 px-2 mr-2" :class="note.class" v-for="note in notes" :key="note.bg">
-        ${ note.content }
-      </div>
-    </div>
-  </div>
-
-  <p class="mb-3">
+  <p>
     Đang hiển thị từ ${ currentPage * perPage - perPage + 1 }
     đến ${ currentPage * perPage > totalRows ? totalRows : currentPage * perPage }
     trong tổng số ${ totalRows } dòng
@@ -117,7 +108,7 @@
       <b-button size="sm" @click="row.toggleDetails">
         <i class="fas" :class="row.detailsShowing ? 'fa-eye-slash' : 'fa-eye'"></i>
       </b-button>
-      <b-button size="sm" :href="`${url}/sua.php?id=${row.item.id}`" variant="primary">
+      <b-button size="sm" :href="`${url}/edit.php?id=${row.item.id}`" variant="primary">
         <i class="fas fa-edit"></i>
       </b-button>
       <b-button size="sm" @click="deleteRow(row.item.id)" variant="danger">

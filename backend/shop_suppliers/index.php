@@ -8,11 +8,9 @@ include_once(__DIR__ . '/../../dbconnect.php');
 
 // 2. Chuẩn bị câu truy vấn $sql
 $sql = "select * from `shop_suppliers`";
-$stmt=$conn->prepare($sql);
-$stmt->execute();
-$result=$stmt->get_result();
+
 // 3. Thực thi câu truy vấn SQL để lấy về dữ liệu
-//$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql);
 
 // 4. Khi thực thi các truy vấn dạng SELECT, dữ liệu lấy về cần phải phân tách để sử dụng
 // Thông thường, chúng ta sẽ sử dụng vòng lặp while để duyệt danh sách các dòng dữ liệu được SELECT
