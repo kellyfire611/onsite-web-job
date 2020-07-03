@@ -12,9 +12,9 @@ if(isset($_POST['btnSave']))
     // Lấy dữ liệu người dùng hiệu chỉnh gởi từ REQUEST POST
     $name = $_POST['name'];
     $display_name = $_POST['display_name'];
-    $guard_name = $_POST['guard_name'];
-    $created_at = $_POST['created_at'];
-    $updated_at = $_POST['updated_at'];
+    $guard_name = $_POST['guard_name'];   
+    $created_at = date('Y/m/d H:i:s');
+    $updated_at = '';
     // Câu lệnh INSERT
     $sql = "INSERT INTO `acl_roles` (name, display_name,guard_name,created_at,updated_at) 
     VALUES ('" . $name . "', '". $display_name ."', '". $guard_name ."', '". $created_at ."', '". $updated_at ."');";

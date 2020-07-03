@@ -484,17 +484,7 @@ Trang chủ
 <script src="/node_modules/flatpickr/dist/flatpickr.min.js"></script>
 <script src="/assets/shared/js/flatpickr.js"></script>
 <script>
-	$(() => {
-		$('#navbar').removeClass('bg-dark');
-
-		$(window).on('scroll', () => {
-			if ($('html,body').scrollTop() > 0) {
-				$('#navbar').addClass('bg-dark');
-			} else {
-				$('#navbar').removeClass('bg-dark');
-			}
-		});
-
+	$(document).ready(function () {
 		flatpickr.localize(flatpickr.l10ns.vn);
 
 		$('main.wrapper').removeClass('wrapper');

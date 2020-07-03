@@ -28,4 +28,4 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 
 // Yêu cầu `Twig` vẽ giao diện được viết trong file `backend/loaisanpham/loaisanpham.html.twig`
 // với dữ liệu truyền vào file giao diện được đặt tên là `ds_loaisanpham`
-echo $twig->render('backend/shop_categories/index.html.twig', ['array_category' => $data] );
+echo $twig->render('backend/shop_categories/index.html.twig', ['list_shop_category' => $data] );

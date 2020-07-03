@@ -1,9 +1,0 @@
-#navbar {
-  transition: background-color 400ms linear;
-}
-
-#scrollTop {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-}

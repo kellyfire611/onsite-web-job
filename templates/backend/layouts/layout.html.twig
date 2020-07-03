@@ -8,9 +8,7 @@
 
   <link rel="stylesheet" href="/assets/shared/css/custom.bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" type="text/css" />
-  <link rel="stylesheet" href="/assets/shared/css/scroll.css" type="text/css" />
-  <link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
-  <link rel="stylesheet" href="/assets/backend/css/style.css">
+  <link rel="stylesheet" href="/assets/backend/css/style.css" type="text/css" />
 
   <title>
     Onsite Web Job -
@@ -20,49 +18,30 @@
   {% block customstyles %}{% endblock %}
 </head>
 
-<body>
-  <div class="d-flex">
-    <div id="bar">
-      <b-sidebar id="sidebar" variant="light" text-variant="primary" shadow backdrop v-if="isSmall">
-        <template v-slot:title>
-          <a class="navbar-brand d-flex align-items-center" href="/">
-            <div class="logo logo-32 mr-1"></div>
-            <div class="font-logo text-primary m-0">Onsite Web Job</div>
-          </a>
-        </template>
+<body class="d-flex flex-column h-100">
+  {% include 'backend/layouts/includes/header.html.twig' %}
 
-        {% include 'backend/layouts/includes/sidebar.html.twig' %}
-      </b-sidebar>
+  <div class="container-fluid">
+    <div class="row">
+      {% include 'backend/layouts/includes/sidebar.html.twig' %}
 
-      {% include 'backend/layouts/includes/header.html.twig' %}
-
-      <div class="wrapper shadow-sm border-right bg-light" style="width: 320px;" v-if="!isSmall">
-          {% include 'backend/layouts/includes/sidebar.html.twig' %}
-      </div>
-    </div>
-
-    <div class="wrapper flex-fill">
-      <main role="main" class="container-fluid pt-3 pb-5">
-        <h1 class="h2">
-          {% block headline %}{% endblock %}
-        </h1>
-        <hr>
+      <main role="main" class="col-md-10 ml-sm-auto px-4 mb-2">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">
+            {% block headline %}{% endblock %}
+          </h1>
+        </div>
 
         {% block content %}{% endblock %}
-
       </main>
-
-      {% include 'backend/layouts/includes/footer.html.twig' %}
     </div>
   </div>
+
+  {% include 'backend/layouts/includes/footer.html.twig' %}
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/assets/backend/js/scroll.js"></script>
-  <script src="/node_modules/vue/dist/vue.min.js"></script>
-  <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
-  <script src="/assets/backend/js/bar.js"></script>
 
   {% block customscripts %}{% endblock %}
 </body>
