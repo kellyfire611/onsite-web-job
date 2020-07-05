@@ -29,7 +29,7 @@ Danh sách Loại sản phẩm
         </tr>
     </thead>
     <tbody>
-        {% for shop_categories in list_shop_category %}
+        {% for shop_categories in array_category %}
         <tr>
             <td>{{ shop_categories.category_code }}</td>
             <td>{{ shop_categories.category_name }}</td>
@@ -41,7 +41,7 @@ Danh sách Loại sản phẩm
                 </a>
 
                 <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `lsp_ma` -->
-                <a href="delete.php?category_code={{ shop_categories.category_code }}" class="btn btn-danger">
+                <a href="delete.php?category_codes={{ shop_categories.category_code }}" class="btn btn-danger">
                     <span data-feather="delete"></span> Xóa
                 </a>
             </td>

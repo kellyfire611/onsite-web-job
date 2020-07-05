@@ -3,19 +3,19 @@
 
 {# Nội dung trong block title #}
 {% block title %}
-Sửa Loại sản phẩm
+Sửa nhà cung cấp
 {% endblock %}
 {# End Nội dung trong block title #}
 
 {# Nội dung trong block headline #}
 {% block headline %}
-Sửa Loại sản phẩm
+Sửa nhà cung cấp
 {% endblock %}
 {# End Nội dung trong block headline #}
 
 {# Nội dung trong block content #}
 {% block content %}
-
+<!--
 <form name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="POST" action="/backend/shop_suppliers/edit?id={{ suppliers.id }}">
     <div class="form-group">
         <label for="ncc_ma">Mã số nhà cung cấp</label>
@@ -43,7 +43,70 @@ Sửa Loại sản phẩm
  
     
     <button class="btn btn-primary" name="btnSave">Cập nhật nhà cung cấp</button>
-</form>
-
+</form> -->
+<div class="container-fluid">
+    <div class="row">
+		<div class="col-md-12">
+			<form class="card" name="frmNhaCungCap" id="frmNhaCungCap"  enctype="multipart/form-data" method="POST" action="/backend/shop_suppliers/edit?id={{ suppliers.id }}">
+                <div class="row card-body">
+                    <div class="col-md-12">
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                            </div>
+                            <input type="text" class="form-control" id="ncc_ma" name="ncc_ma" placeholder="Mã nhà cung cấp" readonly value="{{ suppliers.id }}">
+                        </div>
+                        <small id="ncc_maHelp" class="form-text text-muted">Mã nhà cung cấp không được hiệu chỉnh.</small>
+                    </div>
+                    
+                </div>
+                <div class="row card-body">
+					<div class="col-md-6">
+						<div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                            </div>
+                            <input type="text" class="form-control" id="ncc_code" name="ncc_code" value="{{ suppliers.supplier_code }}" placeholder="Ký hiệu SUP + mã số">
+                        </div> <!-- form-group// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                            </div>
+                            <input type="text" class="form-control" id="ncc_ten" name="ncc_ten" value="{{ suppliers.supplier_name }}" placeholder="Tên nhà cung cấp">
+                        </div> <!-- form-group// -->
+                        
+					</div>
+					<div class="col-md-6">
+						<div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fas fa-mars-stroke-h"></i> </span>
+                            </div>
+                            <input type="text" class="form-control" id="ncc_mota" name="ncc_mota" value="{{ suppliers.description }}" placeholder="Mô tả nhà cung cấp">
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="anh_file"> <i class="fas fa-globe"></i> </span>
+                            </div>
+                            .<div class="custom-file">
+                                <input type="hidden" name="ncc_anhcu" value="./../../{{ suppliers.image }}">
+                                <input aria-describedby="anh_file" type="file" value="Chọn ảnh" class="form-control custom-file" id="ncc_anh" name="ncc_anh" placeholder="Ảnh đại diện nhà cung cấp">
+                                <input type="file" class="form-control custom-file" id="ncc_anh" name="ncc_anh">
+                                <label for="ncc_anh" class="custom-file-label">Chọn ảnh đại diện</label>
+                                
+                            </div>
+                        </div> <!-- form-group// -->
+                        <img src="./../../{{ suppliers.image }}" width="120" class="img-thumbnail">
+					</div>
+				</div> <!-- end row body -->
+				<div class="row card-footer bg-light m-0">
+					<div class="col-md-4 offset-4">
+						<button class="btn btn-primary" name="btnSave">Cập nhật nhà cung cấp</button>
+					</div>
+                    					
+                </div> <!-- end card-footer -->
+			</form>
+		</div> <!-- end col-md-10 -->
+	</div>
+</div>
 {% endblock %}
 {# End Nội dung trong block content #}

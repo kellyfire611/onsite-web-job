@@ -1,0 +1,322 @@
+{% extends "backend/layouts/layout.html.twig" %}
+
+{% block title %}
+Quản lý sản phẩm
+{% endblock %}
+
+{% block headline %}
+Quản lý sản phẩm
+{% endblock %}
+
+{% block content %}
+<div id="{{ el }}" data-user="{{ data }}">
+  <b-form @submit="submit" method="post" enctype="multipart/form-data">
+    <h6>Thông tin bắt buộc</h6>
+    <b-row>
+      <b-col lg="6">
+        <b-form-group label="Mã sản phẩm" label-for="input-product_code" description="Mã sản phẩm không được phép thay đổi">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-truck-loading"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-product_code" name="product_code" v-model="product_code" readonly></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Tên sản phẩm" label-for="input-product_name" description="Tên hiển thị sản phẩm (VD: Dell Inspirion)"
+                      invalid-feedback="Tên không hợp lệ" :state="state.product_name">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-truck-loading"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-product_name" name="product_name" v-model="form.product_name" :state="state.product_name"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Giá nhập" label-for="input-standard_cost"
+                      description="Tối thiểu 0, dùng dấu phẩy hoặc dấu chấm để phân cách phần thập phân (VD: 8283000.0000)" invalid-feedback="Giá không hợp lệ"
+                      :state="state.standard_cost">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-dollar-sign"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-standard_cost" name="standard_cost" v-model="form.standard_cost" :state="state.standard_cost" type="number" step="0.0001">
+            </b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Giá niêm yết" label-for="input-list_price"
+                      description="Tối thiểu 0, dùng dấu phẩy hoặc dấu chấm để phân cách phần thập phân (VD: 8283000.0000)" invalid-feedback="Giá không hợp lệ"
+                      :state="state.list_price">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-dollar-sign"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-list_price" name="list_price" v-model="form.list_price" :state="state.list_price" type="number" step="0.0001">
+            </b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6">
+        <b-form-group label="Số lượng trên mỗi đơn vị" label-for="input-quantity_per_unit" description="Tối thiểu 0 (VD: 56)"
+                      invalid-feedback="Số lượng không hợp lệ" :state="state.quantity_per_unit">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-boxes"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-quantity_per_unit" name="quantity_per_unit" v-model="form.quantity_per_unit" :state="state.quantity_per_unit" type="number"
+                          step="1">
+            </b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Sản phẩm ngừng bán hay không?" description="Lựa chọn đúng hoặc sai" invalid-feedback="Vui lòng chọn" :state="state.discontinued">
+          <b-form-radio-group v-model="form.discontinued" :options="options" name="discontinued" :state="state.discontinued"></b-form-radio-group>
+        </b-form-group>
+
+        <b-form-group label="Là sản phẩm nổi bật hay không?" description="Lựa chọn đúng hoặc sai" invalid-feedback="Vui lòng chọn" :state="state.is_featured">
+          <b-form-radio-group v-model="form.is_featured" :options="options" name="is_featured" :state="state.is_featured"></b-form-radio-group>
+        </b-form-group>
+
+        <b-form-group label="Là sản phẩm mới nhất hay không?" description="Lựa chọn đúng hoặc sai" invalid-feedback="Vui lòng chọn" :state="state.is_new">
+          <b-form-radio-group v-model="form.is_new" :options="options" name="is_new" :state="state.is_new"></b-form-radio-group>
+        </b-form-group>
+      </b-col>
+    </b-row>
+
+    <h6>Thông tin không bắt buộc</h6>
+    <b-row>
+      <b-col lg="6">
+        <b-form-group label="Loại sản phẩm" label-for="input-category_id" description="Chọn loại sản phẩm" invalid-feedback="Loại sản phẩm không hợp lệ"
+                      :state="state.category_id">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-layer-group"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-select name="category_id" v-model="form.category_id" :options="shop_categories" :state="state.category_id">
+              <template v-slot:first>
+                <b-form-select-option value="">-- Không thuộc loại sản phẩm nào --</b-form-select-option>
+              </template>
+            </b-form-select>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Nhà cung cấp" label-for="input-supplier_id" description="Chọn nhà cung cấp sản phẩm" invalid-feedback="Nhà cung cấp không hợp lệ"
+                      :state="state.supplier_id">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-industry"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-select name="supplier_id" v-model="form.supplier_id" :options="shop_suppliers" :state="state.supplier_id">
+              <template v-slot:first>
+                <b-form-select-option value="">-- Không thuộc nhà cung cấp sản phẩm nào --</b-form-select-option>
+              </template>
+            </b-form-select>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6">
+        <b-form-group label="Ảnh sản phẩm" label-for="input-image" description="Tải ảnh sản phẩm, để trống với mặc định là ảnh đại hiện của hệ thống"
+                      :state="state.image">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-camera"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-file id="input-image" name="image" v-model="form.image" placeholder="Chọn hoặc kẻo thả ảnh vào đây..." drop-placeholder="Thả ảnh vào đây..."
+                         :state="state.image" accept="image/*"
+                         :file-name-formatter="(files) => (files.length == 1 ? 'Đã chọn ảnh sản phẩm' : 'Chọn hoặc kẻo thả ảnh vào đây...')">
+            </b-form-file>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Mô tả ngắn" label-for="input-short_description" description="Mô tả ngắn về sản phẩm không quá 250 ký tự"
+                      invalid-feedback="Mô tả không hợp lệ" :state="state.short_description">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-quote-right"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-short_description" name="short_description" v-model="form.short_description" :state="state.short_description">
+            </b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col cols="12">
+        <b-form-group label="Mô tả về sản phẩm" label-for="input-description" description="Mô tả về sản phẩm không quá 5000 ký tự"
+                      invalid-feedback="Mô tả không hợp lệ" :state="state.description">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-keyboard"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-textarea id="input-description" name="description" v-model="form.description" :state="state.description" rows="3" max-rows="10">
+            </b-form-textarea>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+    </b-row>
+
+    <b-form-group class="text-center">
+      <b-button type="submit" variant="primary" name="submit" :disabled="!valid">Tạo mới</b-button>
+    </b-form-group>
+  </b-form>
+</div>
+{% endblock %}
+
+{% block customscripts %}
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script src="/assets/shared/js/regex.js"></script>
+<script>
+  new Vue({
+    el: '#{{ el }}',
+    delimiters: ['${', '}'],
+    data() {
+      return {
+        options: [
+          { text: 'Đúng', value: 1 },
+          { text: 'Sai', value: 0 }
+        ],
+        form: {
+          product_name: '',
+          image: null,
+          short_description: '',
+          description: '',
+          standard_cost: '',
+          list_price: '',
+          quantity_per_unit: '',
+          discontinued: null,
+          is_featured: null,
+          is_new: null,
+          category_id: '',
+          supplier_id: '',
+        },
+        state: {
+          product_name: false,
+          image: null,
+          short_description: null,
+          description: null,
+          standard_cost: false,
+          list_price: false,
+          quantity_per_unit: false,
+          discontinued: false,
+          is_featured: false,
+          is_new: false,
+          category_id: null,
+          supplier_id: null,
+        },
+      }
+    },
+    beforeMount() {
+      const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.product_code = data.product_code;
+      this.regex = data.regex;
+      this.form = Object.assign(this.form, data.form);
+      this.shop_suppliers = data.shop_suppliers;
+      this.shop_categories = data.shop_categories;
+      for (const key in this.regex) {
+        this.regex[key].pattern = new RegExp(this.regex[key].pattern);
+      }
+      if (data.response) {
+        this.$bvToast.toast(data.response.content, {
+          title: data.response.title,
+          variant: data.response.variant,
+        });
+      }
+    },
+    mounted() {
+      this.$el.removeAttribute('data-user');
+    },
+    methods: {
+      submit(event) {
+        if (!this.valid) {
+          event.preventDefault();
+          this.$bvToast.toast('Thông tin không hợp lệ, vui lòng kiểm tra lại', {
+            title: 'Tạo mới không thành công',
+            variant: 'danger',
+          })
+        }
+      },
+    },
+    computed: {
+      valid() {
+        for (const key in this.state) {
+          if (this.state[key] === false) {
+            return false;
+          }
+        }
+        return true;
+      },
+    },
+    watch: {
+      'form.product_name'() {
+        this.state.product_name = Regex.test(this.regex.product_name.pattern, this.regex.product_name.min, this.regex.product_name.max, this.form.product_name);
+      },
+      'form.standard_cost'() {
+        this.state.standard_cost =
+          this.form.standard_cost.length > 0 &&
+          !isNaN(this.form.standard_cost) &&
+          this.form.standard_cost >= 0;
+      },
+      'form.list_price'() {
+        this.state.list_price =
+          this.form.list_price.length > 0 &&
+          !isNaN(this.form.list_price) &&
+          this.form.list_price >= 0;
+      },
+      'form.quantity_per_unit'() {
+        this.state.quantity_per_unit = Regex.test(this.regex.quantity_per_unit.pattern, this.regex.quantity_per_unit.min, this.regex.quantity_per_unit.max, this.form.quantity_per_unit);
+      },
+      'form.discontinued'() {
+        this.state.discontinued = Regex.test(this.regex.discontinued.pattern, this.regex.discontinued.min, this.regex.discontinued.max, this.form.discontinued);
+      },
+      'form.is_featured'() {
+        this.state.is_featured = Regex.test(this.regex.is_featured.pattern, this.regex.is_featured.min, this.regex.is_featured.max, this.form.is_featured);
+      },
+      'form.is_new'() {
+        this.state.is_new = Regex.test(this.regex.is_new.pattern, this.regex.is_new.min, this.regex.is_new.max, this.form.is_new);
+      },
+      'form.image'() {
+        this.state.image = this.form.image != null ? true : null;
+      },
+      'form.category_id'() {
+        this.state.category_id = this.form.category_id == '' ? null : Regex.test(this.regex.category_id.pattern, this.regex.category_id.min, this.regex.category_id.max, this.form.category_id);
+      },
+      'form.supplier_id'() {
+        this.state.supplier_id = this.form.supplier_id == '' ? null : Regex.test(this.regex.supplier_id.pattern, this.regex.supplier_id.min, this.regex.supplier_id.max, this.form.supplier_id);
+      },
+      'form.short_description'() {
+        this.state.short_description = this.form.short_description.length == 0 ? null : Regex.test(this.regex.short_description.pattern, this.regex.short_description.min, this.regex.short_description.max, this.form.short_description);
+      },
+      'form.description'() {
+        this.state.description = this.form.description.length == 0 ? null : (this.form.description.length <= 5000 ? true : false);
+      },
+    },
+  });
+</script>
+{% endblock %}
+
+{% block customstyles %}
+<link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+{% endblock %}

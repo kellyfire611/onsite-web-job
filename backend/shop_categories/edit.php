@@ -9,11 +9,11 @@ include_once(__DIR__.'/../../dbconnect.php');
 // 2. Chuẩn bị câu truy vấn $sqlSelect, lấy dữ liệu ban đầu của record cần update
 // Lấy giá trị khóa chính được truyền theo dạng QueryString Parameter key1=value1&key2=value2...
 $category_code = $_GET['category_code'];
-$sqlSelect = "SELECT * FROM `shop_categories` WHERE category_code='$category_code';";
+$sqlSelect = "SELECT * FROM `shop_categories` WHERE category_code=$category_code;";
 
 // 3. Thực thi câu truy vấn SQL để lấy về dữ liệu ban đầu của record cần update
 $resultSelect = mysqli_query($conn, $sqlSelect);
-$category_row = mysqli_fetch_array($resultSelect, MYSQLI_ASSOC); // 1 record
+$shop_category_Row = mysqli_fetch_array($resultSelect, MYSQLI_ASSOC); // 1 record
 
 // 4. Nếu người dùng có bấm nút Đăng ký thì thực thi câu lệnh UPDATE
 if(isset($_POST['btnSave'])) 
@@ -37,4 +37,4 @@ if(isset($_POST['btnSave']))
 
 // Yêu cầu `Twig` vẽ giao diện được viết trong file `backend/loaisanpham/edit.html.twig`
 // với dữ liệu truyền vào file giao diện được đặt tên là `loaisanpham`
-echo $twig->render('backend/shop_categories/edit.html.twig', ['shop_category' => $category_row] );
+echo $twig->render('backend/shop_categories/edit.html.twig', ['array_category' => $shop_category_Row] );

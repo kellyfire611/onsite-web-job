@@ -1,0 +1,22 @@
+{% extends "backend/layouts/layout.html.twig" %}
+
+{% block title %}
+Quản lý sản phẩm
+{% endblock %}
+
+{% block headline %}
+Quản lý sản phẩm
+{% endblock %}
+
+{% block content %}
+{% include 'backend/shared/table/content.html.twig' %}
+{% endblock %}
+
+{% block customscripts %}
+<script src="/assets/shared/js/formatter.js"></script>
+{% include 'backend/shared/table/script.html.twig' %}
+{% endblock %}
+
+{% block customstyles %}
+{% include 'backend/shared/table/style.html.twig' %}
+{% endblock %}

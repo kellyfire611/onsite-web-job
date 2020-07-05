@@ -1,0 +1,332 @@
+{% extends "backend/layouts/layout.html.twig" %}
+
+{% block title %}
+Quản lý người dùng
+{% endblock %}
+
+{% block headline %}
+Quản lý người dùng
+{% endblock %}
+
+{% block content %}
+<div id="{{ el }}" data-user="{{ data }}">
+  <b-form @submit="submit" method="post" enctype="multipart/form-data">
+    <h6>Thông tin bắt buộc</h6>
+    <b-row>
+      <b-col lg="6">
+        <b-form-group label="Tên đăng nhập" label-for="input-username" description="Tên đăng nhập không được phép thay đổi">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-user"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-username" v-model="username" readonly></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Email" label-for="input-email" description="Email này dùng để kích hoạt tài khoản (VD: phucuong@ctu.edu.vn)"
+                      invalid-feedback="Email không hợp lệ" :state="state.email">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-envelope"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-email" name="email" v-model="form.email" :state="state.email"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6">
+        <b-form-group label="Họ" label-for="input-last_name" description="Phần tên họ bao gồm cả phần tên lót (VD: Dương Nguyễn Phú)"
+                      invalid-feedback="Họ không hợp lệ" :state="state.last_name">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-user"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-last_name" name="last_name" v-model="form.last_name" :state="state.last_name"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Tên" label-for="input-first_name" description="Chỉ phần tên (VD: Cường)" invalid-feedback="Tên không hợp lệ"
+                      :state="state.first_name">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-user"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-first_name" name="first_name" v-model="form.first_name" :state="state.first_name"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+    </b-row>
+
+    <h6>Thông tin không bắt buộc</h6>
+    <b-row>
+      <b-col lg="6">
+        <b-form-group label="Ảnh đại diện" label-for="input-avatar" description="Tải ảnh đại diện, để trống nếu không thay đổi" :state="state.avatar">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-camera"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-file id="input-avatar" name="avatar" v-model="form.avatar" placeholder="Chọn hoặc kẻo thả ảnh vào đây..."
+                         drop-placeholder="Thả ảnh vào đây..." :state="state.avatar" accept="image/*"
+                         :file-name-formatter="(files) => (files.length == 1 ? 'Đã chọn ảnh đại diện' : 'Chọn hoặc kẻo thả ảnh vào đây...')">
+            </b-form-file>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Công việc" label-for="input-job_title" description="Vị trí công việc hiện tại (VD: Nhà phát triển)"
+                      invalid-feedback="Công việc không hợp lệ" :state="state.job_title">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-briefcase"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-job_title" name="job_title" v-model="form.job_title" :state="state.job_title"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Bộ phận" label-for="input-department" description="Bộ phận nơi làm việc hiện tại (VD: CUSC Software)"
+                      invalid-feedback="Bộ phận không hợp lệ" :state="state.department">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-building"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-department" name="department" v-model="form.department" :state="state.department"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Điện thoại" label-for="input-phone" description="Số điện thoại (VD 0915659223)" invalid-feedback="Số điện thoại không hợp lệ"
+                      :state="state.phone">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-phone"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-phone" name="phone" v-model="form.phone" :state="state.phone"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Địa chỉ 1" label-for="input-address1" description="Địa chỉ nhà (VD: 130 Xô Viết Nghệ Tỉnh, Quận Ninh Kiều)"
+                      invalid-feedback="Địa chỉ không hợp lệ" :state="state.address1">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-address1" name="address1" v-model="form.address1" :state="state.address1"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6">
+        <b-form-group label="Địa chỉ 2" label-for="input-address2" description="Địa chỉ nhà khác hoặc nơi làm việc (VD: 130 Xô Viết Nghệ Tỉnh, Quận Ninh Kiều)"
+                      invalid-feedback="Địa chỉ không hợp lệ" :state="state.address2">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-address2" name="address2" v-model="form.address2" :state="state.address2"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Thành phố" label-for="input-city" description="Thành phố hiện tại đang sống (VD: Cần Thơ)"
+                      invalid-feedback="Thành phố không hợp lệ" :state="state.city">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-city"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-city" name="city" v-model="form.city" :state="state.city"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Bang" label-for="input-state" description="Bang hiện tại đang sống (VD: New York)" invalid-feedback="Bang không hợp lệ"
+                      :state="state.state">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-city"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-state" name="state" v-model="form.state" :state="state.state"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Mã bưu điện" label-for="input-postal_code" description="Mã bưu điện tại nơi đang sống (VD: 64000)"
+                      invalid-feedback="Mã bưu điện không hợp lệ" :state="state.postal_code">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-mail-bulk"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-postal_code" name="postal_code" v-model="form.postal_code" :state="state.postal_code"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+
+        <b-form-group label="Quốc gia" label-for="input-country" description="Quốc gia đang sống (VD: Vietnam)" invalid-feedback="Quốc gia không hợp lệ"
+                      :state="state.country">
+          <b-input-group>
+            <template v-slot:prepend>
+              <b-input-group-text class="group-icon">
+                <i class="fas fa-flag"></i>
+              </b-input-group-text>
+            </template>
+            <b-form-input id="input-country" name="country" v-model="form.country" :state="state.country"></b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+    </b-row>
+
+    <b-form-group class="text-center">
+      <b-button type="submit" variant="primary" name="submit" :disabled="!valid">Thay đổi</b-button>
+    </b-form-group>
+  </b-form>
+</div>
+{% endblock %}
+
+{% block customscripts %}
+<script src="/node_modules/vue/dist/vue.min.js"></script>
+<script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+<script src="/assets/shared/js/regex.js"></script>
+<script>
+  new Vue({
+    el: '#{{ el }}',
+    delimiters: ['${', '}'],
+    data() {
+      return {
+        form: {
+          last_name: '',
+          first_name: '',
+          email: '',
+          avatar: null,
+          job_title: '',
+          department: '',
+          phone: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          postal_code: '',
+          country: '',
+        },
+        state: {
+          last_name: false,
+          first_name: false,
+          email: false,
+          avatar: null,
+          job_title: null,
+          department: null,
+          phone: null,
+          address1: null,
+          address2: null,
+          city: null,
+          state: null,
+          postal_code: null,
+          country: null,
+        },
+      }
+    },
+    beforeMount() {
+      const data = JSON.parse(this.$el.attributes['data-user'].value);
+      this.username = data.username;
+      this.regex = data.regex;
+      this.form = Object.assign(this.form, data.form);
+      for (const key in this.regex) {
+        this.regex[key].pattern = new RegExp(this.regex[key].pattern);
+      }
+      if (data.response) {
+        this.$bvToast.toast(data.response.content, {
+          title: data.response.title,
+          variant: data.response.variant,
+        });
+      }
+    },
+    mounted() {
+      this.$el.removeAttribute('data-user');
+    },
+    methods: {
+      submit(event) {
+        if (!this.valid) {
+          event.preventDefault();
+          this.$bvToast.toast('Thông tin không hợp lệ, vui lòng kiểm tra lại', {
+            title: 'Thay đổi không thành công',
+            variant: 'danger',
+          })
+        }
+      },
+    },
+    computed: {
+      valid() {
+        for (const key in this.state) {
+          if (this.state[key] === false) {
+            return false;
+          }
+        }
+        return true;
+      },
+    },
+    watch: {
+      'form.last_name'() {
+        this.state.last_name = Regex.test(this.regex.last_name.pattern, this.regex.last_name.min, this.regex.last_name.max, this.form.last_name);
+      },
+      'form.first_name'() {
+        this.state.first_name = Regex.test(this.regex.first_name.pattern, this.regex.first_name.min, this.regex.first_name.max, this.form.first_name);
+      },
+      'form.email'() {
+        this.state.email = Regex.test(this.regex.email.pattern, this.regex.email.min, this.regex.email.max, this.form.email);
+      },
+      'form.avatar'() {
+        this.state.avatar = this.form.avatar != null ? true : null;
+      },
+      'form.job_title'() {
+        this.state.job_title = this.form.job_title.length == 0 ? null : Regex.test(this.regex.job_title.pattern, this.regex.job_title.min, this.regex.job_title.max, this.form.job_title);
+      },
+      'form.department'() {
+        this.state.department = this.form.department.length == 0 ? null : Regex.test(this.regex.department.pattern, this.regex.department.min, this.regex.department.max, this.form.department);
+      },
+      'form.phone'() {
+        this.state.phone = this.form.phone.length == 0 ? null : Regex.test(this.regex.phone.pattern, this.regex.phone.min, this.regex.phone.max, this.form.phone);
+      },
+      'form.address1'() {
+        this.state.address1 = this.form.address1.length == 0 ? null : Regex.test(this.regex.address1.pattern, this.regex.address1.min, this.regex.address1.max, this.form.address1);
+      },
+      'form.address2'() {
+        this.state.address2 = this.form.address2.length == 0 ? null : Regex.test(this.regex.address2.pattern, this.regex.address2.min, this.regex.address2.max, this.form.address2);
+      },
+      'form.city'() {
+        this.state.city = this.form.city.length == 0 ? null : Regex.test(this.regex.city.pattern, this.regex.city.min, this.regex.city.max, this.form.city);
+      },
+      'form.state'() {
+        this.state.state = this.form.state.length == 0 ? null : Regex.test(this.regex.state.pattern, this.regex.state.min, this.regex.state.max, this.form.state);
+      },
+      'form.postal_code'() {
+        this.state.postal_code = this.form.postal_code.length == 0 ? null : Regex.test(this.regex.postal_code.pattern, this.regex.postal_code.min, this.regex.postal_code.max, this.form.postal_code);
+      },
+      'form.country'() {
+        this.state.country = this.form.country.length == 0 ? null : Regex.test(this.regex.country.pattern, this.regex.country.min, this.regex.country.max, this.form.country);
+      },
+    },
+  });
+</script>
+{% endblock %}
+
+{% block customstyles %}
+<link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+{% endblock %}
